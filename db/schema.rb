@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_144837) do
     t.string "name_user", null: false
     t.integer "type_user", default: 0, null: false
     t.string "gender", null: false
-    t.integer "birthday", null: false
+    t.datetime "birthday", null: false
     t.string "nationality", null: false
     t.string "country", null: false
     t.string "language_first", null: false

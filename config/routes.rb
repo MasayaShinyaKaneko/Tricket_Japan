@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'users#top'
   #users controller
+  get '/users/about', to: 'users#about'
   get '/users/:id/unsubscribe', to: 'users#unsubscribe'
   patch '/users/:id/status_flag', to: 'users#status_flag'
   get '/users/unsubscribe/complete', to: 'users#complete'
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   get '/users/locals', to: 'users#index_local'
   get '/users/locals/search', to: 'users#search_local'
   get '/users/locals/sort', to: 'users#sort_local'
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :edit, :update] do
     resources :favorites, only:[:create, :destroy]
   end
   #posts controller

@@ -1,9 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
-    <h2>Sign up</h2>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+     <%= form_for(@user) do |f| %>
 
       <div class="field">
         <%= f.label :usertype %>
@@ -65,21 +63,7 @@
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
       </div>
-
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirmation"  %>
-      </div>
     </div>
-
     <div class="col-md-6">
     <h2>Option</h2>
       <div class="field">
@@ -96,11 +80,9 @@
   <div class="row">
     <div class="col-md-12">
       <div class="actions">
-        <%= f.submit "Sign up" %>
+        <%= f.submit "Update" %>
       </div>
     <% end %>
-
     </div>
   </div>
 </div>
-

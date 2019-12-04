@@ -1,4 +1,8 @@
-<%= link_to "開発　ログアウト用", destroy_user_session_path, method: :delete %>
+<% if flash[:notice] %>
+	<div id="flash">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
 
 <div class="container-fluid">
 	<div class="row">
