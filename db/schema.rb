@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_040338) do
+ActiveRecord::Schema.define(version: 2019_12_04_144837) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,20 +24,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_040338) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "countries", force: :cascade do |t|
-    t.string "country", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "interests", force: :cascade do |t|
-    t.string "interest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,12 +37,6 @@ ActiveRecord::Schema.define(version: 2019_12_04_040338) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "nationalities", force: :cascade do |t|
-    t.string "nationality", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -62,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_040338) do
     t.integer "user_id", null: false
     t.string "area", null: false
     t.string "season", null: false
-    t.integer "interest_id", null: false
+    t.string "interest", null: false
     t.string "time_todo", null: false
     t.string "place_todo", null: false
     t.integer "status_accomplishment", default: 0, null: false
@@ -86,9 +68,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_040338) do
     t.integer "type_user", default: 0, null: false
     t.string "gender", null: false
     t.integer "birthday", null: false
-    t.integer "nationality_id", null: false
-    t.integer "country_id"
-    t.string "place_prefecture"
+    t.string "nationality", null: false
+    t.string "country", null: false
     t.string "language_first", null: false
     t.string "language_second"
     t.string "language_third"

@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.integer :user_id, null: false
       t.string :area, null: false
       t.string :season, null: false
-      t.integer :interest_id, null: false
+      t.string :interest, null: false
       t.string :time_todo, null: false
       t.string :place_todo, null: false
       t.integer :status_accomplishment, null: false, default: 0
