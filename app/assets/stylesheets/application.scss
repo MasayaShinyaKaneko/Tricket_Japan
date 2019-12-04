@@ -16,3 +16,55 @@
 
 @import "bootstrap";
 @import "bootstrap-sprockets";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+
+/*header*/
+.nav-container{
+	height: 50px;
+	width: 100%;
+	background-color: #D84315;
+	position: fixed;
+    top: 0;
+
+    #brand{
+    	float: left;
+    	color: #FBE9E7;
+    	font-family: Times New Roman;
+    	font-size: 40px;
+    }
+}
+
+/*space*/
+.space-top{
+	height: 55px;
+	display: block;
+	top: 0;
+}
+.space-bottom{
+	height: 55px;
+	display: block;
+	bottom: 0;
+}
+
+
+/*footer*/
+footer{
+	height: 50px;
+	width: 100%;
+	background-color: #D84315;
+    text-align: center;
+    color: white;
+	position: fixed;
+    bottom: 0;
+}
