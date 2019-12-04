@@ -63,3 +63,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # 新規追加
 gem 'devise'
+gem 'pry-rails'
+gem 'enum_help'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-rails'
