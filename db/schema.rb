@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_040338) do
     t.string "name_first", null: false
     t.string "name_last", null: false
     t.string "name_user", null: false
+    t.integer "type_user", default: 0, null: false
     t.string "gender", null: false
     t.integer "birthday", null: false
     t.integer "nationality_id", null: false
