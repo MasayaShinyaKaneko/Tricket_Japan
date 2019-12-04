@@ -36,23 +36,48 @@
 	background-color: #D84315;
 	position: fixed;
     top: 0;
+    z-index: 100;
 
     #brand{
     	float: left;
     	color: #FBE9E7;
     	font-family: Times New Roman;
-    	font-size: 40px;
+    	font-size: 35px;
+    }
+    .login{
+    	height: 50px;
+    	width: 100%;
+
+    	.login-label{
+    		float:left;
+    	}
+    	.login-field{
+    		float:left;
+    	}
+    	.login-button{
+    		float:left;
+    	}
+    }
+    .nav-lists{
+    	float: right;
+    	width: 500px;
+    }
+    .nav-button{
+    	color: #FBE9E7;
+    	font-family: Times New Roman;
+		background-color: #D84315;
+
     }
 }
 
 /*space*/
 .space-top{
-	height: 55px;
+	height: 50px;
 	display: block;
 	top: 0;
 }
 .space-bottom{
-	height: 55px;
+	height: 50px;
 	display: block;
 	bottom: 0;
 }
@@ -67,4 +92,5 @@ footer{
     color: white;
 	position: fixed;
     bottom: 0;
+    z-index: 100;
 }

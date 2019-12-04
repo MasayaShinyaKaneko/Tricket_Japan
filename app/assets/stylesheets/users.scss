@@ -1,3 +1,39 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*topページ*/
+.video-container{
+	position: relative;
+	z-index: 1;
+
+	.video-headline{
+		position: absolute;
+		z-index: 2;
+		top: 0;
+	 	width: 100%;
+	 	text-align: center;
+	 	margin-top: 150px;
+	 	color:#FBE9E7;
+
+	 	h1{
+	 		font-size: 60px;
+	 		line-height: 80px;
+	 	}
+	}
+}
+.home-background1{
+	width: 100%;
+	height: 300px;
+	background-color: #FBE9E7;
+}
+.home-background2{
+	width: 100%;
+	height: 300px;
+	background-color: #FFCA28;
+}
+.home-background3{
+	width: 100%;
+	height: 300px;
+	background-color: #FBE9E7;
+}
