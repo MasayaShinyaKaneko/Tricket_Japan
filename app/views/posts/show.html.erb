@@ -13,9 +13,14 @@
 		<div class="col-md-12">
 		<p>User Name</p>
 			<% if @post.post_image? %>
-				<%= image_tag @post.post_image.post.url %>
-			<% else %>
-				<%= image_tag "/assets/default.png", :size => '400x300' %>
+				<% if @post.post_image.file.content_type.include?('image/') %>
+					<%= image_tag @post.post_image.post.url %>
+				<% elsif @post.post_image.file.content_type.include?('video/') %>
+				    <%= video_tag @post.post_image.url, width: "30%", height: "30%", 
+                  controls: true, autobuffer: true %>
+                <% end %>
+            <% else %>
+				<%= image_tag "/assets/default.jpg", :size => '400x300' %>
 			<% end %>
 		</div>
 	</div>

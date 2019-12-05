@@ -29,27 +29,43 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  version :profile, if: :is_profile?
   version :profile do
     process resize_to_fill: [150, 150, "Center"]
   end
 
+  version :background, if: :is_background?
   version :background do
     process resize_to_fill: [400, 150]
   end
 
+  version :post, if: :is_post?
   version :post do
     process resize_to_fill: [400, 300]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_whitelist
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_whitelist
+     %w(jpg jpeg gif png mp4 MOV mov)
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+private
+  def is_profile? post_image
+    post_image.content_type.include?("image/")
+  end
+
+  def is_background? post_image
+    post_image.content_type.include?("image/")
+  end
+
+  def is_post? post_image
+    post_image.content_type.include?("image/")
+  end
 end

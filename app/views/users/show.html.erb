@@ -7,7 +7,7 @@
 <% if @user.picture_background? %>
 	<%= image_tag @user.picture_background.background.url, class: "background" %>
 <% else %>
-	<%= image_tag "/assets/default.png", :size => '400x150', class: "background"  %>
+	<%= image_tag "/assets/default.jpg", :size => '400x150', class: "background"  %>
 <% end %>
 <div class="user-headline">
 	<h1>Traveler</h1>
@@ -18,7 +18,7 @@
 	<% if @user.picture_profile? %>
 		<%= image_tag @user.picture_profile.profile.url, :style=>"border-radius: 150px;" %>
 	<% else %>
-		<%= image_tag "/assets/default.png", :size => '150x150', :style=>"border-radius: 150px;" %>
+		<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
 	<% end %>
 </div>
 
