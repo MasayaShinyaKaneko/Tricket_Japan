@@ -4,10 +4,14 @@ class UsersController < ApplicationController
 	def about
 	end
 	def index_traveler
-
+		@users = User.where(type_user: 1)
 	end
 	def search_traveler
-
+		if params[:search_flag] == "1"
+			@users = User.where(type_user: 1).where("name_user LIKE ?", "%#{params[:user_search]}%")
+		else
+		end
+		render :index_traveler
 	end
 	def index_local
 
