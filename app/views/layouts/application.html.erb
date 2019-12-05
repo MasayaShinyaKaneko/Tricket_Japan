@@ -15,6 +15,7 @@
       <div class="nav-container">
         <div id="brand">Tricket</div>
         <div class="nav-lists">
+          <%= link_to "mypage", user_path(current_user), class:"nav-button" %>
           <%= link_to "Trickets", posts_top_path, class:"nav-button" %>
           <%= link_to "Locals", users_locals_path, class:"nav-button" %>
           <%= link_to "Messages", posts_top_path, class:"nav-button" %>

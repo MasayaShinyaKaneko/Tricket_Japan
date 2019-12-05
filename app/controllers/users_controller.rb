@@ -19,12 +19,13 @@ class UsersController < ApplicationController
 
 	end
 	def show
-
+		@user = User.find(params[:id])
+		@posts = Post.where(user_id: @user.id)
 	end
 	def edit
         @user = User.find(params[:id])
 		if @user != current_user
-           flash[:notice] = "編集するが権限がありません"
+           flash[:notice] = "I have no authorization to edit"
            redirect_to posts_top_path
         else
            @user = User.find(params[:id])
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
 	end
 
 	def favorite
-
+		@user = User.find(params[:id])
 	end
 	def status_user
 

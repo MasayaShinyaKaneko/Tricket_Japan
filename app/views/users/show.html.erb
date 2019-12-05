@@ -1,24 +1,46 @@
-<!-- travelers用とlocals用必要 -->
+<% if flash[:notice] %>
+	<div id="flash">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
 
+<!-- travelers用とlocals用必要 -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		<p>Travelers</p>
+		<h1>Travelers</h1>
+			<%= link_to "your favorites", user_favorite_page_path(current_user) %>
+			<%= link_to "edit profile", edit_user_path(current_user) %>
+			<%= link_to "unsubscribe", users_unsubscribe_path(current_user) %>
+			<p>User Name <%= @user.name_user %></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Profile</p>
+		<h1>Profile</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Trickets</p>
+			<div class="user-Tricket-headline">
+				<h1>Trickets</h1>
+				<%= link_to "new Tricket", new_post_path %>
+			</div>
+			<% @posts.each do |p| %>
+			<div class="user-Tricket-content">
+				<%= p.title %>
+				<%= p.status_display %>
+				<%= p.area %>
+				<%= p.season %>
+				<%= p.interest %>
+				<%= link_to "edit Tricket", edit_post_path(p.id) %>
+			</div>
+			<% end %>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Accomplishments</p>
+		<h1>Accomplishments</h1>
 		</div>
 	</div>
 </div>

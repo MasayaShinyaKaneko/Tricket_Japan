@@ -1,12 +1,52 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-		<p>Travelers</p>
+		<div class="Tricket-new-edit-background1">
+			<div class="col-md-12">
+			<h1>Edit Tricket</h1>
+			<%= link_to "delete Tricket", post_path(@post), method: :delete, data: { confirm: "Are you sure to delete this Tricket?" } %>
+			<%= form_for(@post) do |f| %>
+
+		      <div class="field">
+		        <%= f.label :title %>
+		        <%= f.text_field :title, autofocus: true, placeholder: "title" %>
+		      </div>
+
+		      <div class="field">
+		        <%= f.label :display_choice %>
+		        <%= f.select :status_display, [["open", 0 ],["closed", 1 ]], autofocus: true %>
+		      </div>
+		      <div class="field">
+		        <%= f.label :area %>
+		        <%= f.select :area, [["N/A", "N/A"],["Kanto(Tokyo area)", "Kanto(Tokyo area)"],["Kansai(Osaka area)", "Kansai(Osaka area)"],["Hokkaido", "Hokkaido"],["Tohoku", "Tohoku"],["Chubu", "Chubu"],["Chugoku", "Chugoku"],["Shikoku", "Shikoku"],["Kyushu", "Kyushu"],["Okinawa", "Okinawa"]], autofocus: true %>
+		        <%= f.label :season %>
+		        <%= f.select :season, [["N/A", "N/A"],["spring", "spring"],["summer", "summer"],["automn", "automn"],["winter", "winter"]], autofocus: true %>
+		        <%= f.label :interest %>
+		        <%= f.select :interest, [["N/A", "N/A"],["food", "food"],["nature", "nature"]], autofocus: true %>
+		      </div>
+		      <div class="field">
+		        <%= f.label :when? %>
+		        <%= f.text_field :time_todo, autofocus: true, placeholder: "when?" %>
+		      </div>
+		      <div class="field">
+		        <%= f.label :where? %>
+		        <%= f.text_field :place_todo, autofocus: true, placeholder: "where?" %>
+		      </div>
+		      <div class="field">
+		        <%= f.label :content %>
+		        <%= f.text_area :content, autofocus: true, placeholder: "content" %>
+		      </div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-		<p>Edit Tricket</p>
+		<div class="Tricket-new-edit-background2">
+			<div class="col-md-12">
+			  <div class="actions">
+			    <%= f.submit "update" %>
+			    <%= link_to "mypage", user_path(current_user) %>
+			  </div>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>
