@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_144837) do
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
-    t.string "post_image_id"
+    t.string "post_image"
     t.integer "user_id", null: false
     t.string "area", null: false
     t.string "season", null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_144837) do
     t.integer "status_display", default: 0, null: false
     t.integer "delete_flag", default: 0, null: false
     t.string "comment_accomplishment"
-    t.string "image_accomplishment_id"
+    t.string "image_accomplishment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_144837) do
     t.string "language_first", null: false
     t.string "language_second"
     t.string "language_third"
-    t.string "picture_profile_id"
-    t.string "picture_background_id"
+    t.string "picture_profile"
+    t.string "picture_background"
     t.string "hobby"
     t.string "introduction"
     t.integer "status_user", default: 0, null: false

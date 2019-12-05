@@ -4,20 +4,30 @@
 	</div>
 <% end %>
 
+<% if @user.picture_background? %>
+	<%= image_tag @user.picture_background.background.url, class: "background" %>
+<% else %>
+	<%= image_tag "/assets/default.png", :size => '400x150', class: "background"  %>
+<% end %>
+<div class="user-headline">
+	<h1>Traveler</h1>
+	<%= link_to "your favorites", user_favorite_page_path(current_user) %>
+	<%= link_to "edit profile", edit_user_path(current_user) %>
+	<%= link_to "unsubscribe", users_unsubscribe_path(current_user) %>
+	<p>User Name <%= @user.name_user %></p>
+	<% if @user.picture_profile? %>
+		<%= image_tag @user.picture_profile.profile.url, :style=>"border-radius: 150px;" %>
+	<% else %>
+		<%= image_tag "/assets/default.png", :size => '150x150', :style=>"border-radius: 150px;" %>
+	<% end %>
+</div>
+
 <!-- travelers用とlocals用必要 -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		<h1>Travelers</h1>
-			<%= link_to "your favorites", user_favorite_page_path(current_user) %>
-			<%= link_to "edit profile", edit_user_path(current_user) %>
-			<%= link_to "unsubscribe", users_unsubscribe_path(current_user) %>
-			<p>User Name <%= @user.name_user %></p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
 		<h1>Profile</h1>
+
 		</div>
 	</div>
 	<div class="row">
@@ -33,6 +43,7 @@
 				<%= p.area %>
 				<%= p.season %>
 				<%= p.interest %>
+				<%= link_to "Tricket detail", post_path(p.id) %>
 				<%= link_to "edit Tricket", edit_post_path(p.id) %>
 			</div>
 			<% end %>
@@ -56,6 +67,12 @@
 	<div class="row">
 		<div class="col-md-12">
 		<p>Profile</p>
+				<p>Profile</p>
+						<p>Profile</p>
+								<p>Profile</p>
+										<p>Profile</p>
+												<p>Profile</p>
+														<p>Profile</p>
 		</div>
 	</div>
 </div>

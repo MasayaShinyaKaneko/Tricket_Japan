@@ -43,8 +43,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :language_first, null: false
       t.string :language_second
       t.string :language_third
-      t.string :picture_profile_id
-      t.string :picture_background_id
+      t.string :picture_profile
+      t.string :picture_background
       t.string :hobby
       t.string :introduction
       t.integer :status_user, null: false, default: 0

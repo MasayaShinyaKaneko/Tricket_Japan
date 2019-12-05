@@ -7,6 +7,10 @@ class User < ApplicationRecord
 	has_many :favorites, dependent: :destroy
 	has_many :posts, dependent: :destroy
 	has_many :likes, dependent: :destroy
+
+  mount_uploader :picture_profile, ImageUploader
+  mount_uploader :picture_background, ImageUploader
+
 	def favorited_by?(user)
       favorites.where(user_id: user.id).exists?
     end

@@ -83,6 +83,14 @@
     <div class="col-md-6">
     <h2>Option</h2>
       <div class="field">
+        <%= f.label :profile_picture %>
+        <%= f.file_field :picture_profile, accept: 'image/jpeg,image/gif,image/png' %>
+      </div>
+      <div class="field">
+        <%= f.label :background_picture %>
+        <%= f.file_field :picture_background, accept: 'image/jpeg,image/gif,image/png' %>
+      </div>
+      <div class="field">
         <%= f.label :hobby %>
         <%= f.text_field :hobby, autofocus: true, placeholder: "hobby" %>
       </div>

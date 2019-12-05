@@ -9,7 +9,8 @@ class PostsController < ApplicationController
 
 	end
 	def show
-
+        @post = Post.find(params[:id])
+        @user = @post.user
 	end
 	def status_display
 
@@ -25,7 +26,7 @@ class PostsController < ApplicationController
     	@post.user_id = current_user.id
     	if  @post.save
         	flash[:notice] = "You have creatad Tricket successfully."
-    		redirect_to user_path(current_user)
+    		redirect_to post_path(@post)
         else
         	flash[:notice] = "error!!"
 			@post = Post.new
@@ -60,6 +61,6 @@ class PostsController < ApplicationController
 
 	private
 	    def post_params
-	      params.require(:post).permit(:title, :content, :area, :season, :interest, :time_todo, :place_todo, :status_display)
+	      params.require(:post).permit(:title, :content, :area, :season, :interest, :time_todo, :place_todo, :status_display, :post_image, :image_accomplishment)
 	    end
 end

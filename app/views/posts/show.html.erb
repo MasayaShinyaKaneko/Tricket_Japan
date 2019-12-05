@@ -12,6 +12,11 @@
 	<div class="row">
 		<div class="col-md-12">
 		<p>User Name</p>
+			<% if @post.post_image? %>
+				<%= image_tag @post.post_image.post.url %>
+			<% else %>
+				<%= image_tag "/assets/default.png", :size => '400x300' %>
+			<% end %>
 		</div>
 	</div>
 	<div class="row">
