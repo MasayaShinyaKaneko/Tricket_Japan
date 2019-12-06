@@ -22,6 +22,7 @@
 				<% @users.each do |user| %>
 				<div class="travelers-index-content">
 					<p><%= user.name_user %></p>
+					<p><%= link_to "userpage" ,user_path(user) %></p>
 				</div>
 				<% end %>
 			</div>
