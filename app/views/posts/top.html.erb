@@ -6,23 +6,52 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-		<p>Trickets&Travelers</p>
+		<div class="Trickets-index-background1">
+			<div class="col-md-12">
+				<h1>Trickets&Travelers</h1>
+			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Most liked Trickets</p>
+			<h1>Most liked Trickets</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Trickets</p>
+			<h1>Trickets</h1>
+			<% @posts.each do |post| %>
+			<div class="Trickets-index-content">
+				<p><%= link_to "#{post.user.name_user}" ,user_path(post.user.id) %></p>
+				<p><%= post.user.nationality %></p>
+				<p><%= post.area %></p>
+				<p><%= post.season %></p>
+				<p><%= post.interest %></p>
+				<p><%= post.title %></p>
+				<p><%= link_to "Tricket detail" ,post_path(post) %></p>
+			</div>
+			<% end %>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Travelers</p>
+			<h1>Travelers</h1>
+			<div class="travelers-search-content">
+				<%= form_tag(users_travelers_search_path, method: :get) do %>
+					<%= label_tag "traveler_name" %>
+					<%= hidden_field_tag :search_flag, 1 %>
+					<%= text_field_tag :user_search %>
+					<%= submit_tag "search" %>
+				<% end %>
+			</div>
+			<div class="travelers-index-headline">
+				<% @users.each do |user| %>
+				<div class="travelers-index-content">
+					<p><%= user.name_user %></p>
+					<p><%= link_to "userpage" ,user_path(user) %></p>
+				</div>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>

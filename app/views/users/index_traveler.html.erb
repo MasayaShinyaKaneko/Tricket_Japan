@@ -15,8 +15,6 @@
 					<%= text_field_tag :user_search %>
 					<%= submit_tag "search" %>
 				<% end %>
-				<%= label_tag "nationality" %>
-				<%= select_tag 'nationality', options_for_select({Japanese: "Japanese", American: "Ame", sample3: 3}, 1) %>
 			</div>
 			<div class="travelers-index-headline">
 				<% @users.each do |user| %>

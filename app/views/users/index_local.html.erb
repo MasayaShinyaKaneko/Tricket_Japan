@@ -1,17 +1,35 @@
 <div class="container-fluid">
 	<div class="row">
+		<div class="locals-index-background1">
+			<div class="col-md-12">
+			<h1>Locals</h>
+			</div>
+		</h1>
+	</div>
+	<div class="row">
 		<div class="col-md-12">
-		<p>Locals</p>
+		<h1>Populer Locals</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Populer Locals</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		<p>Locals</p>
+		<h1>Locals</h1>
+			<div class="locals-search-content">
+				<%= form_tag(users_locals_search_path, method: :get) do %>
+					<%= label_tag "local_name" %>
+					<%= hidden_field_tag :search_flag, 1 %>
+					<%= text_field_tag :user_search %>
+					<%= submit_tag "search" %>
+				<% end %>
+			</div>
+			<div class="locals-index-headline">
+				<% @users.each do |user| %>
+				<div class="locals-index-content">
+					<p><%= user.name_user %></p>
+					<p><%= link_to "userpage" ,user_path(user) %></p>
+				</div>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>

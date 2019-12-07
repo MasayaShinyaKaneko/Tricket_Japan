@@ -1,0 +1,27 @@
+<% @roomusers.each do |ru| %>
+    <% if ru.user == current_user %>
+    <% else %>
+    <h1>Message from <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %></h1>
+    <% end %>
+<% end %>
+
+<%= form_for @message do |f| %>
+    <%= f.text_field :content, :placeholder => "type messages" , :size => 100 %>
+    <%= f.hidden_field :room_id, :value => @room.id %>
+    <br>
+    <%= f.submit "send" %>
+<% end %>
+
+<hr>
+<% if @messages.present? %>
+    <% @messages.reverse.each do |m| %>
+        <small><strong><%= link_to "#{m.user.name_user}", user_path(m.user.id) %></strong>:</small>
+        <strong><%= m.content %></strong>
+        <small>at <%= m.created_at.strftime("%-m/%-d/%Y %H:%M") %></small>
+        <hr>
+    <% end %>
+<% else %>
+    <p>No Message</p>
+<% end %>
+
+

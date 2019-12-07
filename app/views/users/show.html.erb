@@ -14,6 +14,22 @@
 	<%= link_to "your favorites", user_favorite_page_path(current_user) %>
 	<%= link_to "edit profile", edit_user_path(current_user) %>
 	<%= link_to "unsubscribe", users_unsubscribe_path(current_user) %>
+
+    <!-- message -->
+	<% if @user.id == current_user.id %>
+	<% else %>
+		<% if @isRoom == true %>
+    		<%= link_to "chat", room_path(@roomId) %>
+  		<% else %>
+	    	<%= form_for @room do |f| %>
+	      		<%= fields_for @roomusernew do |e| %>
+	        		<%= e.hidden_field :user_id, :value=> @user.id %>
+	    		<% end %>
+      			<%= f.submit "new chat" %>
+    		<% end %>
+  		<% end %>
+	<% end %>
+
 	<p>User Name <%= @user.name_user %></p>
 	<% if @user.picture_profile? %>
 		<%= image_tag @user.picture_profile.profile.url, :style=>"border-radius: 150px;" %>

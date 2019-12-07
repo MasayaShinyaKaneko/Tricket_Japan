@@ -29,7 +29,11 @@ Rails.application.routes.draw do
   patch '/posts/:id/status_accomplish', to: 'posts#status_accomplish'
   #likes controller  →  posts controller下へ
   #favorites controller  →  users controller下へ
-
+  #room controller
+  resources :rooms, :only => [:create, :show, :index]
+  #message controller
+  resources :messages, :only => [:create]
+  
   #adminsファイル内のcontroller
   namespace :admins do
 	  #admins/users controller

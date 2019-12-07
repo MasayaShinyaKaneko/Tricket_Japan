@@ -1,0 +1,7 @@
+<% @rooms.each do |r| %>
+	<% r.room_users.each do |ru| %>
+		<% if ru.user_id != current_user.id %>
+			<%= link_to "#{ru.user.name_user}", room_path(id: r.id) %>
+		<% end %>
+	<% end %>
+<% end %>

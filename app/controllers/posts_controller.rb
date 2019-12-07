@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 	def top
-
+		@users = User.where(type_user: 0)
+		@posts = Post.all
 	end
 	def index
 
