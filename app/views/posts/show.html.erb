@@ -4,6 +4,20 @@
 			<p>Category: <%= @post.area %><%= @post.season %><%= @post.interest %></p>
 			<p>accomplish or not: <%= @post.status_accomplishment %></p>
 			<p>display or not: <%= @post.status_display %></p>
+
+	<!-- Tricketに対するいいね機能 -->
+			<% if @post.liked_by?(current_user) %>
+			    <%= link_to post_like_path(@post), method: :delete do %>
+					<%= icon 'fa', 'thumbs-up', :style=>"color: red;"%>
+			    <% end %>
+			    <%= @post.likes.count %> good!
+			<% else %>
+			    <%= link_to post_likes_path(@post), method: :post do %>
+					<%= icon 'fa', 'thumbs-up', :style=>"color: grey;" %>
+			    <% end %>
+			    <%= @post.likes.count %> good!
+			<% end %>
+
 		</div>
 	</div>
 	<div class="row">
@@ -14,6 +28,13 @@
 	<div class="row">
 		<div class="col-md-12">
 		<p>User Name: <%= @user.name_user %></p>
+
+		<!-- ユーザに対するいいね機能 -->
+
+
+
+
+
 
 		    <!-- message -->
 			<% if @user.id == current_user.id %>
