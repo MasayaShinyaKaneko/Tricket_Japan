@@ -10,6 +10,24 @@
 		<div class="col-md-12">
 			<div class="Trickets-index-headline">
 				<p>Trickets</p>
+				<%= form_tag(posts_sort_path, method: :get) do %>
+					<%= label_tag "area" %>
+					<%= hidden_field_tag :search_flag, 1 %>
+					<%= select_tag "area", options_for_select(@area) %>
+					<%= submit_tag "search" %>
+				<% end %>
+				<%= form_tag(posts_sort_path, method: :get) do %>
+					<%= label_tag "season" %>
+					<%= hidden_field_tag :search_flag, 2 %>
+					<%= select_tag "season", options_for_select(@season) %>
+					<%= submit_tag "search" %>
+				<% end %>
+				<%= form_tag(posts_sort_path, method: :get) do %>
+					<%= label_tag "interest" %>
+					<%= hidden_field_tag :search_flag, 3 %>
+					<%= select_tag "interest", options_for_select(@interest) %>
+					<%= submit_tag "search" %>
+				<% end %>
 			</div>
 			<% @posts.each do |post| %>
 			<div class="Trickets-index-content">

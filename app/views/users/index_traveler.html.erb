@@ -16,8 +16,16 @@
 					<%= submit_tag "search" %>
 				<% end %>
 				<%= form_tag(users_travelers_search_path, method: :get) do %>
+					<%= label_tag "nationality" %>
 					<%= hidden_field_tag :search_flag, 2 %>
 					<%= select_tag "nationality", options_for_select(@nationality) %>
+					<%= submit_tag "search" %>
+				<% end %>
+				<%= form_tag(users_travelers_search_path, method: :get) do %>
+					<%= label_tag "language" %>
+					<%= hidden_field_tag :search_flag, 3 %>
+					<%= select_tag "language", options_for_select(@language) %>
+					<%= submit_tag "search" %>
 				<% end %>
 			</div>
 			<div class="travelers-index-headline">

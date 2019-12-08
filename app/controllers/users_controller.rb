@@ -7,23 +7,36 @@ class UsersController < ApplicationController
 	def about
 	end
 	def index_traveler
-		@users = User.where(type_user: 0)
         @nationality = NATIOALITY
+        @language = LANGUAGE
+		@users = User.where(type_user: 0)
 	end
 	def search_traveler
+        @nationality = NATIOALITY
+        @language = LANGUAGE
 		if params[:search_flag] == "1"
 			@users = User.where(type_user: 0).where("name_user LIKE ?", "%#{params[:user_search]}%")
-		else
+		elsif params[:search_flag] == "2"
+			@users = User.where(type_user: 0).where(nationality: params[:nationality])
+		elsif  params[:search_flag] == "3"
+			@users = User.where(type_user: 0).where('language_first = ? or language_second = ? or language_third = ?', params[:language], params[:language], params[:language])
 		end
 		render :index_traveler
 	end
 	def index_local
+        @nationality = NATIOALITY
+        @language = LANGUAGE
 		@users = User.where(type_user: 1)
 	end
 	def search_local
+        @nationality = NATIOALITY
+        @language = LANGUAGE
 		if params[:search_flag] == "1"
 			@users = User.where(type_user: 1).where("name_user LIKE ?", "%#{params[:user_search]}%")
-		else
+		elsif params[:search_flag] == "2"
+			@users = User.where(type_user: 1).where(nationality: params[:nationality])
+		elsif  params[:search_flag] == "3"
+			@users = User.where(type_user: 1).where('language_first = ? or language_second = ? or language_third = ?', params[:language], params[:language], params[:language])
 		end
 		render :index_local
 	end

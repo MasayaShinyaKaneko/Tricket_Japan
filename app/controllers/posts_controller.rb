@@ -1,13 +1,31 @@
 class PostsController < ApplicationController
 	def top
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
+        @nationality = NATIOALITY
+        @language = LANGUAGE
 		@users = User.where(type_user: 0)
 		@posts = Post.all
 	end
 	def index
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
 		@posts = Post.all
 	end
 	def sort
-
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
+		if params[:search_flag] == "1"
+			@posts = Post.where(area: params[:area])
+		elsif params[:search_flag] == "2"
+			@posts = Post.where(season: params[:season])
+		elsif  params[:search_flag] == "3"
+			@posts = Post.where(interest: params[:interest])
+		end
+		render :index
 	end
 	def show
         @post = Post.find(params[:id])
