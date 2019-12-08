@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 	end
 	def index_traveler
 		@users = User.where(type_user: 0)
+        @nationality = NATIOALITY
 	end
 	def search_traveler
 		if params[:search_flag] == "1"
@@ -54,6 +55,10 @@ class UsersController < ApplicationController
 	    end
 	end
 	def edit
+        @nationality = NATIOALITY
+        @country = COUNTRY
+		@language = LANGUAGE
+
         @user = User.find(params[:id])
 		if @user != current_user
            flash[:notice] = "I have no authorization to edit"

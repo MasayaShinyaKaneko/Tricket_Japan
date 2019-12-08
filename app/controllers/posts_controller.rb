@@ -40,6 +40,9 @@ class PostsController < ApplicationController
 
 	end
 	def new
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
 		@post = Post.new
 	end
 	def create
@@ -55,6 +58,9 @@ class PostsController < ApplicationController
         end
 	end
 	def edit
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
         @post = Post.find(params[:id])
 		if  @post.user != current_user
         	flash[:notice] = "I have no authorization to edit"

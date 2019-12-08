@@ -15,6 +15,10 @@
 					<%= text_field_tag :user_search %>
 					<%= submit_tag "search" %>
 				<% end %>
+				<%= form_tag(users_travelers_search_path, method: :get) do %>
+					<%= hidden_field_tag :search_flag, 2 %>
+					<%= select_tag "nationality", options_for_select(@nationality) %>
+				<% end %>
 			</div>
 			<div class="travelers-index-headline">
 				<% @users.each do |user| %>
