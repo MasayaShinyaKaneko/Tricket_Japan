@@ -1,10 +1,7 @@
 class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
-		posts_top_path
-	end
-	def after_sign_up_path_for(resource)
-		user_path(current_user)
+		users_travelers_path
 	end
 
 	NATIOALITY = ["Japanese","American","French","Italian"]

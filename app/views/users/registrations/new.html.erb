@@ -5,10 +5,19 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
+      <% if @view == 0 %>
       <div class="field">
         <%= f.label :usertype %>
-        <%= f.select :type_user, [["traveler", 0 ],["local", 1 ]], autofocus: true %>
+        <%= f.radio_button :type_user, 0, checked: true %>traveler
+        <%= f.radio_button :type_user, 1 %>local
       </div>
+      <% elsif @view == 1 %>
+      <div class="field">
+        <%= f.label :usertype %>
+        <%= f.radio_button :type_user, 0 %>traveler
+        <%= f.radio_button :type_user, 1, checked: true %>local
+      </div>
+      <% end %>
 
       <div class="field">
         <%= f.label :firstname %>
@@ -37,27 +46,27 @@
 
       <div class="field">
         <%= f.label :nationality %>
-        <%= f.select :nationality, [["Japanese","Japanese"],["American","American"],["French","French"]], autofocus: true %>
+        <%= f.select :nationality, @nationality %>
       </div>
 
       <div class="field">
         <%= f.label :livingcountry %>
-        <%= f.select :country, [["Japan","Japan"],["America","America"],["Frence","Frence"]], autofocus: true %>
+        <%= f.select :country, @country %>
       </div>
 
       <div class="field">
         <%= f.label :native_language %>
-        <%= f.select :language_first, [["Japanese","Japanese"],["English","English"],["French","French"]], autofocus: true %>
+        <%= f.select :language_first, @language %>
       </div>
 
       <div class="field">
         <%= f.label :second_language %>
-        <%= f.select :language_second, [["N/A",""],["Japanese","Japanese"],["English","English"],["French","French"]], autofocus: true %>
+        <%= f.select :language_second, @language %>
       </div>
 
       <div class="field">
         <%= f.label :third_language %>
-        <%= f.select :language_third, [["N/A",""],["Japanese","Japanese"],["English","English"],["French","French"]], autofocus: true %>
+        <%= f.select :language_third, @language %>
       </div>
 
 
