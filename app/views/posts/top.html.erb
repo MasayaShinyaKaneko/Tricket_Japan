@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="Trickets-index-background1">
+		<div class="Trickets-top-background1">
 			<div class="col-md-12">
 				<h1>Trickets&Travelers</h1>
 			</div>
@@ -21,7 +21,7 @@
 		<div class="col-md-12">
 			<h1>Trickets</h1>
 			<% @posts.each do |post| %>
-			<div class="Trickets-index-content">
+			<div class="Trickets-top-content">
 				<p><%= link_to "#{post.user.name_user}" ,user_path(post.user.id) %></p>
 				<p><%= post.user.nationality %></p>
 				<p><%= post.area %></p>

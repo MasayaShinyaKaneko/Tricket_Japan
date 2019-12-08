@@ -1,17 +1,36 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		<p>Category</p>
+			<p>Category: <%= @post.area %><%= @post.season %><%= @post.interest %></p>
+			<p>accomplish or not: <%= @post.status_accomplishment %></p>
+			<p>display or not: <%= @post.status_display %></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Title</p>
+		<p>Title: <%= @post.title %></p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>User Name</p>
+		<p>User Name: <%= @user.name_user %></p>
+
+		    <!-- message -->
+			<% if @user.id == current_user.id %>
+			<% else %>
+				<% if @isRoom == true %>
+		    		<%= link_to "chat", room_path(@roomId) %>
+		  		<% else %>
+			    	<%= form_for @room do |f| %>
+			      		<%= fields_for @roomusernew do |e| %>
+			        		<%= e.hidden_field :user_id, :value=> @user.id %>
+			    		<% end %>
+		      			<%= f.submit "new chat" %>
+		    		<% end %>
+		  		<% end %>
+			<% end %>
+
+		<p>Nationality: <%= @user.nationality %></p>
 			<% if @post.post_image? %>
 				<% if @post.post_image.file.content_type.include?('image/') %>
 					<%= image_tag @post.post_image.post.url %>
@@ -22,6 +41,10 @@
             <% else %>
 				<%= image_tag "/assets/default.jpg", :size => '400x300' %>
 			<% end %>
+			<p>When:  <%= @post.time_todo %></p>
+			<p>Where:  <%= @post.place_todo %></p>
+			<p>Content:  <%= @post.content %></p>
+			<%= link_to "Trickets", posts_top_path, class:"nav-button" %>
 		</div>
 	</div>
 	<div class="row">
@@ -29,9 +52,32 @@
 		<p>Discuss on this Tricket</p>
 		</div>
 	</div>
+	<% if @user.id == current_user.id %>
 	<div class="row">
 		<div class="col-md-12">
 		<p>Your Tricket had come true!! with</p>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-12">
+		<p>Post accomplished message</p>
+			<%= form_for(@post) do |f| %>
+		      <div class="field">
+		        <%= f.label :comment_accomplishment %>
+		        <%= f.text_field :comment_accomplishment, autofocus: true, placeholder: "comment_accomplishment" %>
+		      </div>
+		      <div class="field">
+        		<%= f.label :image_accomplishment %>
+        		<%= f.file_field :image_accomplishmente, accept: 'image/jpeg,image/gif,image/png,video/*' %>
+      		  </div>
+			  <div class="actions">
+			    <%= f.submit "Accomplish" %>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
 </div>
+
+
+

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 		@posts = Post.all
 	end
 	def index
-
+		@posts = Post.all
 	end
 	def sort
 
@@ -12,6 +12,26 @@ class PostsController < ApplicationController
 	def show
         @post = Post.find(params[:id])
         @user = @post.user
+        # 下記message
+	    @currentroomuser=RoomUser.where(user_id: current_user.id)
+    	@roomuser=RoomUser.where(user_id: @user.id)
+    	if @user.id == current_user.id
+    	else
+			@currentroomuser.each do |cu|
+			@roomuser.each do |u|
+				if cu.room_id == u.room_id
+					@isRoom = true  #view
+					@roomId = cu.room_id  #view
+				else
+				end
+			end
+			end
+		    if @isRoom
+		    else
+		        @room = Room.new  #view
+		        @roomusernew = RoomUser.new  #view
+		    end
+	    end
 	end
 	def status_display
 

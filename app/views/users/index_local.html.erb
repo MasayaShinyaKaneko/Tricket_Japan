@@ -25,8 +25,8 @@
 			<div class="locals-index-headline">
 				<% @users.each do |user| %>
 				<div class="locals-index-content">
-					<p><%= user.name_user %></p>
-					<p><%= link_to "userpage" ,user_path(user) %></p>
+					<p><%= link_to "#{user.name_user}" ,user_path(user) %></p>
+					<p><%= user.nationality %></p>
 				</div>
 				<% end %>
 			</div>
