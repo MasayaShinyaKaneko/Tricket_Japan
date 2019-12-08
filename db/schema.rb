@@ -25,9 +25,13 @@ ActiveRecord::Schema.define(version: 2019_12_06_053504) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "user_id"
+    t.integer "follow_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_favorites_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_favorites_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|

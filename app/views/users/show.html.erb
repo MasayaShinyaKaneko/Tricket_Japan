@@ -36,6 +36,22 @@
 	<% else %>
 		<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
 	<% end %>
+		<!-- ユーザに対するいいね機能 -->
+	<% if current_user != @user %>
+	  <% if current_user.following?(@user) %>
+	    <%= link_to favorite_path(current_user.favorites.find_by(follow_id: @user.id),follow_id: @user.id), method: :delete do %>
+			<%= icon 'fa', 'heart', :style=>"color: red;"%>
+	    <% end %>
+	    <%= @user.followers.count %> favorite
+	  <% else %>
+	    <%= link_to favorites_path(current_user.favorites.build,follow_id: @user.id), method: :post do %>
+			<%= icon 'fa', 'heart', :style=>"color: grey;"%>
+	    <% end %>
+		<%= @user.followers.count %> favorite
+	  <% end %>
+	<% else %>
+	  <%= @user.followers.count %> favorite
+	<% end %>
 </div>
 
 <!-- travelers用とlocals用必要 -->

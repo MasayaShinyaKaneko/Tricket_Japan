@@ -21,9 +21,7 @@ Rails.application.routes.draw do
   get '/users/locals', to: 'users#index_local'
   get '/users/locals/search', to: 'users#search_local'
   get '/users/locals/sort', to: 'users#sort_local'
-  resources :users, only: [:show, :edit, :update] do
-    resources :favorites, only:[:create, :destroy]
-  end
+  resources :users, only: [:show, :edit, :update]
   #posts controller
   get '/posts/top', to: 'posts#top'
   get '/posts/sort', to: 'posts#sort'
@@ -33,12 +31,13 @@ Rails.application.routes.draw do
   patch '/posts/:id/status_display', to: 'posts#status_display'
   patch '/posts/:id/status_accomplish', to: 'posts#status_accomplish'
   #likes controller  →  posts controller下へ
-  #favorites controller  →  users controller下へ
+  #favorites controller
+  resources :favorites, only: [:create, :destroy]
   #room controller
   resources :rooms, :only => [:create, :show, :index]
   #message controller
   resources :messages, :only => [:create]
-  
+
   #adminsファイル内のcontroller
   namespace :admins do
 	  #admins/users controller

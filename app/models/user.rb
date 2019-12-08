@@ -9,6 +9,26 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :room_users, dependent: :destroy
 
+  has_many :favorites
+  has_many :followings, through: :favorites, source: :follow
+  has_many :reverse_of_favorites, class_name: 'Favorite', foreign_key: 'follow_id'
+  has_many :followers, through: :reverse_of_favorites, source: :user
+
+  def follow(other_user)
+    if self != other_user
+      self.favorites.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    favorite = self.favorites.find_by(follow_id: other_user.id)
+    favorite.destroy if favorite
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
+
   mount_uploader :picture_profile, ImageUploader
   mount_uploader :picture_background, ImageUploader
 
