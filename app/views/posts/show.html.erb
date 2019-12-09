@@ -37,21 +37,27 @@
 	<div class="row">
 		<div class="col-md-12">
 			<p>User Name: <%= link_to "#{@user.name_user}", user_path(@user) %></p>
+
 		<!-- ユーザに対するいいね機能 -->
 			<% if current_user != @user %>
-			  <% if current_user.following?(@user) %>
-			    <%= link_to favorite_path(current_user.favorites.find_by(follow_id: @user.id),follow_id: @user.id), method: :delete do %>
-					<%= icon 'fa', 'heart', :style=>"color: red;"%>
-			    <% end %>
-			    <%= @user.followers.count %> favorite
-			  <% else %>
-			    <%= link_to favorites_path(current_user.favorites.build,follow_id: @user.id), method: :post do %>
-					<%= icon 'fa', 'heart', :style=>"color: grey;"%>
-			    <% end %>
-				<%= @user.followers.count %> favorite
-			  <% end %>
+			  	<% if current_user.following?(@user) %>
+				    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
+						<%= icon 'fa', 'heart', :style=>"color: red;"%>
+				    <% end %>
+				    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
+						<%= icon 'fa', 'heart', :style=>"color: grey;"%>
+				    <% end %>
+			  	<% else %>
+				    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
+						<%= icon 'fa', 'heart', :style=>"color: red;"%>
+				    <% end %>
+				    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
+						<%= icon 'fa', 'heart', :style=>"color: grey;"%>
+				    <% end %>
+			  	<% end %>
+			  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
 			<% else %>
-			  <%= @user.followers.count %> favorite
+			  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
 			<% end %>
 
 		    <!-- message -->
@@ -87,7 +93,7 @@
 		</div>
 	</div>
 
-	<% if @post.status_accomplishment == 1 %>
+	<% if @post.status_accomplishment_before_type_cast == 1 %>
 	<div class="row">
 		<div class="col-md-12">
 		<h1>Tricket came true</h1>

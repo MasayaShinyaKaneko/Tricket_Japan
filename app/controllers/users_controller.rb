@@ -56,6 +56,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])  #view
 		@posts = Post.where(user_id: @user.id)  #view
+		@favorite_count = @user.followers.count
 		# 下記message
 	    @currentroomuser=RoomUser.where(user_id: current_user.id)
     	@roomuser=RoomUser.where(user_id: @user.id)
