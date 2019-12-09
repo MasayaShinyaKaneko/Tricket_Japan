@@ -8,18 +8,23 @@
 	<!-- Tricketに対するいいね機能 -->
 			<% if current_user != @user %>
 				<% if @post.liked_by?(current_user) %>
-				    <%= link_to post_like_path(@post), method: :delete do %>
+				    <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
 						<%= icon 'fa', 'thumbs-up', :style=>"color: red;"%>
 				    <% end %>
-				    <%= @post.likes.count %> good!
-				<% else %>
-				    <%= link_to post_likes_path(@post), method: :post do %>
+				    <%= link_to post_likes_path(@post), id:"notliked", :style=>"display: none;", remote: true, method: :post do %>
 						<%= icon 'fa', 'thumbs-up', :style=>"color: grey;" %>
 				    <% end %>
-				    <%= @post.likes.count %> good!
+				<% else %>
+				    <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
+						<%= icon 'fa', 'thumbs-up', :style=>"color: red;" %>
+				    <% end %>
+				    <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
+						<%= icon 'fa', 'thumbs-up', :style=>"color: grey;" %>
+				    <% end %>
 				<% end %>
+				<span id="count"><%= @count %> good!</span>
 			<% else %>
-				<%= @post.likes.count %> good!
+				<span id="count"><%= @count %> good!</span>
 			<% end %>
 
 		</div>

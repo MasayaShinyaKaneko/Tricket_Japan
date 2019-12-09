@@ -31,6 +31,7 @@ class PostsController < ApplicationController
 	def show
         @post = Post.find(params[:id])
         @user = @post.user
+        @count = @post.likes.count
         # 下記message
 	    @currentroomuser=RoomUser.where(user_id: current_user.id)
     	@roomuser=RoomUser.where(user_id: @user.id)
