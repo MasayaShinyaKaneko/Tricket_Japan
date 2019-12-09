@@ -7,6 +7,7 @@ class PostsController < ApplicationController
         @language = LANGUAGE
 		@users = User.where(type_user: 0)
 		@posts = Post.all
+        @most_liked_posts = Post.find(Like.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:post_id).order('count(post_id) desc').limit(2).pluck(:post_id))
 	end
 	def index
 		@area = AREA
@@ -51,6 +52,28 @@ class PostsController < ApplicationController
 		    end
 	    end
 	end
+	def update_accomplish
+        @post = Post.find(params[:id])
+        if @post.update(post_params)
+           flash[:notice] = "You have posted accomplishment successfully."
+           @post.update(status_accomplishment: 1)
+           redirect_to post_path(@post.id)
+        else
+           flash[:notice] = "error!!"
+           redirect_to post_path(@post.id)
+        end
+	end
+	def reset_accomplish
+        @post = Post.find(params[:id])
+        if @post.update(status_accomplishment: 0, image_accomplishment: "", comment_accomplishment: "")
+           flash[:notice] = "You have reset accomplishment successfully."
+           redirect_to post_path(@post.id)
+        else
+           flash[:notice] = "error!!"
+           redirect_to post_path(@post.id)
+        end
+	end
+
 	def status_display
 
 	end
@@ -106,6 +129,6 @@ class PostsController < ApplicationController
 
 	private
 	    def post_params
-	      params.require(:post).permit(:title, :content, :area, :season, :interest, :time_todo, :place_todo, :status_display, :post_image, :image_accomplishment)
+	      params.require(:post).permit(:title, :content, :area, :season, :interest, :time_todo, :place_todo, :status_display, :post_image, :image_accomplishment, :comment_accomplishment)
 	    end
 end

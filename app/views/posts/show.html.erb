@@ -31,7 +31,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p>User Name: <%= @user.name_user %></p>
+			<p>User Name: <%= link_to "#{@user.name_user}", user_path(@user) %></p>
 		<!-- ユーザに対するいいね機能 -->
 			<% if current_user != @user %>
 			  <% if current_user.following?(@user) %>
@@ -81,33 +81,58 @@
 			<%= link_to "Trickets", posts_top_path, class:"nav-button" %>
 		</div>
 	</div>
+
+	<% if @post.status_accomplishment == 1 %>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Discuss on this Tricket</p>
+		<h1>Tricket came true</h1>
+		<p>Your Tricket had come true!! with</p>
+		<p>comment: <%= @post.comment_accomplishment %></p>
+			<% if @post.image_accomplishment? %>
+				<% if @post.image_accomplishment.file.content_type.include?('image/') %>
+					<%= image_tag @post.image_accomplishment.post.url %>
+				<% elsif @post.image_accomplishment.file.content_type.include?('video/') %>
+				    <%= video_tag @post.image_accomplishment.url, width: "30%", height: "30%", 
+                  controls: true, autobuffer: true %>
+                <% end %>
+            <% else %>
+				<%= image_tag "/assets/default.jpg", :size => '400x300' %>
+			<% end %>
 		</div>
 	</div>
+	<% end %>
+
+	<div class="row">
+		<div class="col-md-12">
+		<h1>Discuss on this Tricket</h1>
+		</div>
+	</div>
+
 	<% if @user.id == current_user.id %>
 	<div class="row">
 		<div class="col-md-12">
-		<p>Your Tricket had come true!! with</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		<p>Post accomplished message</p>
-			<%= form_for(@post) do |f| %>
+		<h1>Post accomplished message</h1>
+
+		<% if flash[:notice] %>
+			<div id="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+
+			<%= form_for(@post, url:update_accomplish_path, method: :patch) do |f| %>
 		      <div class="field">
 		        <%= f.label :comment_accomplishment %>
 		        <%= f.text_field :comment_accomplishment, autofocus: true, placeholder: "comment_accomplishment" %>
 		      </div>
 		      <div class="field">
         		<%= f.label :image_accomplishment %>
-        		<%= f.file_field :image_accomplishmente, accept: 'image/jpeg,image/gif,image/png,video/*' %>
+        		<%= f.file_field :image_accomplishment, accept: 'image/jpeg,image/gif,image/png,video/*' %>
       		  </div>
 			  <div class="actions">
 			    <%= f.submit "Accomplish" %>
 			  </div>
 			<% end %>
+			<%= link_to "reset accomplishment", reset_accomplish_path(@post), method: :patch %>
 		</div>
 	</div>
 	<% end %>

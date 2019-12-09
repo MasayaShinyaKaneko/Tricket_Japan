@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     resources :likes, only:[:create, :destroy]
   end
   patch '/posts/:id/status_display', to: 'posts#status_display'
-  patch '/posts/:id/status_accomplish', to: 'posts#status_accomplish'
+  patch '/posts/:id/status_accomplish', to: 'posts#status_accomplish', as: "status_accomplish"
+  patch '/posts/:id/update_accomplish', to: 'posts#update_accomplish', as: "update_accomplish"
+  patch '/posts/:id/reset_accomplish', to: 'posts#reset_accomplish', as: "reset_accomplish"
   #likes controller  →  posts controller下へ
   #favorites controller
   resources :favorites, only: [:create, :destroy]

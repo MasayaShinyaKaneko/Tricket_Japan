@@ -27,6 +27,16 @@ class UsersController < ApplicationController
         @nationality = NATIOALITY
         @language = LANGUAGE
 		@users = User.where(type_user: 1)
+		@most_favorited_usersId = Favorite.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:follow_id).order('count(follow_id) desc').pluck(:follow_id)
+		@most_favorited_users = []
+		@most_favorited_usersId.each do |i|
+			if User.find(i).type_user == 1
+				@most_favorited_users  << User.find(i)
+				if @most_favorited_users.count == 2
+					break
+			    end
+			end
+		end
 	end
 	def search_local
         @nationality = NATIOALITY

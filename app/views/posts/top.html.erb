@@ -14,7 +14,17 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Most liked Trickets</h1>
+			<h1>Most liked Trickets (monthly)</h1>
+			<% @most_liked_posts.each do |post| %>
+				<p><%= link_to "#{post.user.name_user}", user_path(post.user.id) %></p>
+				<p><%= post.user.nationality %></p>
+				<p><%= post.area %></p>
+				<p><%= post.season %></p>
+				<p><%= post.interest %></p>
+				<p><%= post.title %></p>
+				<p><%= post.likes.count %> likes</p>
+				<p><%= link_to "Tricket detail" ,post_path(post) %></p>
+			<% end %>
 		</div>
 	</div>
 	<div class="row">
@@ -42,7 +52,7 @@
 			</div>
 			<% @posts.first(2).each do |post| %>
 			<div class="Trickets-top-content">
-				<p><%= link_to "#{post.user.name_user}" ,user_path(post.user.id) %></p>
+				<p><%= link_to "#{post.user.name_user}", user_path(post.user.id) %></p>
 				<p><%= post.user.nationality %></p>
 				<p><%= post.area %></p>
 				<p><%= post.season %></p>

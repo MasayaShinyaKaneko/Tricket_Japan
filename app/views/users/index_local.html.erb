@@ -2,13 +2,18 @@
 	<div class="row">
 		<div class="locals-index-background1">
 			<div class="col-md-12">
-			<h1>Locals</h>
+			<h1>Locals</h1>
 			</div>
-		</h1>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 		<h1>Populer Locals</h1>
+			<% @most_favorited_users.each do |user| %>
+				<p><%= link_to "#{user.name_user}" ,user_path(user) %></p>
+				<p><%= user.nationality %></p>
+			  	<p><%= user.followers.count %> favorite</p>
+			<% end %>
 		</div>
 	</div>
 	<div class="row">
