@@ -55,7 +55,8 @@ class UsersController < ApplicationController
 	end
 	def show
 		@user = User.find(params[:id])  #view
-		@posts = Post.where(user_id: @user.id)  #view
+		@posts_unaccomplish = Post.where(user_id: @user.id, status_accomplishment: 0)  #view
+		@posts_accomplish = Post.where(user_id: @user.id, status_accomplishment: 1)  #view
 		@favorite_count = @user.followers.count
 		# 下記message
 	    @currentroomuser=RoomUser.where(user_id: current_user.id)
@@ -99,7 +100,12 @@ class UsersController < ApplicationController
 	end
 
 	def favorite
-		@user = User.find(params[:id])
+		@user = current_user
+		@posts = []
+		@user.likes.each do |l|
+			@posts << l.post
+		end
+		@users = @user.followings
 	end
 	def status_user
 

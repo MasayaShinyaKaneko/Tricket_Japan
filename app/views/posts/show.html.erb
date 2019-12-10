@@ -68,7 +68,7 @@
 		  		<% else %>
 			    	<%= form_for @room do |f| %>
 			      		<%= fields_for @roomusernew do |e| %>
-			        		<%= e.hidden_field :user_id, :value=> @user.id %>
+	        			<%= e.hidden_field :user_id, value:@user.id %>
 			    		<% end %>
 		      			<%= f.submit "new chat" %>
 		    		<% end %>

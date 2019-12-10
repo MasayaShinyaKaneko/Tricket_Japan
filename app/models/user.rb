@@ -32,4 +32,6 @@ class User < ApplicationRecord
   mount_uploader :picture_profile, ImageUploader
   mount_uploader :picture_background, ImageUploader
 
+  enum type_user: { Traveler: 0, Local: 1 }
+
 end

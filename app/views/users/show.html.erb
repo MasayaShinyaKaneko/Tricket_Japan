@@ -10,7 +10,7 @@
 	<%= image_tag "/assets/default.jpg", :size => '400x150', class: "background"  %>
 <% end %>
 <div class="user-headline">
-	<h1>Traveler</h1>
+	<h1><%= @user.type_user %></h1>
 	<%= link_to "your favorites", user_favorite_page_path(current_user) %>
 	<%= link_to "edit profile", edit_user_path(current_user) %>
 	<%= link_to "unsubscribe", users_unsubscribe_path(current_user) %>
@@ -23,7 +23,7 @@
   		<% else %>
 	    	<%= form_for @room do |f| %>
 	      		<%= fields_for @roomusernew do |e| %>
-	        		<%= e.hidden_field :user_id, :value=> @user.id %>
+	        		<%= e.hidden_field :user_id, value:@user.id %>
 	    		<% end %>
       			<%= f.submit "new chat" %>
     		<% end %>
@@ -58,14 +58,29 @@
 	<% else %>
 	  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
 	<% end %>
+
+
+	<p><%= @favorite_count %> favorites / <%= @posts_unaccomplish.count %> Trickets / <%= @posts_accomplish.count %> accomplishments</p>
+
 </div>
 
 <!-- travelers用とlocals用必要 -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		<h1>Profile</h1>
-
+			<h1>Profile</h1>
+			<p>username: <%= @user.name_user %></p>
+			<p>gender: <%= @user.gender %></p>
+			<p>nationality: <%= @user.nationality %></p>
+			<p>first language: <%= @user.language_first %></p>
+			<% if @user.language_second.present? %>
+				<p>second language: <%= @user.language_second %></p>
+			<% end %>
+			<% if @user.language_third.present? %>
+				<p>third language: <%= @user.language_third %></p>
+			<% end %>
+			<p>hobby: <%= @user.hobby %></p>
+			<p>introduction: <%= @user.introduction %></p>
 		</div>
 	</div>
 	<div class="row">
@@ -74,7 +89,7 @@
 				<h1>Trickets</h1>
 				<%= link_to "new Tricket", new_post_path %>
 			</div>
-			<% @posts.each do |p| %>
+			<% @posts_unaccomplish.each do |p| %>
 			<div class="user-Tricket-content">
 				<%= p.title %>
 				<%= p.status_display %>
@@ -87,25 +102,21 @@
 			<% end %>
 		</div>
 	</div>
-	<div class="row">
 		<div class="col-md-12">
-		<h1>Accomplishments</h1>
-		</div>
-	</div>
-</div>
-
-
-<!-- travelers用とlocals用必要 -->
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-		<p>Locals</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		<p>Profile</p>
-
+			<div class="user-accomplish-headline">
+				<h1>Accomplishment</h1>
+			</div>
+			<% @posts_accomplish.each do |p| %>
+			<div class="user-accomplish-content">
+				<%= p.title %>
+				<%= p.status_display %>
+				<%= p.area %>
+				<%= p.season %>
+				<%= p.interest %>
+				<%= link_to "Tricket detail", post_path(p.id) %>
+				<%= link_to "edit Tricket", edit_post_path(p.id) %>
+			</div>
+			<% end %>
 		</div>
 	</div>
 </div>

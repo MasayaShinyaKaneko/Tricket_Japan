@@ -54,6 +54,27 @@
 	float: left;
 }
 
+/*favoriteページ*/
+.background{
+	width: 100%;
+	opacity: 0.5;
+	z-index: 1;
+	height: 250px;
+}
+.favorite-headline{
+	width: 100%;
+	z-index: 10;
+	height: 250px;
+	position: absolute;
+	top: 45px;
+}
+.favorite-Tricket-content{
+	width: 50%;
+	height: 100px;
+	float: left;
+}
+
+
 /*index_travelersページ*/
 .travelers-index-background1{
 	width: 100%;
@@ -73,3 +94,5 @@
 		margin: 0;
 		}
 }
+
+
