@@ -8,14 +8,14 @@
       <% if @view == 0 %>
       <div class="field">
         <%= f.label :usertype %>
-        <%= f.radio_button :type_user, 0, checked: true %>traveler
-        <%= f.radio_button :type_user, 1 %>local
+        <%= f.radio_button :type_user, :Traveler, checked: true %>traveler
+        <%= f.radio_button :type_user, :Local %>local
       </div>
       <% elsif @view == 1 %>
       <div class="field">
         <%= f.label :usertype %>
-        <%= f.radio_button :type_user, 0 %>traveler
-        <%= f.radio_button :type_user, 1, checked: true %>local
+        <%= f.radio_button :type_user, :Traveler %>traveler
+        <%= f.radio_button :type_user, :Local, checked: true %>local
       </div>
       <% end %>
 
