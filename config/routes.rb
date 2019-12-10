@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   resources :rooms, :only => [:create, :show, :index]
   #message controller
   resources :messages, :only => [:create]
+  #contact controller
+  resources :contacts, only: [:new, :create]
 
   #adminsファイル内のcontroller
   namespace :admins do
