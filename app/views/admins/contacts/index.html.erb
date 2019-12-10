@@ -1,0 +1,7 @@
+<% @contacts.each do |contact| %>
+	<p>username: <%= contact.user.name_user %></p>
+	<p>subject: <%= contact.subject %></p>
+	<p>content: <%= contact.content %></p>
+	<p><%= link_to "contact detail" ,admins_contact_path(contact.id) %></p>
+<% end %>
+

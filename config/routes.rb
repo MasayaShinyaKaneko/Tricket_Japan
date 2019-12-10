@@ -58,5 +58,7 @@ Rails.application.routes.draw do
     get '/posts/sort', to: 'posts#sort'
     patch '/posts/:id/status_flag', to: 'posts#status_flag'
     resources :posts, only:[:index, :show, :edit, :update]
+    #admins/contacts controller
+    resources :contacts, only:[:index, :show, :update]
   end
 end

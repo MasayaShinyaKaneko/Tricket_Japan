@@ -1,0 +1,21 @@
+	<p>username: <%= @contact.user.name_user %></p>
+	<p>subject: <%= @contact.subject %></p>
+	<p>content: <%= @contact.content %></p>
+	<p><%= link_to "back" ,admins_contacts_path %></p>
+
+<% if flash[:notice] %>
+	<div id="flash">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+
+<%= form_for(@contact, url: admins_contact_path, method: :patch) do |f| %>
+	<div class="field">
+		<%= f.label :reply %>
+		<%= f.text_area :reply, autofocus: true, placeholder: "reply" %>
+	</div>
+	<div class="actions">
+		<%= f.submit "send" %>
+	</div>
+<% end %>
