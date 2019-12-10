@@ -7,9 +7,9 @@ class Admins::ContactsController < ApplicationController
 		@user = @contact.user
 	end
 	def update
-      	contact = Contact.find(params[:id])
-    	contact.update(contact_params)
-    	redirect_to admins_contact_path
+      	@contact = Contact.find(params[:id])
+		@user = @contact.user
+    	ContactMailer.send_when_admin_reply(@user, @contact).deliver
     	if  @contact.update(contact_params)
         	flash[:notice] = "You have sent the message successfully."
     		render :show
