@@ -19,6 +19,7 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+/*全体*/
 * {
 	margin: 0;
 	padding: 0;
@@ -29,37 +30,58 @@
 	display: block;
 	clear: both;
 }
-#flash{
-    color: red;
+strong{
+    font-size: 40px;
 }
-
-
+/*headline全体*/
+.title_type1 {
+  padding: 0.25em 0.5em;
+  background: transparent;
+  border-left: solid 5px #165e83;
+}
+.title_type1_traveler {
+  padding: 0.25em 0.5em;
+  background: transparent;
+  border-left: solid 5px #f8b500;
+}
+.title_type1_local {
+  padding: 0.25em 0.5em;
+  background: transparent;
+  border-left: solid 5px #9e3d3f;
+}
+.title_type2 {
+  padding: 0.5em 0;
+  color: #165e83;
+  border-top: solid 3px #165e83;
+  border-bottom: solid 3px #165e83;
+}
+.title_type2_traveler {
+  padding: 0.5em 0;
+  color: #f8b500;
+  border-top: solid 3px #f8b500;
+  border-bottom: solid 3px #f8b500;
+}
+.title_type2_local {
+  padding: 0.5em 0;
+  color: #9e3d3f;
+  border-top: solid 3px #9e3d3f;
+  border-bottom: solid 3px #9e3d3f;
+}
 /*header*/
 .nav-container{
 	height: 50px;
 	width: 100%;
-	background-color: #D84315;
+	background-color: #165e83;
 	position: fixed;
     top: 0;
-    z-index: 100;
+    z-index: 20;
 
     #brand{
     	float: left;
-    	color: #FBE9E7;
+        margin: 0 20px 0 10px;
+    	color: white;
     	font-family: Times New Roman;
     	font-size: 35px;
-        text-decoration: none;
-    }
-    .nav-lists{
-    	float: right;
-    	width: 450px;
-    }
-    .nav-button{
-        font-size: 20px;
-        line-height: 50px;
-        margin: 0 10px ;
-    	color: #FBE9E7;
-		background-color: #D84315;
         text-decoration: none;
     }
     .nav-button-home{
@@ -67,8 +89,8 @@
         font-size: 20px;
         line-height: 50px;
         margin: 0 20px ;
-        color: #FBE9E7;
-        background-color: #D84315;
+        color: white;
+        background-color: #165e83;
         text-decoration: none;
     }
     #login_space {
@@ -84,12 +106,22 @@
         display: inline-block;
         float: left;
         color: white;
-        font-weight: bold;
         border: none;
-        background-color: #FFCA28;
+        background-color: #c77eb5;
+    }
+    .nav-lists{
+    	float: right;
+    	width: 450px;
+    }
+    .nav-button{
+        font-size: 20px;
+        line-height: 50px;
+        margin: 0 10px ;
+    	color: white;
+		background-color: #165e83;
+        text-decoration: none;
     }
 }
-
 /*space*/
 .space-top{
 	height: 50px;
@@ -101,16 +133,14 @@
 	display: block;
 	bottom: 0;
 }
-
-
 /*footer*/
 footer{
 	height: 50px;
 	width: 100%;
-	background-color: #D84315;
+	background-color: #165e83;
     text-align: center;
     color: white;
 	position: fixed;
     bottom: 0;
-    z-index: 100;
+    z-index: 20;
 }

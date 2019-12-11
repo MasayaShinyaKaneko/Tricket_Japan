@@ -2,45 +2,70 @@
 	<div class="row">
 		<div class="Trickets-index-background1">
 			<div class="col-md-12">
-			<h1>Trickets</h>
+			<h1 class="title_type1_traveler">Trickets</h1>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="Trickets-index-headline">
-				<p>Trickets</p>
-				<%= form_tag(posts_sort_path, method: :get) do %>
-					<%= label_tag "area" %>
-					<%= hidden_field_tag :search_flag, 1 %>
-					<%= select_tag "area", options_for_select(@area) %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(posts_sort_path, method: :get) do %>
-					<%= label_tag "season" %>
-					<%= hidden_field_tag :search_flag, 2 %>
-					<%= select_tag "season", options_for_select(@season) %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(posts_sort_path, method: :get) do %>
-					<%= label_tag "interest" %>
-					<%= hidden_field_tag :search_flag, 3 %>
-					<%= select_tag "interest", options_for_select(@interest) %>
-					<%= submit_tag "search" %>
-				<% end %>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "area" %>
+						<%= hidden_field_tag :search_flag, 1 %>
+						<%= select_tag "area", options_for_select(@area) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "season" %>
+						<%= hidden_field_tag :search_flag, 2 %>
+						<%= select_tag "season", options_for_select(@season) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "interest" %>
+						<%= hidden_field_tag :search_flag, 3 %>
+						<%= select_tag "interest", options_for_select(@interest) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
 			</div>
-			<% @posts.each do |post| %>
-			<div class="Trickets-index-content">
-				<p><%= link_to "#{post.user.name_user}" ,user_path(post.user.id) %></p>
-				<p><%= post.user.nationality %></p>
-				<p><%= post.area %></p>
-				<p><%= post.season %></p>
-				<p><%= post.interest %></p>
-				<p><%= post.title %></p>
-				<p><%= link_to "Tricket detail" ,post_path(post) %></p>
+
+			<% @posts.each do |p| %>
+			<div class="Trickets-index-content clearfix">
+				<div style="width: 15%; float:left;">
+					<div class="Trickets-top-user-image">
+						<% if p.user.picture_profile? %>
+							<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% end %>
+						<p style="text-align:center;"><%= p.user.nationality %></p>
+					</div>
+				</div>
+				<div class="panel panel-default" style="width: 80%; float:left;">
+					<div class="panel-heading" style="background-color:#f8b500;">
+						<h5 class="panel-title">Title: <%= p.title.truncate(40) %></h5>
+					</div>
+					<div class="panel-body">
+						<h4 class="label label-default"><%= p.area %></h4>
+						<h4 class="label label-default"><%= p.season %></h4>
+						<h4 class="label label-default"><%= p.interest %></h4>
+						<div style="float:right;">
+							<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+							<% if @user == current_user %>
+							<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+							<% end %>
+						</div>
+					</div>
+				</div>
 			</div>
 			<% end %>
 		</div>
 	</div>
-    <%= link_to "Trickets", posts_top_path, class:"nav-button" %>
+	<h4 style="text-align: center;"><%= link_to "back", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5" %></h4>
 </div>

@@ -15,24 +15,40 @@
 	background-color: #FFCA28;
 }
 
+
 /*Tricket topページ*/
 .Trickets-top-background1{
 	width: 100%;
-	height: 200px;
+	height: 250px;
 	background-image: url(travelers_backgraund.jpg);
-	color: #FBE9E7;
+	color: white;
 
 		h1{
 		margin: 0;
 		}
 }
+.Trickets-top-content{
+	width: 50%;
+	height: 100px;
+	float: left;
+}
+.search-form-tag{
+	margin: 10px;
+	height: 40px;
+	float: left;
+}
 
 /*Tricket indexページ*/
+.Trickets-index-content{
+	width: 50%;
+	height: 100px;
+	float: left;
+}
 .Trickets-index-background1{
 	width: 100%;
-	height: 200px;
+	height: 250px;
 	background-image: url(travelers_backgraund.jpg);
-	color: #FBE9E7;
+	color: white;
 
 		h1{
 		margin: 0;

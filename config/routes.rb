@@ -10,12 +10,11 @@ Rails.application.routes.draw do
 
   root to: 'users#top'
   #users controller
-  get '/users/about', to: 'users#about'
   get '/users/:id/unsubscribe', to: 'users#unsubscribe', as: "users_unsubscribe"
   patch '/users/:id/status_flag', to: 'users#status_flag'
   get '/users/unsubscribe/complete', to: 'users#complete'
   get '/users/:id/favorite', to: 'users#favorite', as: "user_favorite_page"
-  patch '/users/:id/status_user', to: 'users#status_user'
+  patch '/users/:id/status_user', to: 'users#status_user', as: "user_status"
   get '/users/travelers', to: 'users#index_traveler'
   get '/users/travelers/search', to: 'users#search_traveler'
   get '/users/locals', to: 'users#index_local'

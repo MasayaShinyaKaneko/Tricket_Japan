@@ -1,73 +1,115 @@
-<% if flash[:notice] %>
-	<div id="flash">
-		<%= flash[:notice] %>
-	</div>
-<% end %>
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="Trickets-top-background1">
 			<div class="col-md-12">
-				<h1>Trickets&Travelers</h1>
+				<h1 class="title_type1_traveler">Trickets&Travelers</h1>
 			</div>
 		</div>
 	</div>
-	<div class="row">
+
+	<div class="row" style="height:330px; background-color:#EFE9D1;">
 		<div class="col-md-12">
-			<h1>Most liked Trickets (monthly)</h1>
-			<% @most_liked_posts.each do |post| %>
-				<p><%= link_to "#{post.user.name_user}", user_path(post.user.id) %></p>
-				<p><%= post.user.nationality %></p>
-				<p><%= post.area %></p>
-				<p><%= post.season %></p>
-				<p><%= post.interest %></p>
-				<p><%= post.title %></p>
-				<p><%= post.likes.count %> likes</p>
-				<p><%= link_to "Tricket detail" ,post_path(post) %></p>
+			<h1 class="title_type1_traveler">Most liked Trickets (monthly)</h1>
+			<% @most_liked_posts.each do |p| %>
+			<h2><%= p.likes.count %> likes</h2>
+			<div class="Trickets-top-content clearfix">
+				<div style="width: 15%; float:left;">
+					<div class="Trickets-top-user-image">
+						<% if p.user.picture_profile? %>
+							<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% end %>
+						<p style="text-align:center;"><%= p.user.nationality %></p>
+					</div>
+				</div>
+				<div class="panel panel-default" style="width: 80%; float:left;">
+					<div class="panel-heading" style="background-color:#f8b500;">
+						<h5 class="panel-title">Title: <%= p.title.truncate(40) %></h5>
+					</div>
+					<div class="panel-body">
+						<h4 class="label label-default"><%= p.area %></h4>
+						<h4 class="label label-default"><%= p.season %></h4>
+						<h4 class="label label-default"><%= p.interest %></h4>
+						<div style="float:right;">
+							<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+							<% if @user == current_user %>
+							<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
 			<% end %>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="Trickets-top-headline">
-				<h1>Trickets</h1>
-				<%= form_tag(posts_sort_path, method: :get) do %>
-					<%= label_tag "area" %>
-					<%= hidden_field_tag :search_flag, 1 %>
-					<%= select_tag "area", options_for_select(@area) %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(posts_sort_path, method: :get) do %>
-					<%= label_tag "season" %>
-					<%= hidden_field_tag :search_flag, 2 %>
-					<%= select_tag "season", options_for_select(@season) %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(posts_sort_path, method: :get) do %>
-					<%= label_tag "interest" %>
-					<%= hidden_field_tag :search_flag, 3 %>
-					<%= select_tag "interest", options_for_select(@interest) %>
-					<%= submit_tag "search" %>
-				<% end %>
+			<div class="Trickets-top-headline clearfix">
+				<h1 class="title_type1_traveler">Trickets</h1>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "area" %>
+						<%= hidden_field_tag :search_flag, 1 %>
+						<%= select_tag "area", options_for_select(@area) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "season" %>
+						<%= hidden_field_tag :search_flag, 2 %>
+						<%= select_tag "season", options_for_select(@season) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "interest" %>
+						<%= hidden_field_tag :search_flag, 3 %>
+						<%= select_tag "interest", options_for_select(@interest) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
 			</div>
-			<% @posts.first(2).each do |post| %>
-			<div class="Trickets-top-content">
-				<p><%= link_to "#{post.user.name_user}", user_path(post.user.id) %></p>
-				<p><%= post.user.nationality %></p>
-				<p><%= post.area %></p>
-				<p><%= post.season %></p>
-				<p><%= post.interest %></p>
-				<p><%= post.title %></p>
-				<p><%= link_to "Tricket detail" ,post_path(post) %></p>
+
+			<% @posts.first(4).each do |p| %>
+			<div class="Trickets-top-content clearfix">
+				<div style="width: 15%; float:left;">
+					<div class="Trickets-top-user-image clearfix">
+						<% if p.user.picture_profile? %>
+							<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% end %>
+						<p style="text-align:center;"><%= p.user.nationality %></p>
+					</div>
+				</div>
+				<div class="panel panel-default" style="width: 80%; float:left;">
+					<div class="panel-heading" style="background-color:#f8b500;">
+						<h5 class="panel-title">Title: <%= p.title.truncate(40) %></h5>
+					</div>
+					<div class="panel-body">
+						<h4 class="label label-default"><%= p.area %></h4>
+						<h4 class="label label-default"><%= p.season %></h4>
+						<h4 class="label label-default"><%= p.interest %></h4>
+						<div style="float:right;">
+							<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+							<% if @user == current_user %>
+							<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+							<% end %>
+						</div>
+					</div>
+				</div>
 			</div>
 			<% end %>
-			<%= link_to "See more Trickets", posts_path %>
+			<h4 style="text-align: center;"><%= link_to "check more Trickets", posts_path, class:"label label-default", :style=>"background-color: #c77eb5; margin-top: 30px;"%></h4>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" style="height:330px; background-color:#EFE9D1;">
 		<div class="col-md-12">
 			<div class="travelers-top-headline">
-				<h1>Travelers</h1>
+				<h1 class="title_type1_traveler">Travelers</h1>
 				<%= form_tag(users_travelers_search_path, method: :get) do %>
 					<%= label_tag "traveler_name" %>
 					<%= hidden_field_tag :search_flag, 1 %>

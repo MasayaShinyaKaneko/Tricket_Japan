@@ -1,13 +1,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
-     <h1>Edit Profile</h1>
-     <%= form_for(@user) do |f| %>
-
+      <div class="profile-edit-headline title_type1">
+       <h1>Edit Profile</h1>
+      </div>
+      <%= form_for(@user) do |f| %>
       <div class="field">
-        <%= f.label :usertype %>
-        <%= f.radio_button :type_user, 0 %>traveler
-        <%= f.radio_button :type_user, 1 %>local
+         <%= f.label :usertype %>
+          <%= f.radio_button :type_user, :Traveler, checked: true %>
+          <h1 class="label label-default" style="background-color:#f8b500; font-size: 20px;">Travelers</h1>
+          <%= f.radio_button :type_user, :Local %>
+          <h1 class="label label-default" style="background-color:#9e3d3f; font-size: 20px;">Locals</h1>
       </div>
 
       <div class="field">
@@ -65,7 +68,9 @@
       </div>
     </div>
     <div class="col-md-6">
-    <h2>Option</h2>
+      <div class="profile-edit-headline title_type1">
+       <h1>Option</h1>
+      </div>
       <div class="field">
         <%= f.label :profile_picture %>
         <%= f.file_field :picture_profile, accept: 'image/jpeg,image/gif,image/png' %>
@@ -79,7 +84,7 @@
         <%= f.text_field :hobby, autofocus: true, placeholder: "hobby" %>
       </div>
 
-      <div class="introduction">
+      <div class="field">
         <%= f.label :introduction %><br>
         <%= f.text_area :introduction, autofocus: true, placeholder: "introduction" %>
       </div>
@@ -87,11 +92,11 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="actions">
-        <%= f.submit "Update" %>
+      <div class="actions" style="width: 100%; margin: 0 auto;">
+      <%= f.submit "Update", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
       </div>
-    <% end %>
-    <%= link_to "mypage", user_path(current_user) %>
+      <% end %>
+      <h3><%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5; width: 100px;" %></h3>
     </div>
   </div>
 </div>

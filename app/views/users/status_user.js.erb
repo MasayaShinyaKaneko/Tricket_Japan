@@ -1,0 +1,11 @@
+<% if @user.status_user_before_type_cast == 0 %>
+$('.label-danger').text('<%= @user.status_user %>');
+$('.label-danger').attr("class", "label label-success");
+<% elsif @user.status_user_before_type_cast == 1 %>
+$('.label-success').text('<%= @user.status_user %>');
+$('.label-success').attr("class", "label label-warning");
+<% elsif @user.status_user_before_type_cast == 2 %>
+$('.label-warning').text('<%= @user.status_user %>');
+$('.label-warning').attr("class", "label label-danger");
+<% end %>
+

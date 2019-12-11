@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :background, if: :is_background?
   version :background do
-    process resize_to_fill: [400, 150]
+    process resize_to_fill: [400, 200]
   end
 
   version :post, if: :is_post?

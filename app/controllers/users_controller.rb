@@ -4,8 +4,6 @@ class UsersController < ApplicationController
 
 	def top
 	end
-	def about
-	end
 	def index_traveler
         @nationality = NATIOALITY
         @language = LANGUAGE
@@ -108,7 +106,14 @@ class UsersController < ApplicationController
 		@users = @user.followings
 	end
 	def status_user
-
+		@user = User.find(params[:id])
+		if @user.status_user_before_type_cast == 0
+			@user.update(status_user: 1)
+    	elsif @user.status_user_before_type_cast == 1
+			@user.update(status_user: 2)
+    	elsif @user.status_user_before_type_cast == 2
+   			@user.update(status_user: 0)
+   		end
 	end
 	def unsubscribe
 

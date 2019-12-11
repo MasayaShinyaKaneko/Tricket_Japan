@@ -1,122 +1,217 @@
+<% if @user.picture_background? %>
+	<%= image_tag @user.picture_background.background.url, :size => '400x200', class: "background" %>
+<% else %>
+	<%= image_tag "/assets/default.jpg", :size => '400x200', class: "background"  %>
+<% end %>
+
+<div class="user-headline clearfix">
+	<% if @user.type_user_before_type_cast == 0 %>
+		<h1 class="title_type1_traveler"><%= @user.type_user %></h1>
+	<% elsif @user.type_user_before_type_cast == 1 %>
+		<h1 class="title_type1_local"><%= @user.type_user %></h1>
+	<% end %>
+    <div class="user-headline-left">
+    	<% if @user == current_user %>
+		<%= link_to "your favorites", user_favorite_page_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+		<%= link_to "edit profile", edit_user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+		<%= link_to "unsubscribe", users_unsubscribe_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+		<% end %>
+		<!-- message -->
+		<% if @user != current_user %>
+			<% if @isRoom == true %>
+	    		<%= link_to "message", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+	  		<% else %>
+		    	<%= form_for @room do |f| %>
+		      		<%= fields_for @roomusernew do |e| %>
+		        		<%= e.hidden_field :user_id, value:@user.id %>
+		    		<% end %>
+	      			<%= f.submit "new message", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
+	    		<% end %>
+	  		<% end %>
+		<% end %>
+	</div>
+	<div class="user-headline-image">
+		<% if @user.picture_profile? %>
+			<%= image_tag @user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+		<% else %>
+			<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+		<% end %>
+	</div>
+	<div class="user-headline-rigth">
+		<p>User Name</p>
+		<p style="font-size: 30px; font-weight: bold;"><%= @user.name_user %></p>
+		<!-- ユーザに対するいいね機能 -->
+		<% if current_user != @user %>
+		  	<% if current_user.following?(@user) %>
+			    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
+					<%= icon 'fa', 'heart', :style=>"color: red; font-size: 30px;"%>
+			    <% end %>
+			    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
+					<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 30px;"%>
+			    <% end %>
+		  	<% else %>
+			    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
+					<%= icon 'fa', 'heart', :style=>"color: red; font-size: 30px;"%>
+			    <% end %>
+			    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
+					<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 30px;"%>
+			    <% end %>
+		  	<% end %>
+		  	<span id="favorite_count" style="font-size: 20px;"><%= @favorite_count %> favorites</span>
+		<% else %>
+		  	<span id="favorite_count" style="font-size: 20px;"><%= @favorite_count %> favorites</span>
+		<% end %>
+		<% if @user == current_user %>
+			<% if @user.status_user_before_type_cast == 0 %>
+				<%= link_to @user.status_user, user_status_path(@user), method: :patch, remote: true, :style=>"font-size: 20px;", class:"label label-success" %>
+			<% elsif @user.status_user_before_type_cast == 1 %>
+				<%= link_to @user.status_user, user_status_path(@user), method: :patch, remote: true, :style=>"font-size: 20px;", class:"label label-warning" %>
+			<% elsif @user.status_user_before_type_cast == 2 %>
+				<%= link_to @user.status_user, user_status_path(@user), method: :patch, remote: true, :style=>"font-size: 20px;", class:"label label-danger" %>
+			<% end %>
+		<% else %>
+			<% if @user.status_user_before_type_cast == 0 %>
+				<span class="label label-success" style="font-size: 20px;"><%= @user.status_user %></span>
+			<% elsif @user.status_user_before_type_cast == 1 %>
+				<span class="label label-warning" style="font-size: 20px;"><%= @user.status_user %></span>
+			<% elsif @user.status_user_before_type_cast == 2 %>
+				<span class="label label-danger" style="font-size: 20px;"><%= @user.status_user %></span>
+			<% end %>
+		<% end %>
+
+		<p style="font-size: 20px;"><%= @posts_unaccomplish.count %> Trickets / <%= @posts_accomplish.count %> accomplishments</p>
+	</div>
+</div>
+
 <% if flash[:notice] %>
 	<div id="flash">
 		<%= flash[:notice] %>
 	</div>
 <% end %>
 
-<% if @user.picture_background? %>
-	<%= image_tag @user.picture_background.background.url, class: "background" %>
-<% else %>
-	<%= image_tag "/assets/default.jpg", :size => '400x150', class: "background"  %>
-<% end %>
-<div class="user-headline">
-	<h1><%= @user.type_user %></h1>
-	<%= link_to "your favorites", user_favorite_page_path(current_user) %>
-	<%= link_to "edit profile", edit_user_path(current_user) %>
-	<%= link_to "unsubscribe", users_unsubscribe_path(current_user) %>
-
-    <!-- message -->
-	<% if @user.id == current_user.id %>
-	<% else %>
-		<% if @isRoom == true %>
-    		<%= link_to "chat", room_path(@roomId) %>
-  		<% else %>
-	    	<%= form_for @room do |f| %>
-	      		<%= fields_for @roomusernew do |e| %>
-	        		<%= e.hidden_field :user_id, value:@user.id %>
-	    		<% end %>
-      			<%= f.submit "new chat" %>
-    		<% end %>
-  		<% end %>
-	<% end %>
-
-	<p>User Name <%= @user.name_user %></p>
-	<% if @user.picture_profile? %>
-		<%= image_tag @user.picture_profile.profile.url, :style=>"border-radius: 150px;" %>
-	<% else %>
-		<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
-	<% end %>
-
-	<!-- ユーザに対するいいね機能 -->
-	<% if current_user != @user %>
-	  	<% if current_user.following?(@user) %>
-		    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
-				<%= icon 'fa', 'heart', :style=>"color: red;"%>
-		    <% end %>
-		    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
-				<%= icon 'fa', 'heart', :style=>"color: grey;"%>
-		    <% end %>
-	  	<% else %>
-		    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
-				<%= icon 'fa', 'heart', :style=>"color: red;"%>
-		    <% end %>
-		    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
-				<%= icon 'fa', 'heart', :style=>"color: grey;"%>
-		    <% end %>
-	  	<% end %>
-	  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
-	<% else %>
-	  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
-	<% end %>
-
-
-	<p><%= @favorite_count %> favorites / <%= @posts_unaccomplish.count %> Trickets / <%= @posts_accomplish.count %> accomplishments</p>
-
-</div>
-
-<!-- travelers用とlocals用必要 -->
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h1>Profile</h1>
-			<p>username: <%= @user.name_user %></p>
-			<p>gender: <%= @user.gender %></p>
-			<p>nationality: <%= @user.nationality %></p>
-			<p>first language: <%= @user.language_first %></p>
-			<% if @user.language_second.present? %>
-				<p>second language: <%= @user.language_second %></p>
-			<% end %>
-			<% if @user.language_third.present? %>
-				<p>third language: <%= @user.language_third %></p>
-			<% end %>
-			<p>hobby: <%= @user.hobby %></p>
-			<p>introduction: <%= @user.introduction %></p>
+	<div class="user-content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="user-profile-headline">
+					<% if @user.type_user_before_type_cast == 0 %>
+						<h1 class="title_type1_traveler">Profile</h1>
+					<% elsif @user.type_user_before_type_cast == 1 %>
+						<h1 class="title_type1_local">Profile</h1>
+					<% end %>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="user-Tricket-headline">
-				<h1>Trickets</h1>
-				<%= link_to "new Tricket", new_post_path %>
+		<div class="row">
+			<div class="user-profile-content">
+				<div class="col-md-6">
+					<table class="table table-condensed">
+						<tbody>
+							<tr>
+								<th>username</th>
+								<td><%= @user.name_user %></td>
+							</tr>
+							<tr>
+								<th>gender</th>
+								<td><%= @user.gender %></td>
+							</tr>
+							<tr>
+								<th>nationality</th>
+								<td><%= @user.nationality %></td>
+							</tr>
+							<tr>
+								<th>first language</th>
+								<td><%= @user.language_first %></td>
+							</tr>
+							<% if @user.language_second.present? %>
+							<tr>
+								<th>second language</th>
+								<td><%= @user.language_second %></td>
+							</tr>
+							<% end %>
+							<% if @user.language_third.present? %>
+							<tr>
+								<th>second language</th>
+								<td><%= @user.language_third %></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-6">
+					<table class="table table-condensed">
+						<tbody>
+							<tr>
+								<th>hobby</th>
+								<td><%= @user.hobby %></td>
+							</tr>
+							<tr>
+								<th>introduction</th>
+								<td><%= @user.introduction %></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-			<% @posts_unaccomplish.each do |p| %>
-			<div class="user-Tricket-content">
-				<%= p.title %>
-				<%= p.status_display %>
-				<%= p.area %>
-				<%= p.season %>
-				<%= p.interest %>
-				<%= link_to "Tricket detail", post_path(p.id) %>
-				<%= link_to "edit Tricket", edit_post_path(p.id) %>
-			</div>
-			<% end %>
 		</div>
-	</div>
-		<div class="col-md-12">
-			<div class="user-accomplish-headline">
-				<h1>Accomplishment</h1>
+		<% if @user.type_user_before_type_cast == 0 %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="user-Tricket-headline clearfix">
+						<h1 class="title_type1_traveler" style="margin: 0;">Trickets</h1>
+						<% if @user == current_user %>
+						<h3 style="margin: 0 0 20px 0;"><%= link_to "new Tricket", new_post_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
+						<% end %>
+					</div>
+					<% @posts_unaccomplish.each do |p| %>
+					<div class="user-Tricket-content">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="background-color:#f8b500;">
+								<h5 class="panel-title">Title: <%= p.title.truncate(50) %></h5>
+							</div>
+							<div class="panel-body">
+								<h4 class="label label-default"><%= p.area %></h4>
+								<h4 class="label label-default"><%= p.season %></h4>
+								<h4 class="label label-default"><%= p.interest %></h4>
+								<div style="float:right;">
+									<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+									<% if @user == current_user %>
+									<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+					<% end %>
+				</div>
 			</div>
-			<% @posts_accomplish.each do |p| %>
-			<div class="user-accomplish-content">
-				<%= p.title %>
-				<%= p.status_display %>
-				<%= p.area %>
-				<%= p.season %>
-				<%= p.interest %>
-				<%= link_to "Tricket detail", post_path(p.id) %>
-				<%= link_to "edit Tricket", edit_post_path(p.id) %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="user-accomplish-headline">
+						<h1 class="title_type1_traveler" style="margin: 0;">Accomplishments</h1>
+					</div>
+					<% @posts_accomplish.each do |p| %>
+					<div class="user-Tricket-content">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="background-color:#f8b500;">
+								<h5 class="panel-title">Title: <%= p.title %></h5>
+							</div>
+							<div class="panel-body">
+								<h4 class="label label-default"><%= p.area %></h4>
+								<h4 class="label label-default"><%= p.season %></h4>
+								<h4 class="label label-default"><%= p.interest %></h4>
+								<div style="float:right;">
+									<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+									<% if @user == current_user %>
+									<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+								</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+					<% end %>
+				</div>
 			</div>
-			<% end %>
-		</div>
+		<% end %>
 	</div>
 </div>

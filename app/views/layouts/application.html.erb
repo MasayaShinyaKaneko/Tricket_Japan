@@ -13,7 +13,12 @@
     <% if user_signed_in? %>
       <div class="nav-container">
         <div id="brand">Tricket</div>
-          <%= link_to "#{current_user.name_user}", user_path(current_user), class:"nav-button" %>
+        <% if current_user.picture_profile? %>
+          <%= image_tag current_user.picture_profile.profile.url, :size => '35x35', :style=>"border-radius: 35px;" %>
+        <% else %>
+          <%= image_tag "/assets/default.jpg", :size => '35x35', :style=>"border-radius: 35px;" %>
+        <% end %>
+        <%= link_to "#{current_user.name_user}さん", user_path(current_user), class:"nav-button", :style=>"margin-left: 0;" %>
         <div class="nav-lists">
           <%= link_to "Trickets", posts_top_path, class:"nav-button" %>
           <%= link_to "Locals", users_locals_path, class:"nav-button" %>
@@ -36,11 +41,9 @@
               <input id="login_button" type="submit" name="commit" value="Log in" data-disable-with="Log in">
             </div>
           </form>
-          <%= link_to "About", users_about_path, class:"nav-button-home" %>
           <%= link_to "Home", root_path, class:"nav-button-home" %>
       </div>
     <% end %>
-
 
     <!-- headerのためのspace -->
     <div class="space-top"></div>
@@ -50,7 +53,6 @@
 
     <!-- footer -->
     <footer>
-      <p>Contact</p>
     </footer>
   </body>
 </html>

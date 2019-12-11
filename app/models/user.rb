@@ -34,5 +34,6 @@ class User < ApplicationRecord
   mount_uploader :picture_background, ImageUploader
 
   enum type_user: { Traveler: 0, Local: 1 }
+  enum status_user: { Active: 0, Busy: 1, Away: 2 }
 
 end
