@@ -33,6 +33,14 @@
 						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
 					<% end %>
 				</div>
+				<div class="search-form-tag">
+					<%= form_tag(posts_sort_path, method: :get) do %>
+						<%= label_tag "status" %>
+						<%= hidden_field_tag :search_flag, 4 %>
+						<%= select_tag "status", options_for_select({ongoing: 0, accomplished: 1}) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
 			</div>
 
 			<% @posts.each do |p| %>
@@ -55,6 +63,9 @@
 						<h4 class="label label-default"><%= p.area %></h4>
 						<h4 class="label label-default"><%= p.season %></h4>
 						<h4 class="label label-default"><%= p.interest %></h4>
+						<% if p.status_accomplishment_before_type_cast == 1 %>
+							<h4 class="label label-success"><%= p.status_accomplishment %></h4>
+						<% end %>
 						<div style="float:right;">
 							<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
 							<% if @user == current_user %>

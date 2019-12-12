@@ -28,6 +28,8 @@ class PostsController < ApplicationController
 			@posts = Post.where(season: params[:season])
 		elsif  params[:search_flag] == "3"
 			@posts = Post.where(interest: params[:interest])
+		elsif  params[:search_flag] == "4"
+			@posts = Post.where(status_accomplishment: params[:status])
 		end
 		render :index
 	end

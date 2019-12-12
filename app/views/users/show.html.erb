@@ -210,6 +210,7 @@
 									<h4 class="label label-default"><%= p.area %></h4>
 									<h4 class="label label-default"><%= p.season %></h4>
 									<h4 class="label label-default"><%= p.interest %></h4>
+									<h4 class="label label-success"><%= p.status_accomplishment %></h4>
 									<div style="float:right;">
 										<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
 										<% if @user == current_user %>

@@ -1,135 +1,176 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<p>Category: <%= @post.area %><%= @post.season %><%= @post.interest %></p>
-			<p>accomplish or not: <%= @post.status_accomplishment %></p>
-			<p>display or not: <%= @post.status_display %></p>
+			<div class="Trikcket-detail-headline">
+				<div class="category">
+					<span class="label label-default" style="font-size: 20px;">Area: <%= @post.area %></span>
+					<span class="label label-default" style="font-size: 20px;">Season: <%= @post.season %></span>
+					<span class="label label-default" style="font-size: 20px;">Interest: <%= @post.interest %></span>
 
-	<!-- Tricketに対するいいね機能 -->
-			<% if current_user %>
-			<% if current_user != @user %>
-				<% if @post.liked_by?(current_user) %>
-				    <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
-						<%= icon 'fa', 'thumbs-up', :style=>"color: red;"%>
-				    <% end %>
-				    <%= link_to post_likes_path(@post), id:"notliked", :style=>"display: none;", remote: true, method: :post do %>
-						<%= icon 'fa', 'thumbs-up', :style=>"color: grey;" %>
-				    <% end %>
-				<% else %>
-				    <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
-						<%= icon 'fa', 'thumbs-up', :style=>"color: red;" %>
-				    <% end %>
-				    <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
-						<%= icon 'fa', 'thumbs-up', :style=>"color: grey;" %>
-				    <% end %>
-				<% end %>
-				<span id="count"><%= @count %> good!</span>
-			<% else %>
-				<span id="count"><%= @count %> good!</span>
-			<% end %>
-			<% end %>
+				<!-- Tricketに対するいいね機能 -->
+					<div style="float:right;"> If you like this Tricket, click
+					<% if current_user %>
+					<% if current_user != @user %>
+						<% if @post.liked_by?(current_user) %>
+						    <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
+								<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;"%>
+						    <% end %>
+						    <%= link_to post_likes_path(@post), id:"notliked", :style=>"display: none;", remote: true, method: :post do %>
+								<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
+						    <% end %>
+						<% else %>
+						    <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
+								<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;" %>
+						    <% end %>
+						    <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
+								<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
+						    <% end %>
+						<% end %>
+						/ <span id="count"><%= @count %> good!</span>
+					<% else %>
+						/ <span id="count"><%= @count %> good!</span>
+					<% end %>
+					<% end %>
 
+					<%= link_to 'Facebook', "https://www.facebook.com/sharer/sharer.php?u=#{request.url}&text=Tricket_Japan_#{@post.title}", title: 'Facebook', target: '_blank' %>
+					</div>
+				</div>
+
+				<div class="title">
+					<% if @post.status_accomplishment_before_type_cast == 0 %>
+						<h1><%= @post.title %></h1>
+					<% elsif @post.status_accomplishment_before_type_cast == 1 %>
+						<h2><span class="label label-success"><%= @post.status_accomplishment %></span> <%= @post.title %></h2>
+					<% end %>
+				</div>
+				<div class="user_info clearfix">
+					<div class="user_info-right">
+					   <!-- message -->
+					    <% if current_user %>
+						<% if @user.id == current_user.id %>
+						<% else %>
+							<% if @isRoom == true %>
+					    		<h2><%= link_to "chat", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %></h2>
+					  		<% else %>
+						    	<%= form_for @room do |f| %>
+						      		<%= fields_for @roomusernew do |e| %>
+				        			<%= e.hidden_field :user_id, value:@user.id %>
+						    		<% end %>
+					      			<%= f.submit "new chat", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px; height:35px; margin-top:20px;" %>
+					    		<% end %>
+					  		<% end %>
+						<% end %>
+						<% end %>
+					</div>
+					<div class="user_info-middle">
+						<h3 style="margin: 10px 0 0 0;"><%= link_to "#{@user.name_user}", user_path(@user) %></h3>
+						<p style="text-align:center; margin: 0;"><%= @user.nationality %></p>
+					<!-- ユーザに対するいいね機能 -->
+						<% if current_user %>
+						<% if current_user != @user %>
+						  	<% if current_user.following?(@user) %>
+							    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
+									<%= icon 'fa', 'heart', :style=>"color: red; font-size: 20px;"%>
+							    <% end %>
+							    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
+									<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 20px;"%>
+							    <% end %>
+						  	<% else %>
+							    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
+									<%= icon 'fa', 'heart', :style=>"color: red; font-size: 20px;"%>
+							    <% end %>
+							    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
+									<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 20px;"%>
+							    <% end %>
+						  	<% end %>
+						  	<span id="favorite_count"><%= @favorite_count %> favorites</span>
+						<% else %>
+						  	<span id="favorite_count"><%= @favorite_count %> favorites</span>
+						<% end %>
+						<% end %>
+					</div>
+					<div class="user_info-left">
+						<% if @user.picture_profile? %>
+							<%= image_tag @user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+						<% end %>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-		<p>Title: <%= @post.title %></p>
+		<div class="col-md-6">
+		<% if @post.post_image? %>
+			<% if @post.post_image.file.content_type.include?('image/') %>
+				<%= image_tag @post.post_image.post.url %>
+			<% elsif @post.post_image.file.content_type.include?('video/') %>
+			    <%= video_tag @post.post_image.url, width: "100%", height: "100%", 
+              controls: true, autobuffer: true %>
+            <% end %>
+        <% else %>
+			<%= image_tag "/assets/default.jpg", width: "100%", height: "100%" %>
+		<% end %>
+		</div>
+		<div class="col-md-6">
+			<h2>When</h2>
+			<% if @post.time_todo.present? %>
+				<%= @post.time_todo %>
+			<% else %>
+				<p> Not particuler</p>
+			<% end %>
+			<h2>Where</h2>
+			<% if @post.place_todo.present? %>
+				<%= @post.place_todo %>
+			<% else %>
+				<p> Not particuler</p>
+			<% end %>
+			<%= @post.place_todo %>
+			<h2>Details</h2>
+			<%= @post.content %>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p>User Name: <%= link_to "#{@user.name_user}", user_path(@user) %></p>
-
-		<!-- ユーザに対するいいね機能 -->
-			<% if current_user %>
-			<% if current_user != @user %>
-			  	<% if current_user.following?(@user) %>
-				    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
-						<%= icon 'fa', 'heart', :style=>"color: red;"%>
-				    <% end %>
-				    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
-						<%= icon 'fa', 'heart', :style=>"color: grey;"%>
-				    <% end %>
-			  	<% else %>
-				    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
-						<%= icon 'fa', 'heart', :style=>"color: red;"%>
-				    <% end %>
-				    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
-						<%= icon 'fa', 'heart', :style=>"color: grey;"%>
-				    <% end %>
-			  	<% end %>
-			  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
-			<% else %>
-			  	<span id="favorite_count"><%= @favorite_count %> favorite!</span>
-			<% end %>
-			<% end %>
-
-		    <!-- message -->
-		    <% if current_user %>
-			<% if @user.id == current_user.id %>
-			<% else %>
-				<% if @isRoom == true %>
-		    		<%= link_to "chat", room_path(@roomId) %>
-		  		<% else %>
-			    	<%= form_for @room do |f| %>
-			      		<%= fields_for @roomusernew do |e| %>
-	        			<%= e.hidden_field :user_id, value:@user.id %>
-			    		<% end %>
-		      			<%= f.submit "new chat" %>
-		    		<% end %>
-		  		<% end %>
-			<% end %>
-			<% end %>
-
-		<p>Nationality: <%= @user.nationality %></p>
-			<% if @post.post_image? %>
-				<% if @post.post_image.file.content_type.include?('image/') %>
-					<%= image_tag @post.post_image.post.url %>
-				<% elsif @post.post_image.file.content_type.include?('video/') %>
-				    <%= video_tag @post.post_image.url, width: "30%", height: "30%", 
-                  controls: true, autobuffer: true %>
-                <% end %>
-            <% else %>
-				<%= image_tag "/assets/default.jpg", :size => '400x300' %>
-			<% end %>
-			<p>When:  <%= @post.time_todo %></p>
-			<p>Where:  <%= @post.place_todo %></p>
-			<p>Content:  <%= @post.content %></p>
-			<%= link_to "Trickets", posts_top_path, class:"nav-button" %>
-		</div>
-	</div>
+	<h3 style="text-align: center;"><%= link_to "Back to Trickets", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
 
 	<% if @post.status_accomplishment_before_type_cast == 1 %>
-	<div class="row">
-		<div class="col-md-12">
-		<h1>Tricket came true</h1>
-		<p>Your Tricket had come true!! with</p>
-		<p>comment: <%= @post.comment_accomplishment %></p>
+	<div class="row" style="background-color:#EFE9D1;">
+		<h1 class="title_type1_traveler">This Tricket had come true!!</h1>
+		<div class="col-md-6">
 			<% if @post.image_accomplishment? %>
 				<% if @post.image_accomplishment.file.content_type.include?('image/') %>
-					<%= image_tag @post.image_accomplishment.post.url %>
+					<%= image_tag @post.image_accomplishment.post.url, width: "100%", height: "100%" %>
 				<% elsif @post.image_accomplishment.file.content_type.include?('video/') %>
-				    <%= video_tag @post.image_accomplishment.url, width: "30%", height: "30%", 
+				    <%= video_tag @post.image_accomplishment.url, width: "100%", height: "100%", 
                   controls: true, autobuffer: true %>
                 <% end %>
             <% else %>
 				<%= image_tag "/assets/default.jpg", :size => '400x300' %>
 			<% end %>
+		</div>
+		<div class="col-md-6">
+			<h2>Comment from <%= link_to "#{@user.name_user}", user_path(@user) %></h2>
+			<%= @post.comment_accomplishment %>
+		</div>
+	</div>
+	<div class="row" style="background-color:#EFE9D1;">
+		<div class="col-md-12">
+		<h3 style="text-align: center;"><%= link_to "Back to Trickets", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
 		</div>
 	</div>
 	<% end %>
 
 	<div class="row">
 		<div class="col-md-12">
-		<h1>Discuss on this Tricket</h1>
+		<h1 class="title_type1_traveler">Discuss on this Tricket</h1>
 		</div>
 	</div>
 
 	<% if current_user %>
 	<% if @user.id == current_user.id %>
-	<div class="row">
+	<div class="row" style="background-color:#EFE9D1;">
 		<div class="col-md-12">
-		<h1>Post accomplished message</h1>
+		<h1 class="title_type1_traveler">Post accomplished message</h1>
 
 		<% if flash[:notice] %>
 			<div id="flash">
@@ -139,18 +180,18 @@
 
 			<%= form_for(@post, url:update_accomplish_path, method: :patch) do |f| %>
 		      <div class="field">
-		        <%= f.label :comment_accomplishment %>
-		        <%= f.text_field :comment_accomplishment, autofocus: true, placeholder: "comment_accomplishment" %>
+		        <%= f.label :comment %><br>
+		        <%= f.text_area :comment_accomplishment, autofocus: true, placeholder: "After your Tricket had come true, share your accomplishment with everyone who helped you", :style=>"width: 80%;"%>
 		      </div>
 		      <div class="field">
-        		<%= f.label :image_accomplishment %>
+        		<%= f.label :image %>
         		<%= f.file_field :image_accomplishment, accept: 'image/jpeg,image/gif,image/png,video/*' %>
       		  </div>
 			  <div class="actions">
-			    <%= f.submit "Accomplish" %>
+			    <%= f.submit "share your accomplishment", :style=>"background-color: #c77eb5; color: white; width: 200px; border-radius: 5px;" %>
 			  </div>
 			<% end %>
-			<%= link_to "reset accomplishment", reset_accomplish_path(@post), method: :patch %>
+			<h4><%= link_to "reset your accomplishment", reset_accomplish_path(@post), method: :patch, class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
 		</div>
 	</div>
 	<% end %>
