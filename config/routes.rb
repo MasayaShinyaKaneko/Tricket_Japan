@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root to: 'users#top'
   #users controller
   get '/users/:id/unsubscribe', to: 'users#unsubscribe', as: "users_unsubscribe"
-  patch '/users/:id/status_flag', to: 'users#status_flag'
+  patch '/users/:id/status_flag', to: 'users#status_flag', as: "users_flag"
   get '/users/unsubscribe/complete', to: 'users#complete'
   get '/users/:id/favorite', to: 'users#favorite', as: "user_favorite_page"
   patch '/users/:id/status_user', to: 'users#status_user', as: "user_status"

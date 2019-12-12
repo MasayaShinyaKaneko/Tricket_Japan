@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
 
-	before_action :authenticate_user!, except: [:top, :about]
+	before_action :authenticate_user!, except: [:top, :complete]
 
-	def top
-	end
 	def index_traveler
         @nationality = NATIOALITY
         @language = LANGUAGE
@@ -47,9 +45,6 @@ class UsersController < ApplicationController
 			@users = User.where(type_user: 1).where('language_first = ? or language_second = ? or language_third = ?', params[:language], params[:language], params[:language])
 		end
 		render :index_local
-	end
-	def sort_local
-
 	end
 	def show
 		@user = User.find(params[:id])  #view
@@ -120,14 +115,10 @@ class UsersController < ApplicationController
    			@user.update(status_user: 0)
    		end
 	end
-	def unsubscribe
-
-	end
 	def status_flag
-
-	end
-	def complete
-
+		current_user.update(delete_flag: 1)
+		Devise.sign_out_all_scopes ? sign_out : sign_out(current_user)
+		redirect_to users_unsubscribe_complete_path
 	end
 
 	private
