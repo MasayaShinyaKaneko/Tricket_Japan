@@ -38,6 +38,7 @@ class PostsController < ApplicationController
         @user = @post.user
         @count = @post.likes.count
         @favorite_count = @user.followers.count
+		@comment = Comment.new
         if current_user
         # 下記message
 	    @currentroomuser=RoomUser.where(user_id: current_user.id)

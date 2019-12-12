@@ -26,11 +26,14 @@ Rails.application.routes.draw do
   get '/posts/sort', to: 'posts#sort'
   resources :posts do
     resources :likes, only:[:create, :destroy]
+    resources :comments, only: [:create]
   end
   patch '/posts/:id/status_display', to: 'posts#status_display'
   patch '/posts/:id/status_accomplish', to: 'posts#status_accomplish', as: "status_accomplish"
   patch '/posts/:id/update_accomplish', to: 'posts#update_accomplish', as: "update_accomplish"
   patch '/posts/:id/reset_accomplish', to: 'posts#reset_accomplish', as: "reset_accomplish"
+  #comments controller + 一部posts controller下へ
+  resources :comments, only: [:edit, :update, :destroy]
   #likes controller  →  posts controller下へ
   #favorites controller
   resources :favorites, only: [:create, :destroy]

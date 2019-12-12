@@ -84,6 +84,12 @@ class UsersController < ApplicationController
 			@posts << l.post
 		end
 		@users = @user.followings
+		@comments = Comment.where(user_id: @user.id)
+		@posts = []
+		@comments.each do |c|
+			@posts << Post.find_by(id: c.post.id)
+		end
+		@posts = @posts.uniq
 	end
 	def edit
         @nationality = NATIOALITY

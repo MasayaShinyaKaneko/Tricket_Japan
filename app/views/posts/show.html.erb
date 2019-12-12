@@ -49,15 +49,17 @@
 					    <% if current_user %>
 						<% if @user.id == current_user.id %>
 						<% else %>
+							<% if @user.status_user_before_type_cast != 2 %>
 							<% if @isRoom == true %>
-					    		<h2><%= link_to "chat", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %></h2>
+					    		<h2><%= link_to "message", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %></h2>
 					  		<% else %>
 						    	<%= form_for @room do |f| %>
 						      		<%= fields_for @roomusernew do |e| %>
 				        			<%= e.hidden_field :user_id, value:@user.id %>
 						    		<% end %>
-					      			<%= f.submit "new chat", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px; height:35px; margin-top:20px;" %>
+					      			<%= f.submit "new message", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px; height:35px; margin-top:20px;" %>
 					    		<% end %>
+					  		<% end %>
 					  		<% end %>
 						<% end %>
 						<% end %>
@@ -163,6 +165,45 @@
 	<div class="row">
 		<div class="col-md-12">
 		<h1 class="title_type1_traveler">Discuss on this Tricket</h1>
+
+		<% if flash[:comment] %>
+			<div id="flash">
+				<%= flash[:comment] %>
+			</div>
+		<% end %>
+
+			<div class="comments-form">
+				<%= form_for(@comment, url:post_comments_path(post_id: @post.id), method: :post) do |f| %>
+			      <div class="field">
+			        <%= f.label :comment %><br>
+			        <%= f.text_area :content, autofocus: true, placeholder: "content", :style=>"width: 80%;"%>
+			      </div>
+				  <div class="actions">
+				    <%= f.submit "comment", :style=>"background-color: #c77eb5; color: white; width: 200px; border-radius: 5px;" %>
+				  </div>
+				<% end %>
+			</div>
+			<table class="table table-condensed">
+				<% @post.comments.reverse.each do |comment| %>
+				<tbody class="comments-content">
+					<tr>
+						<th style="width: 200px;"><%= link_to "#{comment.user.name_user.truncate(15)}", user_path(comment.user) %></th>
+						<td id="comment-<%= comment.id %>" style="width: 600px;"><%= comment.content %></td>
+						<%= form_for(comment, data: { remote: true }) do |f| %>
+						<td id="comment-edit-<%= comment.id %>" style="display:none;">
+							<%= f.text_field :content, :style=>"width: 500px;" %>
+							<%= f.submit "update", :style=>"width: 100px float:left;", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+						</td>
+						<% end %>
+						<td><%= comment.created_at.to_s(:long) %></td>
+						<% if comment.user == current_user %>
+							<td><%= link_to "edit", edit_comment_path(comment.id), remote: :true, class:"label label-default", :style=>"background-color: #c77eb5;" %></td>
+							<td><%= link_to "delete", comment_path(comment.id), method: :delete, class:"label label-default", :style=>"background-color: #c77eb5;", data: { confirm: "Are you sure to delete this comment?" } %></td>
+						<% end %>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
 		</div>
 	</div>
 
