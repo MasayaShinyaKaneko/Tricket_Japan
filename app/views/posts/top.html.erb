@@ -11,7 +11,7 @@
 		<div class="col-md-12">
 			<h1 class="title_type1_traveler">Most liked Trickets (monthly)</h1>
 			<% @most_liked_posts.each do |p| %>
-			<h2><%= p.likes.count %> likes</h2>
+			<h2><%= p.likes.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).count %> likes</h2>
 			<div class="Trickets-top-content clearfix">
 				<div style="width: 15%; float:left;">
 					<div class="Trickets-top-user-image">
@@ -95,9 +95,6 @@
 						<h4 class="label label-default"><%= p.interest %></h4>
 						<div style="float:right;">
 							<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-							<% if @user == current_user %>
-							<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-							<% end %>
 						</div>
 					</div>
 				</div>
@@ -106,36 +103,55 @@
 			<h4 style="text-align: center;"><%= link_to "check more Trickets", posts_path, class:"label label-default", :style=>"background-color: #c77eb5; margin-top: 30px;"%></h4>
 		</div>
 	</div>
-	<div class="row" style="height:330px; background-color:#EFE9D1;">
+	<div class="row" style="background-color:#EFE9D1;">
 		<div class="col-md-12">
-			<div class="travelers-top-headline">
+			<div class="travelers-top-headline clearfix">
 				<h1 class="title_type1_traveler">Travelers</h1>
-				<%= form_tag(users_travelers_search_path, method: :get) do %>
-					<%= label_tag "traveler_name" %>
-					<%= hidden_field_tag :search_flag, 1 %>
-					<%= text_field_tag :user_search %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(users_travelers_search_path, method: :get) do %>
-					<%= label_tag "nationality" %>
-					<%= hidden_field_tag :search_flag, 2 %>
-					<%= select_tag "nationality", options_for_select(@nationality) %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(users_travelers_search_path, method: :get) do %>
-					<%= label_tag "language" %>
-					<%= hidden_field_tag :search_flag, 3 %>
-					<%= select_tag "language", options_for_select(@language) %>
-					<%= submit_tag "search" %>
+				<div class="search-form-tag">
+					<%= form_tag(users_travelers_search_path, method: :get) do %>
+						<%= label_tag "traveler_name" %>
+						<%= hidden_field_tag :search_flag, 1 %>
+						<%= text_field_tag :user_search %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;"  %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(users_travelers_search_path, method: :get) do %>
+						<%= label_tag "nationality" %>
+						<%= hidden_field_tag :search_flag, 2 %>
+						<%= select_tag "nationality", options_for_select(@nationality) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;"  %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(users_travelers_search_path, method: :get) do %>
+						<%= label_tag "language" %>
+						<%= hidden_field_tag :search_flag, 3 %>
+						<%= select_tag "language", options_for_select(@language) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;"  %>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="travelers-top-content clearfix">
+				<% @users.first(5).each do |user| %>
+				<div class="travelers-index-items">
+					<div class="thumbnail">
+						<% if user.picture_profile? %>
+							<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+						<% end %>
+						<div class="caption">
+							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+							<p>Nationality: <%= user.nationality %></p>
+							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+						</div>
+					</div>
+				</div>
 				<% end %>
 			</div>
-			<% @users.first(2).each do |user| %>
-			<div class="travelers-index-content">
-				<p><%= user.name_user %></p>
-				<p><%= link_to "userpage" ,user_path(user) %></p>
-			</div>
-			<% end %>
-			<%= link_to "See more Travelers", users_travelers_path %>
+			<h4 style="text-align: center;"><%= link_to "check more Travelers", users_travelers_path, class:"label label-default", :style=>"background-color: #c77eb5; margin-top: 30px;"%></h4>
 		</div>
 	</div>
 </div>

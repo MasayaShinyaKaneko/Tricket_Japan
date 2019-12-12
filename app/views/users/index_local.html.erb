@@ -2,48 +2,78 @@
 	<div class="row">
 		<div class="locals-index-background1">
 			<div class="col-md-12">
-			<h1>Locals</h1>
+				<h1 class="title_type1_local">Locals</h1>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<h1>Populer Locals</h1>
-			<% @most_favorited_users.each do |user| %>
-				<p><%= link_to "#{user.name_user}" ,user_path(user) %></p>
-				<p><%= user.nationality %></p>
-			  	<p><%= user.followers.count %> favorite</p>
-			<% end %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		<h1>Locals</h1>
-			<div class="locals-search-content">
-				<%= form_tag(users_locals_search_path, method: :get) do %>
-					<%= label_tag "local_name" %>
-					<%= hidden_field_tag :search_flag, 1 %>
-					<%= text_field_tag :user_search %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(users_locals_search_path, method: :get) do %>
-					<%= label_tag "nationality" %>
-					<%= hidden_field_tag :search_flag, 2 %>
-					<%= select_tag "nationality", options_for_select(@nationality) %>
-					<%= submit_tag "search" %>
-				<% end %>
-				<%= form_tag(users_locals_search_path, method: :get) do %>
-					<%= label_tag "language" %>
-					<%= hidden_field_tag :search_flag, 3 %>
-					<%= select_tag "language", options_for_select(@language) %>
-					<%= submit_tag "search" %>
+			<div class="locals-populer-content clearfix">
+			<h1 class="title_type1_local">Populer Locals (monthly)</h1>
+				<% @most_favorited_users.each do |user| %>
+				<div class="locals-index-items">
+					<div class="thumbnail">
+						<% if user.picture_profile? %>
+							<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+						<% end %>
+						<div class="caption">
+							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+							<p>Nationality: <%= user.nationality %></p>
+							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+						<p><%= user.followers.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).count %> favorites</p>
+						</div>
+					</div>
+				</div>
 				<% end %>
 			</div>
-			<div class="locals-index-headline">
+		</div>
+	</div>
+	<div class="row" style="background-color:#EFE9D1;">
+		<div class="col-md-12">
+			<div class="locals-search-content clearfix">
+				<h1 class="title_type1_local">Locals</h1>
+				<div class="search-form-tag">
+					<%= form_tag(users_locals_search_path, method: :get) do %>
+						<%= label_tag "local_name" %>
+						<%= hidden_field_tag :search_flag, 1 %>
+						<%= text_field_tag :user_search %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(users_locals_search_path, method: :get) do %>
+						<%= label_tag "nationality" %>
+						<%= hidden_field_tag :search_flag, 2 %>
+						<%= select_tag "nationality", options_for_select(@nationality) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+				<div class="search-form-tag">
+					<%= form_tag(users_locals_search_path, method: :get) do %>
+						<%= label_tag "language" %>
+						<%= hidden_field_tag :search_flag, 3 %>
+						<%= select_tag "language", options_for_select(@language) %>
+						<%= submit_tag "search", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+					<% end %>
+				</div>
+			</div>
+			<div class="locals-index-headline clearfix">
 				<% @users.each do |user| %>
-				<div class="locals-index-content">
-					<p><%= link_to "#{user.name_user}" ,user_path(user) %></p>
-					<p><%= user.nationality %></p>
+				<div class="locals-index-items">
+					<div class="thumbnail">
+						<% if user.picture_profile? %>
+							<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+						<% else %>
+							<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+						<% end %>
+						<div class="caption">
+							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+							<p>Nationality: <%= user.nationality %></p>
+							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+						</div>
+					</div>
 				</div>
 				<% end %>
 			</div>

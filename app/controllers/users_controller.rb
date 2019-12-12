@@ -28,9 +28,9 @@ class UsersController < ApplicationController
 		@most_favorited_usersId = Favorite.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:follow_id).order('count(follow_id) desc').pluck(:follow_id)
 		@most_favorited_users = []
 		@most_favorited_usersId.each do |i|
-			if User.find(i).type_user == 1
+			if User.find(i).type_user_before_type_cast == 1
 				@most_favorited_users  << User.find(i)
-				if @most_favorited_users.count == 2
+				if @most_favorited_users.count == 5
 					break
 			    end
 			end
@@ -77,6 +77,14 @@ class UsersController < ApplicationController
 		    end
 	    end
 	end
+	def favorite
+		@user = current_user
+		@posts = []
+		@user.likes.each do |l|
+			@posts << l.post
+		end
+		@users = @user.followings
+	end
 	def edit
         @nationality = NATIOALITY
         @country = COUNTRY
@@ -95,15 +103,6 @@ class UsersController < ApplicationController
 	    @user = User.find(params[:id])
 	    @user.update(user_params)
 	    redirect_to user_path(@user.id)
-	end
-
-	def favorite
-		@user = current_user
-		@posts = []
-		@user.likes.each do |l|
-			@posts << l.post
-		end
-		@users = @user.followings
 	end
 	def status_user
 		@user = User.find(params[:id])

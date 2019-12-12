@@ -1,4 +1,9 @@
-<h2>Log in</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="signup-headline title_type1">
+        <h1>Log in</h1>
+      </div>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -19,8 +24,11 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+
+    </div>
+  </div>
+</div>

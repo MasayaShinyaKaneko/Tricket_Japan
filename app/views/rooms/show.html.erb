@@ -1,27 +1,52 @@
-<% @roomusers.each do |ru| %>
-    <% if ru.user == current_user %>
-    <% else %>
-    <h1>Message from <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %></h1>
-    <% end %>
-<% end %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="title_type1">Messages</h1>
+            <% @roomusers.each do |ru| %>
+            <% if ru.user_id != current_user.id %>
+                <% if ru.user.picture_profile? %>
+                    <%= image_tag ru.user.picture_profile.profile.url, :size => '100x100', :style=>"border-radius: 100px;" %> <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %>
+                <% else %>
+                    <%= image_tag "/assets/default.jpg", :size => '100x100', :style=>"border-radius: 100px;" %> <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %>
+                <% end %>
+            <% end %>
+            <% end %>
+            <%= form_for @message do |f| %>
+                <%= f.text_field :content, :placeholder => "type messages" , :size => 75 %>
+                <%= f.hidden_field :room_id, :value => @room.id %>
+                <%= f.submit "send", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
+            <% end %>
 
-<%= form_for @message do |f| %>
-    <%= f.text_field :content, :placeholder => "type messages" , :size => 100 %>
-    <%= f.hidden_field :room_id, :value => @room.id %>
-    <br>
-    <%= f.submit "send" %>
-<% end %>
-
-<hr>
-<% if @messages.present? %>
-    <% @messages.reverse.each do |m| %>
-        <small><strong><%= link_to "#{m.user.name_user}", user_path(m.user.id) %></strong>:</small>
-        <strong><%= m.content %></strong>
-        <small>at <%= m.created_at.strftime("%-m/%-d/%Y %H:%M") %></small>
-        <hr>
-    <% end %>
-<% else %>
-    <p>No Message</p>
-<% end %>
-
+            <hr>
+            <% if @messages.present? %>
+                <% @messages.reverse.each do |m| %>
+                    <div class="message-content clearfix">
+                    <% if m.user == current_user %>
+                        <div class="message-items-right">
+                            <% if m.user.picture_profile? %>
+                                <%= image_tag m.user.picture_profile.profile.url, :size => '30x30', :style=>"border-radius: 30px;" %> <small>at <%= m.created_at.to_s(:long) %></small>
+                            <% else %>
+                                <%= image_tag "/assets/default.jpg", :size => '30x30', :style=>"border-radius: 30px;" %> <small>at <%= m.created_at.to_s(:long) %></small>
+                            <% end %>
+                            <p><%= m.content %></p>
+                        </div>
+                    <% else %>
+                        <div class="message-items-left">
+                            <% if m.user.picture_profile? %>
+                                <%= image_tag m.user.picture_profile.profile.url, :size => '30x30', :style=>"border-radius: 30px;" %> <small>at <%= m.created_at.to_s(:long) %></small>
+                            <% else %>
+                                <%= image_tag "/assets/default.jpg", :size => '30x30', :style=>"border-radius: 30px;" %> <small>at <%= m.created_at.to_s(:long) %></small>
+                            <% end %>
+                            <p><%= m.content %></p>
+                        </div>
+                    <% end %>
+                    </div>
+                    <hr>
+                <% end %>
+            <% else %>
+                <p>No Message</p>
+            <% end %>
+        </div>
+    </div>
+</div>
 

@@ -86,7 +86,7 @@
 
       <div class="field">
         <%= f.label :introduction %><br>
-        <%= f.text_area :introduction, autofocus: true, placeholder: "introduction" %>
+        <%= f.text_area :introduction, autofocus: true, placeholder: "introduction", :style=>"width: 300px; height: 100px;" %>
       </div>
     </div>
   </div>
@@ -96,7 +96,7 @@
       <%= f.submit "Update", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
       </div>
       <% end %>
-      <h3><%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5; width: 100px;" %></h3>
+      <h4><%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
     </div>
   </div>
 </div>

@@ -78,8 +78,9 @@
 				<span class="label label-danger" style="font-size: 20px;"><%= @user.status_user %></span>
 			<% end %>
 		<% end %>
-
-		<p style="font-size: 20px;"><%= @posts_unaccomplish.count %> Trickets / <%= @posts_accomplish.count %> accomplishments</p>
+		<% if @user.type_user_before_type_cast == 0 %>
+			<p style="font-size: 20px;"><%= @posts_unaccomplish.count %> Trickets / <%= @posts_accomplish.count %> accomplishments</p>
+		<% end %>
 	</div>
 </div>
 
@@ -114,6 +115,10 @@
 							<tr>
 								<th>gender</th>
 								<td><%= @user.gender %></td>
+							</tr>
+							<tr>
+								<th>age</th>
+								<td><%= (Date.today.strftime("%Y%m%d").to_i - @user.birthday.strftime("%Y%m%d").to_i) / 10000 %></td>
 							</tr>
 							<tr>
 								<th>nationality</th>
@@ -158,30 +163,34 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="user-Tricket-headline clearfix">
-						<h1 class="title_type1_traveler" style="margin: 0;">Trickets</h1>
+						<h1 class="title_type1_traveler" style="margin: 0; float: left">Trickets</h1>
 						<% if @user == current_user %>
-						<h3 style="margin: 0 0 20px 0;"><%= link_to "new Tricket", new_post_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
+						<h3 style="margin: 12px 0 20px 0; float: left;"><%= link_to "new Tricket", new_post_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
 						<% end %>
 					</div>
-					<% @posts_unaccomplish.each do |p| %>
-					<div class="user-Tricket-content">
-						<div class="panel panel-default">
-							<div class="panel-heading" style="background-color:#f8b500;">
-								<h5 class="panel-title">Title: <%= p.title.truncate(50) %></h5>
-							</div>
-							<div class="panel-body">
-								<h4 class="label label-default"><%= p.area %></h4>
-								<h4 class="label label-default"><%= p.season %></h4>
-								<h4 class="label label-default"><%= p.interest %></h4>
-								<div style="float:right;">
-									<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-									<% if @user == current_user %>
-									<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-									<% end %>
+					<% if @posts_unaccomplish.exists? %>
+						<% @posts_unaccomplish.each do |p| %>
+						<div class="user-Tricket-content">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="background-color:#f8b500;">
+									<h5 class="panel-title">Title: <%= p.title.truncate(50) %></h5>
+								</div>
+								<div class="panel-body">
+									<h4 class="label label-default"><%= p.area %></h4>
+									<h4 class="label label-default"><%= p.season %></h4>
+									<h4 class="label label-default"><%= p.interest %></h4>
+									<div style="float:right;">
+										<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+										<% if @user == current_user %>
+										<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+										<% end %>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+						<% end %>
+					<% else %>
+						<p>There is no Tricket.</p>
 					<% end %>
 				</div>
 			</div>
@@ -190,25 +199,29 @@
 					<div class="user-accomplish-headline">
 						<h1 class="title_type1_traveler" style="margin: 0;">Accomplishments</h1>
 					</div>
-					<% @posts_accomplish.each do |p| %>
-					<div class="user-Tricket-content">
-						<div class="panel panel-default">
-							<div class="panel-heading" style="background-color:#f8b500;">
-								<h5 class="panel-title">Title: <%= p.title %></h5>
-							</div>
-							<div class="panel-body">
-								<h4 class="label label-default"><%= p.area %></h4>
-								<h4 class="label label-default"><%= p.season %></h4>
-								<h4 class="label label-default"><%= p.interest %></h4>
-								<div style="float:right;">
-									<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-									<% if @user == current_user %>
-									<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+					<% if @posts_accomplish.exists? %>
+						<% @posts_accomplish.each do |p| %>
+						<div class="user-Tricket-content">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="background-color:#f8b500;">
+									<h5 class="panel-title">Title: <%= p.title %></h5>
 								</div>
-								<% end %>
+								<div class="panel-body">
+									<h4 class="label label-default"><%= p.area %></h4>
+									<h4 class="label label-default"><%= p.season %></h4>
+									<h4 class="label label-default"><%= p.interest %></h4>
+									<div style="float:right;">
+										<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+										<% if @user == current_user %>
+										<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+									</div>
+									<% end %>
+								</div>
 							</div>
 						</div>
-					</div>
+						<% end %>
+					<% else %>
+						<p>There is no accomplishment.</p>
 					<% end %>
 				</div>
 			</div>
