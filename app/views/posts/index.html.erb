@@ -8,7 +8,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="Trickets-index-headline">
+			<div class="Trickets-index-headline clearfix">
 				<div class="search-form-tag">
 					<%= form_tag(posts_sort_path, method: :get) do %>
 						<%= label_tag "area" %>
@@ -42,9 +42,9 @@
 					<% end %>
 				</div>
 			</div>
-
-			<% @posts.each do |p| %>
-			<div class="Trickets-index-content clearfix">
+			<% if @posts.present? %>
+			<% @posts.reverse.each do |p| %>
+			<div class="Trickets-index-content">
 				<div style="width: 15%; float:left;">
 					<div class="Trickets-top-user-image">
 						<% if p.user.picture_profile? %>
@@ -77,6 +77,9 @@
 			</div>
 			<% end %>
 		</div>
+		<% else %>
+			<h1>Not applicable.</h1>
+		<% end %>
 	</div>
 	<h4 style="text-align: center;"><%= link_to "back", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5" %></h4>
 </div>

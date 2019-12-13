@@ -25,9 +25,9 @@ class UsersController < ApplicationController
 		@users = User.where(type_user: 1)
 		@most_favorited_usersId = Favorite.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:follow_id).order('count(follow_id) desc').pluck(:follow_id)
 		@most_favorited_users = []
-		@most_favorited_usersId.each do |i|
-			if User.find(i).type_user_before_type_cast == 1
-				@most_favorited_users  << User.find(i)
+		@most_favorited_usersId.each do |f|
+			if User.find(f).type_user_before_type_cast == 1
+				@most_favorited_users  << User.find(f)
 				if @most_favorited_users.count == 5
 					break
 			    end
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 	def search_local
         @nationality = NATIOALITY
         @language = LANGUAGE
+        @search_flag = 0
 		if params[:search_flag] == "1"
 			@users = User.where(type_user: 1).where("name_user LIKE ?", "%#{params[:user_search]}%")
 		elsif params[:search_flag] == "2"
@@ -74,17 +75,17 @@ class UsersController < ApplicationController
 	end
 	def favorite
 		@user = current_user
-		@posts = []
+		@posts_like = []
 		@user.likes.each do |l|
-			@posts << l.post
+			@posts_like << l.post
 		end
 		@users = @user.followings
 		@comments = Comment.where(user_id: @user.id)
-		@posts = []
+		@posts_comment = []
 		@comments.each do |c|
-			@posts << Post.find_by(id: c.post.id)
+			@posts_comment << Post.find_by(id: c.post.id)
 		end
-		@posts = @posts.uniq
+		@posts_comment = @posts_comment.uniq
 	end
 	def edit
         @nationality = NATIOALITY

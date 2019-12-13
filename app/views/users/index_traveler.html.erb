@@ -35,21 +35,25 @@
 				</div>
 			</div>
 			<div class="travelers-index-content clearfix">
-				<% @users.first(5).each do |user| %>
-				<div class="travelers-index-items">
-					<div class="thumbnail">
-						<% if user.picture_profile? %>
-							<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
-						<% else %>
-							<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
-						<% end %>
-						<div class="caption">
-							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
-							<p>Nationality: <%= user.nationality %></p>
-							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+				<% if @users.present? %>
+					<% @users.reverse.each do |user| %>
+					<div class="travelers-index-items">
+						<div class="thumbnail">
+							<% if user.picture_profile? %>
+								<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+							<% else %>
+								<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+							<% end %>
+							<div class="caption">
+								<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+								<p>Nationality: <%= user.nationality %></p>
+								<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+							</div>
 						</div>
 					</div>
-				</div>
+					<% end %>
+				<% else %>
+					<h1>Not applicable.</h1>
 				<% end %>
 			</div>
 		</div>

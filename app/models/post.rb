@@ -8,6 +8,8 @@ class Post < ApplicationRecord
 
 	enum status_accomplishment: { ongoing: 0, Accomplished: 1 }
 
+  scope :open, -> { where(status_display: 0) }
+
     def liked_by?(user)
       likes.where(user_id: user.id).exists?
     end

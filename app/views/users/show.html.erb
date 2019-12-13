@@ -171,7 +171,9 @@
 						<% end %>
 					</div>
 					<% if @posts_unaccomplish.exists? %>
-						<% @posts_unaccomplish.each do |p| %>
+					<% if @posts_unaccomplish.where(status_display: 0).exists? || @user == current_user %>
+						<% @posts_unaccomplish.reverse.each do |p| %>
+						<% unless p.status_display == 1 && @user != current_user %>
 						<div class="user-Tricket-content">
 							<div class="panel panel-default">
 								<div class="panel-heading" style="background-color:#f8b500;">
@@ -191,6 +193,10 @@
 							</div>
 						</div>
 						<% end %>
+						<% end %>
+					<% else %>
+						<p>There is no Tricket.</p>
+					<% end %>
 					<% else %>
 						<p>There is no Tricket.</p>
 					<% end %>
@@ -202,7 +208,9 @@
 						<h1 class="title_type1_traveler" style="margin: 0; border-color:#5cb85c;">Accomplishments</h1>
 					</div>
 					<% if @posts_accomplish.exists? %>
-						<% @posts_accomplish.each do |p| %>
+					<% if @posts_accomplish.where(status_display: 0).exists? || @user == current_user %>
+						<% @posts_accomplish.reverse.each do |p| %>
+						<% unless p.status_display == 1 && @user != current_user %>
 						<div class="user-Tricket-content">
 							<div class="panel panel-default">
 								<div class="panel-heading" style="background-color:#5cb85c">
@@ -223,6 +231,10 @@
 							</div>
 						</div>
 						<% end %>
+						<% end %>
+					<% else %>
+						<p>There is no accomplishment.</p>
+					<% end %>
 					<% else %>
 						<p>There is no accomplishment.</p>
 					<% end %>

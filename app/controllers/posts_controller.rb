@@ -9,27 +9,37 @@ class PostsController < ApplicationController
         @nationality = NATIOALITY
         @language = LANGUAGE
 		@users = User.where(type_user: 0)
-		@posts = Post.all
-        @most_liked_posts = Post.find(Like.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:post_id).order('count(post_id) desc').limit(2).pluck(:post_id))
+		@posts = Post.open.all
+        @most_liked_posts = Post.find(Like.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:post_id).order('count(post_id) desc').pluck(:post_id))
+		@most_liked_posts_two = []
+		@most_liked_posts.each do |p|
+			post = Post.find(p.id)
+			if post.status_display == 0
+				@most_liked_posts_two << post
+				if @most_liked_posts_two.count == 2
+					break
+				end
+			end
+		end
 	end
 	def index
 		@area = AREA
 		@season = SEASON
 		@interest = INTEREST
-		@posts = Post.all
+		@posts = Post.open.all
 	end
 	def sort
 		@area = AREA
 		@season = SEASON
 		@interest = INTEREST
 		if params[:search_flag] == "1"
-			@posts = Post.where(area: params[:area])
+			@posts = Post.open.where(area: params[:area])
 		elsif params[:search_flag] == "2"
-			@posts = Post.where(season: params[:season])
+			@posts = Post.open.where(season: params[:season])
 		elsif  params[:search_flag] == "3"
-			@posts = Post.where(interest: params[:interest])
+			@posts = Post.open.where(interest: params[:interest])
 		elsif  params[:search_flag] == "4"
-			@posts = Post.where(status_accomplishment: params[:status])
+			@posts = Post.open.where(status_accomplishment: params[:status])
 		end
 		render :index
 	end
@@ -82,13 +92,6 @@ class PostsController < ApplicationController
            flash[:notice] = "error!!"
            redirect_to post_path(@post.id)
         end
-	end
-
-	def status_display
-
-	end
-	def status_accomplish
-
 	end
 	def new
 		@area = AREA
