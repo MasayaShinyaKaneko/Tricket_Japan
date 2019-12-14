@@ -5,7 +5,10 @@ if(/room/.test(window.location.pathname)) {
     connected: function() {},
     disconnected: function() {},
     received: function(data) {
-      $('.messages').append(data['content']);
+        $('.messages').append(data['content']);
+        $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
+
+
     },
     speak: function(message) {
       return this.perform('speak', {
