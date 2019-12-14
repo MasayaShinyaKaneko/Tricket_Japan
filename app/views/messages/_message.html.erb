@@ -1,0 +1,18 @@
+<div class="message">
+           
+
+                    <div class="message-content clearfix">
+      
+                        <div class="message-items-right">
+                            <% if message.user.picture_profile? %>
+                                <%= image_tag message.user.picture_profile.profile.url, :size => '30x30', :style=>"border-radius: 30px;" %> <small>at <%= message.created_at.to_s(:long) %></small>
+                            <% else %>
+                                <%= image_tag "/assets/default.jpg", :size => '30x30', :style=>"border-radius: 30px;" %> <small>at <%= message.created_at.to_s(:long) %></small>
+                            <% end %>
+                            <p><%= message.content %></p>
+                        </div>
+
+                    </div>
+                    <hr>
+
+</div>
