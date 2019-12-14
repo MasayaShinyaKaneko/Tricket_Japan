@@ -8,12 +8,14 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    message = Message.create(room_id: data['room_id'], user_id: data['user_id'], content: data['message'])
-    RoomChannel.broadcast_to "room_#{data['room_id']}", content: render_message(message)
+    message = Message.create(room_id: data['room_id'], user_id: current_user.id, content: data['message'])
+    RoomChannel.broadcast_to "room_#{data['room_id']}", content: render_message(message),user_id: current_user.id
   end
 
   private
     def render_message(message)
-      ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
+      #binding.pry
+      user = current_user
+      ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message, user: user })
     end
 end

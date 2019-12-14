@@ -11,7 +11,6 @@ if(/room/.test(window.location.pathname)) {
       return this.perform('speak', {
         message: message,
         room_id: room_id,
-        user_id: $('meta[name="current_user_id"]').attr('content')
       });
     }
   });

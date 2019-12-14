@@ -17,7 +17,10 @@
   <div id="container"  style="height: 500px; overflow: scroll; background: skyblue;">
     <div class="messagesArea messages">
             <% if @messages.present? %>
-      <%= render @messages %>
+            <%@messages.each do |message| %>
+      <%= render "messages/message", user: current_user, message: message %>
+      <% end %>
+
       <% else %>
                 <p>No Message</p>
             <% end %>
