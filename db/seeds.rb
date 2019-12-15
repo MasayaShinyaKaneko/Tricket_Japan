@@ -24,7 +24,7 @@ User.create!(
       picture_background: "",
       hobby:  "1 Awa-odori(Japanese traditional dance), travel",
       introduction: "1 Hello, everyone. I'm always happy to support you. Do not hegitate to message me",
-      status_user: "0",
+      status_user: 0,
       delete_flag: "0",
       email: "test1@gmail.com",
       password:  "111111",
@@ -45,7 +45,7 @@ User.create!(
       picture_background: "",
       hobby:  "2 Awa-odori(Japanese traditional dance), travel",
       introduction: "2 Hello, everyone. I'm always happy to support you. Do not hegitate to message me",
-      status_user: "0",
+      status_user: 0,
       delete_flag: "0",
       email: "test2@gmail.com",
       password:  "222222",
@@ -66,7 +66,7 @@ User.create!(
       picture_background: "",
       hobby:  "3 singing & creating songs",
       introduction: "3 Hello, everyone. I'm a professional singer. I'm excited everytime I visit Japan",
-      status_user: "0",
+      status_user: 0,
       delete_flag: "0",
       email: "test3@gmail.com",
       password:  "333333",
@@ -87,7 +87,7 @@ User.create!(
       picture_background: "",
       hobby:  "4 singing & creating songs",
       introduction: "4 Hello, everyone. I'm a professional singer. I'm excited everytime I visit Japan",
-      status_user: "0",
+      status_user: 0,
       delete_flag: "0",
       email: "test4@gmail.com",
       password:  "444444",
@@ -108,7 +108,7 @@ User.create!(
       picture_background: "",
       hobby:  "5 singing & creating songs",
       introduction: "5 Hello, everyone. I'm a professional singer. I'm excited everytime I visit Japan",
-      status_user: "0",
+      status_user: 0,
       delete_flag: "0",
       email: "test5@gmail.com",
       password:  "555555",
@@ -201,6 +201,14 @@ Post.create!(
   ]
 )
 
+Admin.create!(
+  [
+    {
+      email: "admin@example.jp",
+      password:  "1111111",
+    }
+  ]
+)
 
 
 

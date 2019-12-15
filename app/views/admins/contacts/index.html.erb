@@ -1,9 +1,32 @@
-<% @contacts.each do |contact| %>
-	<p>username: <%= contact.user.name_user %></p>
-	<p>subject: <%= contact.subject %></p>
-	<p>content: <%= contact.content %></p>
-	<p><%= link_to "contact detail" ,admins_contact_path(contact.id) %></p>
-<% end %>
-
-
-<%= link_to "log out", destroy_admin_session_path, method: :delete %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>日付</th>
+						<th>ユーザid</th>
+						<th>ユーザ名</th>
+						<th>件名</th>
+						<th>返信有無</th>
+						<th>詳細</th>
+					</tr>
+				</thead>
+				<% @contacts.each do |contact| %>
+				<tbody>
+					<tr>
+						<th style="width: 75px;"><%= contact.id %></th>
+						<td style="width: 200px;"><%= contact.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
+						<td style="width: 75px;"><%= contact.user.id %></td>
+						<td style="width: 200px;"><%= contact.user.name_user.truncate(15) %></td>
+						<td><%= contact.subject.truncate(40) %></td>
+						<th style="width: 75px;"><%= contact.status_reply %></td>
+						<th style="width: 75px;"><%= link_to "詳細" ,admins_contact_path(contact.id) %></td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

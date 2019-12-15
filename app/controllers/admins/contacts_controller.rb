@@ -3,7 +3,7 @@ class Admins::ContactsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-		@contacts = Contact.all
+		@contacts = Contact.all.reverse
 	end
 	def show
 		@contact = Contact.find(params[:id])

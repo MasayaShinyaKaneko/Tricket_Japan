@@ -68,7 +68,7 @@ strong{
   border-bottom: solid 3px #9e3d3f;
 }
 /*header user側*/
-.nav-container-user{
+.nav-container{
 	height: 50px;
 	width: 100%;
 	background-color: #165e83;
@@ -138,6 +138,18 @@ strong{
       color: white;
       font-family: Times New Roman;
       font-size: 35px;
+        text-decoration: none;
+    }
+    .nav-lists-admin{
+      float: right;
+      width: 500px;
+    }
+    .nav-button-admin{
+        font-size: 20px;
+        line-height: 50px;
+        margin: 0 10px ;
+      color: white;
+    background-color: #7BAA17;
         text-decoration: none;
     }
 
