@@ -21,7 +21,11 @@
 						<td style="width: 75px;"><%= contact.user.id %></td>
 						<td style="width: 200px;"><%= contact.user.name_user.truncate(15) %></td>
 						<td><%= contact.subject.truncate(40) %></td>
-						<th style="width: 75px;"><%= contact.status_reply %></td>
+						<% if contact.status_reply_before_type_cast == 0 %>
+							<th style="width: 75px; background-color: red;"><%= contact.status_reply_i18n %></td>
+						<% elsif contact.status_reply_before_type_cast == 1 %>
+							<th style="width: 75px;"><%= contact.status_reply_i18n %></td>
+						<% end %>
 						<th style="width: 75px;"><%= link_to "詳細" ,admins_contact_path(contact.id) %></td>
 					</tr>
 				</tbody>

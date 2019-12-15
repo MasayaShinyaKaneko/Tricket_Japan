@@ -1,0 +1,6 @@
+ja:
+  enums:
+    contact:
+      status_reply:
+        notyet: 返信未
+        replyed: 返信済
