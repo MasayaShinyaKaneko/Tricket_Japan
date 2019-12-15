@@ -1,7 +1,21 @@
 class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
-		posts_top_path
+		case resource
+		when User
+			posts_top_path
+		when Admin
+			admins_contacts_path
+		end
+	end
+
+	def after_sign_out_path_for(resource_or_scope)
+		case resource_or_scope
+		when :user
+		 	root_path
+		when :admin
+			new_admin_session_path
+		end
 	end
 
 	NATIOALITY = ["Japanese","American","French","Italian"]

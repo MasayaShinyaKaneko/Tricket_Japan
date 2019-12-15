@@ -5,3 +5,5 @@
 	<p><%= link_to "contact detail" ,admins_contact_path(contact.id) %></p>
 <% end %>
 
+
+<%= link_to "log out", destroy_admin_session_path, method: :delete %>

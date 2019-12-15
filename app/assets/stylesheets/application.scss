@@ -67,8 +67,8 @@ strong{
   border-top: solid 3px #9e3d3f;
   border-bottom: solid 3px #9e3d3f;
 }
-/*header*/
-.nav-container{
+/*header user側*/
+.nav-container-user{
 	height: 50px;
 	width: 100%;
 	background-color: #165e83;
@@ -122,6 +122,28 @@ strong{
         text-decoration: none;
     }
 }
+
+/*header admin側*/
+.nav-container-admin{
+  height: 50px;
+  width: 100%;
+  background-color: #7BAA17;
+  position: fixed;
+    top: 0;
+    z-index: 20;
+
+    #brand_admin{
+      float: left;
+        margin: 0 20px 0 10px;
+      color: white;
+      font-family: Times New Roman;
+      font-size: 35px;
+        text-decoration: none;
+    }
+
+}
+
+
 /*space*/
 .space-top{
 	height: 50px;
@@ -134,13 +156,23 @@ strong{
 	bottom: 0;
 }
 /*footer*/
-footer{
+#footer_user{
 	height: 50px;
 	width: 100%;
 	background-color: #165e83;
     text-align: center;
     color: white;
 	position: fixed;
+    bottom: 0;
+    z-index: 20;
+}
+#footer_admin{
+  height: 50px;
+  width: 100%;
+  background-color: #7BAA17;
+    text-align: center;
+    color: white;
+  position: fixed;
     bottom: 0;
     z-index: 20;
 }
