@@ -7,7 +7,10 @@ if(/room/.test(window.location.pathname)) {
     received: function(data) {
         $('.messages').append(data['content']);
         $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
-
+        var another_user_id = $("#another_user_id").text();
+        if (data['user_id'] != another_user_id ){
+          
+        }
 
     },
     speak: function(message) {
