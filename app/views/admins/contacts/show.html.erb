@@ -1,21 +1,73 @@
-	<p>username: <%= @contact.user.name_user %></p>
-	<p>subject: <%= @contact.subject %></p>
-	<p>content: <%= @contact.content %></p>
-	<p><%= link_to "back" ,admins_contacts_path %></p>
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-md-12">
+        	<h1 style="text-decoration: underline;">お問い合わせ詳細</h1>
+			<% if @contact.status_reply_before_type_cast == 0 %>
+				<div style="width: 75px; background-color: red; color: white; text-align: center;"><%= @contact.status_reply_i18n %></div>
+			<% elsif @contact.status_reply_before_type_cast == 1 %>
+				<div style="width: 75px; background-color: green; color: white; text-align: center;"><%= @contact.status_reply_i18n %></div>
+			<% end %>
 
-<% if flash[:notice] %>
-	<div id="flash">
-		<%= flash[:notice] %>
+			<table class="table table-bordered">
+				<tr>
+					<td style="width:150px;">お問い合わせid</td>
+					<td><%= @contact.id %></td>
+				</tr>
+				<tr>
+					<td>日付</td>
+					<td><%= @contact.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
+				</tr>
+				<tr>
+					<td>ユーザid</td>
+					<td><%= @contact.user.id %></td>
+				</tr>
+				<tr>
+					<td>ユーザ名</td>
+					<td><%= @contact.user.name_user %></td>
+				</tr>
+				<tr>
+					<td>eメールアドレス</td>
+					<td><%= @contact.user.email %></td>
+				</tr>
+				<tr>
+					<td>件名</td>
+					<td><%= @contact.subject %></td>
+				</tr>
+				<tr>
+					<td>本文</td>
+					<td><%= @contact.content %></td>
+				</tr>
+			</table>
+			<%= button_to "一覧へ戻る" ,admins_contacts_path, method: :get %>
+		</div>
 	</div>
-<% end %>
 
+	<div class="row">
+        <div class="col-md-12">
+			<h1 style="text-decoration: underline;">お問い合わせ返信</h1>
 
-<%= form_for(@contact, url: admins_contact_path, method: :patch) do |f| %>
-	<div class="field">
-		<%= f.label :reply %>
-		<%= f.text_area :reply, autofocus: true, placeholder: "reply" %>
+			<% if flash[:notice] %>
+				<div id="flash">
+					<%= flash[:notice] %>
+				</div>
+			<% end %>
+
+			<%= form_for(@contact, url: admins_contact_path, method: :patch) do |f| %>
+				<div class="field">
+					<%= f.label :reply, "返信内容入力" %><br>
+					<%= f.text_area :reply, autofocus: true, placeholder: "返信内容", :style=>"width: 100%; height: 200px;" %>
+				</div>
+				<div class="actions">
+					<%= f.submit "送信" %>
+				</div>
+			<% end %>
+
+			<table class="table table-bordered">
+				<tr>
+					<td style="width:150px;">返信内容</td>
+					<td><%= @contact.reply %></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	<div class="actions">
-		<%= f.submit "send" %>
-	</div>
-<% end %>
+</div>

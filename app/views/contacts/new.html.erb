@@ -7,18 +7,18 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Contact Form</h1>
+			<h1 class="title_type1">Contact Form</h1>
 			<%= form_for(@contact, url: contacts_path) do |f| %>
 				<div class="field">
 					<%= f.label :subject %>
-					<%= f.text_field :subject, autofocus: true, placeholder: "subject" %>
+					<%= f.text_field :subject, autofocus: true, placeholder: "subject", :style=>"width: 100%;" %>
 				</div>
 				<div class="field">
-					<%= f.label :content %>
-					<%= f.text_area :content, autofocus: true, placeholder: "content" %>
+					<%= f.label :content %><br>
+					<%= f.text_area :content, autofocus: true, placeholder: "content", :style=>"width: 100%; height: 300px;"  %>
 				</div>
 				<div class="actions">
-					<%= f.submit "send" %>
+					<%= f.submit "send", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
 				</div>
 			<% end %>
 		</div>

@@ -43,7 +43,6 @@ Rails.application.routes.draw do
   resources :messages, :only => [:create]
   #contact controller
   resources :contacts, only: [:new, :create]
-
   #adminsファイル内のcontroller
   namespace :admins do
 	  #admins/users controller
@@ -61,6 +60,7 @@ Rails.application.routes.draw do
     patch '/posts/:id/status_flag', to: 'posts#status_flag'
     resources :posts, only:[:index, :show, :edit, :update]
     #admins/contacts controller
+    get '/contacts/search', to: 'contacts#search'
     resources :contacts, only:[:index, :show, :update]
   end
 end
