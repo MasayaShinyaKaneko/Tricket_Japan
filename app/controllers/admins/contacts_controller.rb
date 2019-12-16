@@ -27,17 +27,22 @@ class Admins::ContactsController < ApplicationController
       	@contact = Contact.find(params[:id])
 		@user = @contact.user
     	if  @contact.update(contact_params)
-    		ContactMailer.send_when_admin_reply(@user, @contact).deliver
-        	flash[:notice] = "送信が完了いたしました。"
+    		if @contact.reply_language == 1
+    			ContactMailer.send_when_admin_reply_japanese(@user, @contact).deliver
+        		flash[:notice] = "日本語で送信が完了いたしました。"
+			else @contact.reply_language == 2
+				ContactMailer.send_when_admin_reply_english(@user, @contact).deliver
+		        flash[:notice] = "英語で送信が完了いたしました。"
+		    end
         	@contact.update(status_reply: 1)
     		render :show
         else
-        	flash[:notice] = "エラー"
+        	flash[:notice] = "エラー。送信でできませんでした。"
     		render :show
         end
 	end
 	private
 	    def contact_params
-	    	params.require(:contact).permit(:user_id, :subject, :content, :reply, :status_reply)
+	    	params.require(:contact).permit(:user_id, :subject, :content, :reply, :status_reply, :reply_language)
 	    end
 end

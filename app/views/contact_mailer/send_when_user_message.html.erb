@@ -1,6 +1,16 @@
-  <h2><%= @user.name_user %> 様</h2>
+  	<h2><%= @user.name_last %> <%= @user.name_first %> 様</h2>
+	<h2>Dear Mr./Ms.<%= @user.name_last %>,</h2>
 
-<p>下記の内容届いてます。</p>
-<%= @subject %>
-<%= @message %>
-<p>このメールに返信できません。</p>
+	<p>下記の通りお問い合わせが届いてます。後日回答いたします。</p>
+	<p>A inquiry have arrived as follows. We will respond to your inquiry at a later date.</p>
+
+	<p>お問い合わせ内容/inquiry content</p>
+
+	<p>件名/subject<br>
+	<%= @subject %></p>
+
+	<p>本文/content<br>
+	<%= @message %></p>
+
+	<p>このメールに返信できません。</p>
+	<p>Please do not reply to this email as this is a send-only address.</p>

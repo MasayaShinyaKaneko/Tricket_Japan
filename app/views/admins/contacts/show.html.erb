@@ -51,8 +51,11 @@
 					<%= flash[:notice] %>
 				</div>
 			<% end %>
-
 			<%= form_for(@contact, url: admins_contact_path, method: :patch) do |f| %>
+				<div class="field">
+					<%= f.label :reply_language, "言語選択" %><br>
+					<%= f.select :reply_language, [["日本語", 1],["英語", 2]] %>
+				</div>
 				<div class="field">
 					<%= f.label :reply, "返信内容入力" %><br>
 					<%= f.text_area :reply, autofocus: true, placeholder: "返信内容", :style=>"width: 100%; height: 200px;" %>
