@@ -19,9 +19,13 @@ class RoomsController < ApplicationController
 
 	def create
 	    @room = Room.create
-	    @entry1 = RoomUser.create(:room_id => @room.id, :user_id => current_user.id)
-	    @entry2 = RoomUser.create(params.require(:room_user).permit(:user_id, :room_id).merge(:room_id => @room.id))
+	    RoomUser.create(:room_id => @room.id, :user_id => current_user.id)
+	    RoomUser.create(room_user_params.merge(:room_id => @room.id))
 	    redirect_to room_path(@room.id)
 	end
 
+	private
+	    def room_user_params
+	    	params.require(:room_user).permit(:user_id, :room_id)
+	    end
 end

@@ -41,6 +41,7 @@ class Admins::ContactsController < ApplicationController
     		render :show
         end
 	end
+
 	private
 	    def contact_params
 	    	params.require(:contact).permit(:user_id, :subject, :content, :reply, :status_reply, :reply_language)
