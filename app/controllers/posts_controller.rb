@@ -101,6 +101,9 @@ class PostsController < ApplicationController
 	end
 	def create
 		@post = Post.new(post_params)
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
     	@post.user_id = current_user.id
     	if  @post.save
         	flash[:notice] = "You have creatad Tricket successfully."
