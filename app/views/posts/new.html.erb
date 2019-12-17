@@ -8,6 +8,18 @@
 					</div>
 				<% end %>
 
+
+			<% if @post.errors.any? %>
+			  <div class="alert alert-warning">
+			    <ul>
+			      <% @post.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			    </ul>
+			  </div>
+			<% end %>
+
+
 			<h1 class="title_type1_traveler">New Tricket</h1>
 			<%= form_for(@post) do |f| %>
 		    <div class="field">

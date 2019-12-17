@@ -5,7 +5,11 @@
 			<% if @notifications.exists? %>
 				<hr>
 				<% @notifications.reverse.each do |n| %>
-					<p>タイトル：<%= link_to "#{n.post.title}", post_path(n.post.id) %>の投稿に<%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %>からコメントがありました。</p>
+					<% if n.post.user == current_user %>
+						<p><span class="label label-default" style="background-color: #f8b500;">Your Tricket</span> <%= link_to "#{n.post.title}", post_path(n.post.id) %> got a new comment by <%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %> <small>/<%= time_ago_in_words(n.created_at) %> ago</small></p>
+					<% else %>
+						<p><span class="label label-default" style="background-color: #9e3d3f;">The Tricket (you commented on)</span> <%= link_to "#{n.post.title}", post_path(n.post.id) %> got a new comment by <%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %> <small>/<%= time_ago_in_words(n.created_at) %> ago</small></p>
+					<% end %>
 					<hr>
 				<% end %>
 			<% else %>

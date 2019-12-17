@@ -110,7 +110,6 @@ class PostsController < ApplicationController
     		redirect_to post_path(@post)
         else
         	flash[:notice] = "error!!"
-			@post = Post.new
         	render :new
         end
 	end
