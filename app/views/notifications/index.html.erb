@@ -1,0 +1,22 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="title_type1">Notificaitons</h1>
+			<% if @notifications.exists? %>
+				<hr>
+				<% @notifications.reverse.each do |n| %>
+					<p>タイトル：<%= link_to "#{n.post.title}", post_path(n.post.id) %>の投稿に<%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %>からコメントがありました。</p>
+					<hr>
+				<% end %>
+			<% else %>
+				<h3>There is no notification.</h3>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

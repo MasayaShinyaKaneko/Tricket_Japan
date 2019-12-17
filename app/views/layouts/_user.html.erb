@@ -10,6 +10,11 @@
     <div class="nav-lists">
       <%= link_to "Trickets", posts_top_path, class:"nav-button" %>
       <%= link_to "Locals", users_locals_path, class:"nav-button" %>
+      <% if Notification.where(checked: false).where(visited_id: current_user.id).exists? %>
+        <%= link_to "Notification", notifications_path, class:"nav-button", :style=>"color:red" %>
+      <% else %>
+        <%= link_to "Notification", notifications_path, class:"nav-button" %>
+      <% end %>
       <%= link_to "Messages", rooms_path, class:"nav-button" %>
       <%= link_to "Contacts", new_contact_path, class:"nav-button" %>
       <%= link_to "out", destroy_user_session_path, method: :delete, class:"nav-button" %>

@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   resources :messages, :only => [:create]
   #contact controller
   resources :contacts, only: [:new, :create]
+  #notification controller
+  resources :notifications, only: [:index]
+
   #adminsファイル内のcontroller
   namespace :admins do
 	  #admins/users controller
