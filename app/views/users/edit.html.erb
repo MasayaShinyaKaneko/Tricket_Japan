@@ -11,6 +11,16 @@
         </div>
       <% end %>
 
+      <% if @user.errors.any? %>
+        <div class="alert alert-warning">
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <%= form_for(@user) do |f| %>
       <div class="field">
          <%= f.label :usertype %>

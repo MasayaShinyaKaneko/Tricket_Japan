@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+	before_action :configure_permitted_parameters, if: :devise_controller?
+
 
 	def after_sign_in_path_for(resource)
 		case resource
@@ -30,7 +32,6 @@ class ApplicationController < ActionController::Base
 
 	INTEREST = ["N/A","food","shopping","entrainment","anime","music","history","religion","tradition","festival","nature","sport","outdoor"]
 
-	before_action :configure_permitted_parameters, if: :devise_controller?
 	protected
 	def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:type_user, :name_first, :name_last, :name_user, :gender, :birthday, :nationality, :country, :language_first, :language_second, :language_third, :hobby, :introduction, :picture_profile, :picture_background])

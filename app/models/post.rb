@@ -1,9 +1,9 @@
 class Post < ApplicationRecord
 
-	validates :title, presence: true
-	validates :content, presence: true
-	validates :time_todo, presence: true
-	validates :place_todo, presence: true
+	validates :title, presence: true, length: {in: 1..100}
+	validates :content, presence: true, length: {in: 1..500}
+	validates :time_todo, presence: true, length: {in: 1..30}
+	validates :place_todo, presence: true, length: {in: 1..30}
 
 	belongs_to :user
 	has_many :likes, dependent: :destroy

@@ -5,7 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   # GET /resource/sign_up
   def new
-    @user = User.new
     @nationality = NATIOALITY
     @country = COUNTRY
     @language = LANGUAGE
@@ -14,12 +13,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
     elsif params[:type_user] == "1"
       @view = 1
     end
+    super
   end
 
+
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @nationality = NATIOALITY
+    @country = COUNTRY
+    @language = LANGUAGE
+    flash[:success] = "You have created account successfully."
+    super
+  end
 
   # GET /resource/edit
   # def edit
