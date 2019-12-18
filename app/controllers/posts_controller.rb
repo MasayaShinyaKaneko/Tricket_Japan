@@ -75,21 +75,21 @@ class PostsController < ApplicationController
 	def update_accomplish
         @post = Post.find(params[:id])
         if @post.update(post_params)
-           flash[:notice] = "You have posted accomplishment successfully."
+           flash[:accomplish] = "You have posted accomplishment successfully."
            @post.update(status_accomplishment: 1)
            redirect_to post_path(@post.id)
         else
-           flash[:notice] = "error!!"
+           flash[:error] = "error!!"
            redirect_to post_path(@post.id)
         end
 	end
 	def reset_accomplish
         @post = Post.find(params[:id])
         if @post.update(status_accomplishment: 0, image_accomplishment: "", comment_accomplishment: "")
-           flash[:notice] = "You have reset accomplishment successfully."
+           flash[:accomplish] = "You have reset accomplishment successfully."
            redirect_to post_path(@post.id)
         else
-           flash[:notice] = "error!!"
+           flash[:error] = "error!!"
            redirect_to post_path(@post.id)
         end
 	end
@@ -106,10 +106,10 @@ class PostsController < ApplicationController
 		@interest = INTEREST
     	@post.user_id = current_user.id
     	if  @post.save
-        	flash[:notice] = "You have creatad Tricket successfully."
+    		flash[:success] = "You have posted the Tricket successfully."
     		redirect_to post_path(@post)
         else
-        	flash[:notice] = "error!!"
+        	flash[:error] = "error!!"
         	render :new
         end
 	end
@@ -119,7 +119,6 @@ class PostsController < ApplicationController
 		@interest = INTEREST
         @post = Post.find(params[:id])
 		if  @post.user != current_user
-        	flash[:notice] = "I have no authorization to edit"
         	redirect_to posts_top_path
         else
         	@post = Post.find(params[:id])
@@ -128,11 +127,14 @@ class PostsController < ApplicationController
 	end
 	def update
         @post = Post.find(params[:id])
+		@area = AREA
+		@season = SEASON
+		@interest = INTEREST
         if @post.update(post_params)
-           flash[:notice] = "You have updated Tricket successfully."
-           redirect_to post_path(@post.id)
+			flash[:success] = "You have edited the Tricket successfully."
+           	redirect_to post_path(@post.id)
         else
-           flash[:notice] = "error!!"
+           flash[:error] = "error!!"
            render :edit
         end
 	end

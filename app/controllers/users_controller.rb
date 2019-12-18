@@ -91,10 +91,8 @@ class UsersController < ApplicationController
         @nationality = NATIOALITY
         @country = COUNTRY
 		@language = LANGUAGE
-
         @user = User.find(params[:id])
 		if @user != current_user
-           flash[:notice] = "I have no authorization to edit"
            redirect_to posts_top_path
         else
            @user = User.find(params[:id])
@@ -102,9 +100,17 @@ class UsersController < ApplicationController
         end
 	end
 	def update
+		@nationality = NATIOALITY
+        @country = COUNTRY
+		@language = LANGUAGE
 	    @user = User.find(params[:id])
-	    @user.update(user_params)
-	    redirect_to user_path(@user.id)
+	    if @user.update(user_params)
+	    	flash[:success] = "You have edited profile successfully."
+	    	redirect_to user_path(@user)
+	    else
+	    	flash[:error] = "error!!"
+	    	render :edit
+	    end
 	end
 	def status_user
 		@user = User.find(params[:id])

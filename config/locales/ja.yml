@@ -1,6 +1,41 @@
 ja:
   enums:
+    post:
+      status_accomplishment:
+        Ongoing: 未達成
+        Accomplished: 達成
+      status_display:
+        open: 表示
+        closed: 非表示
     contact:
       status_reply:
         notyet: 返信未
         replyed: 返信済
+  activerecord:
+    attributes:
+      post:
+        title: "Title"
+        content: "Content"
+        time_todo: "Time"
+        place_todo: "Place"
+      contact:
+        subject: "Subject"
+        content: "Content"
+    errors:
+      models:
+        post:
+          attributes:
+            title:
+              blank: " can't be blank"
+            content:
+              blank: " can't be blank"
+            time_todo:
+              blank: " can't be blank"
+            place_todo:
+              blank: " can't be blank"
+        contact:
+          attributes:
+            subject:
+              blank: " can't be blank"
+            content:
+              blank: " can't be blank"

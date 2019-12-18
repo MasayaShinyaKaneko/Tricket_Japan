@@ -1,4 +1,4 @@
-<% unless @post.status_display == 1 && @user != current_user %>
+<% unless @post.status_display_before_type_cast == 1 && @user != current_user %>
 
 <div class="container-fluid">
 	<div class="row">
@@ -37,6 +37,13 @@
 					<%= link_to 'Share Facebook', "https://www.facebook.com/sharer/sharer.php?u=#{request.url}&text=Tricket_Japan_#{@post.title}", class: 'facebook', title: 'Facebook', target: '_blank' %>
 					</div>
 				</div>
+
+				<% if flash[:success] %>
+					<div id="flash" class="alert alert-success" role="alert">
+						<%= flash[:success] %>
+					</div>
+				<% end %>
+
 
 				<div class="title">
 					<% if @post.status_accomplishment_before_type_cast == 0 %>
@@ -167,13 +174,6 @@
 	<div class="row">
 		<div class="col-md-12">
 		<h1 class="title_type1_traveler">Discuss on this Tricket</h1>
-
-		<% if flash[:comment] %>
-			<div id="flash">
-				<%= flash[:comment] %>
-			</div>
-		<% end %>
-
 			<div class="comments-form">
 				<%= form_for(@comment, url:post_comments_path(post_id: @post.id), method: :post) do |f| %>
 			      <div class="field">
@@ -215,9 +215,14 @@
 		<div class="col-md-12">
 		<h1 class="title_type1_traveler">Post accomplished message</h1>
 
-		<% if flash[:notice] %>
-			<div id="flash">
-				<%= flash[:notice] %>
+		<% if flash[:accomplish] %>
+			<div id="flash" class="alert alert-success" role="alert">
+				<%= flash[:accomplish] %>
+			</div>
+		<% end %>
+		<% if flash[:error] %>
+			<div id="flash" class="alert alert-danger" role="alert">
+				<%= flash[:error] %>
 			</div>
 		<% end %>
 

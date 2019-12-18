@@ -4,6 +4,13 @@
       <div class="profile-edit-headline title_type1">
        <h1>Edit Profile</h1>
       </div>
+
+      <% if flash[:error] %>
+        <div id="flash" class="alert alert-danger" role="alert">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+
       <%= form_for(@user) do |f| %>
       <div class="field">
          <%= f.label :usertype %>

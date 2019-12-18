@@ -10,12 +10,11 @@ class ContactsController < ApplicationController
     	@contact.user_id = current_user.id
     	if  @contact.save
     		ContactMailer.send_when_user_message(current_user, @contact).deliver
-        	flash[:notice] = "You have sent the message successfully."
 			@contact = Contact.new
+        	flash[:success] = "You have sent the message successfully."
     		render :new
         else
-        	flash[:notice] = "error!!"
-			@contact = Contact.new
+        	flash[:error] = "error!!"
         	render :new
         end
 	end

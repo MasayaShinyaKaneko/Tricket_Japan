@@ -2,12 +2,11 @@
 	<div class="row" style="background-color: #EFE9D1;">
 		<div class="col-md-12">
 
-				<% if flash[:notice] %>
-					<div id="flash">
-						<%= flash[:notice] %>
-					</div>
-				<% end %>
-
+			<% if flash[:error] %>
+				<div id="flash" class="alert alert-danger" role="alert">
+					<%= flash[:error] %>
+				</div>
+			<% end %>
 
 			<% if @post.errors.any? %>
 			  <div class="alert alert-warning">
@@ -32,7 +31,7 @@
 	  		</div>
 		    <div class="field">
 		        <%= f.label :display_choice %>
-		        <%= f.select :status_display, [["open", 0 ],["closed", 1 ]] %>
+		        <%= f.select :status_display, [["open", "open"],["closed", "closed"]] %>
 		    </div>
 		    <div class="field">
 		        <%= f.label :area %>

@@ -14,7 +14,8 @@ class Post < ApplicationRecord
  	mount_uploader :post_image, ImageUploader
 	mount_uploader :image_accomplishment, ImageUploader
 
-	enum status_accomplishment: { ongoing: 0, Accomplished: 1 }
+	enum status_accomplishment: { Ongoing: 0, Accomplished: 1 }
+  enum status_display: { open: 0, closed: 1 }
 
   scope :open, -> { where(status_display: 0) }
 
