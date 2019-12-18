@@ -75,22 +75,27 @@ class PostsController < ApplicationController
 	def update_accomplish
         @post = Post.find(params[:id])
         if @post.update(post_params)
-           flash[:accomplish] = "You have posted accomplishment successfully."
-           @post.update(status_accomplishment: 1)
-           redirect_to post_path(@post.id)
+           	flash[:accomplish] = "You have posted accomplishment successfully."
+           	@post.update(status_accomplishment: 1)
+           	#達成通知
+           	other_user_ids = @post.comments.select(:user_id).where(post_id: @post.id).where.not(user_id: current_user.id).distinct
+			other_user_ids.each do |other_user_id|
+      			@post.save_notification_accomplish!(current_user, other_user_id['user_id'])
+    		end
+           	redirect_to post_path(@post.id)
         else
-           flash[:error] = "error!!"
-           redirect_to post_path(@post.id)
+           	flash[:error] = "error!!"
+           	redirect_to post_path(@post.id)
         end
 	end
 	def reset_accomplish
         @post = Post.find(params[:id])
         if @post.update(status_accomplishment: 0, image_accomplishment: "", comment_accomplishment: "")
-           flash[:accomplish] = "You have reset accomplishment successfully."
-           redirect_to post_path(@post.id)
+           	flash[:accomplish] = "You have reset accomplishment successfully."
+           	redirect_to post_path(@post.id)
         else
-           flash[:error] = "error!!"
-           redirect_to post_path(@post.id)
+           	flash[:error] = "error!!"
+           	redirect_to post_path(@post.id)
         end
 	end
 	def new

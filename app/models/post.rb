@@ -51,5 +51,17 @@ class Post < ApplicationRecord
     end
   end
 
-
+  def save_notification_accomplish!(current_user, visited_id)
+    notification = current_user.active_notifications.new(
+      post_id: id,
+      visited_id: visited_id,
+      accomplish: true
+    )
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
+    if notification.valid?
+      notification.save
+    end
+  end
 end
