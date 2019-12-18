@@ -39,3 +39,5 @@ ja:
               blank: " can't be blank"
             content:
               blank: " can't be blank"
+              too_short: ": Please enter a content with at least 30 characters."
+              too_long: ": Please enter a content in 500 characters."
