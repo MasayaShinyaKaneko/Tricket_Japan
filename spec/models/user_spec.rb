@@ -19,7 +19,23 @@ RSpec.describe User, type: :model do
   		expect(user.errors[:name_first]).to include("can't be blank")
 	end
 	# 姓がなければ無効な状態であること
-	it "is invalid without a last name"
+	it "is invalid without a last name" do
+	  	user = User.new(name_last: nil)
+  		user.valid?
+  		expect(user.errors[:name_last]).to include("can't be blank")
+    end
+	# ユーザ名がなければ無効な状態であること
+    it "is invalid without a user name" do
+	  	user = User.new(name_user: nil)
+  		user.valid?
+  		expect(user.errors[:name_user]).to include("can't be blank")
+    end
+	# メールアドレスがなければ無効な状態であること
+	it "is invalid without an email address" do
+	  	user = User.new(email: nil)
+  		user.valid?
+  		expect(user.errors[:email]).to include("can't be blank")
+    end
 	# メールアドレスがなければ無効な状態であること
 	it "is invalid without an email address"
 	# 重複したメールアドレスなら無効な状態であること
