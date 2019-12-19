@@ -25,9 +25,9 @@ class Post < ApplicationRecord
 
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべてuser_idを取得
-    other_user_ids = Comment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
+    other_user_ids = Comment.where(post_id: id).where.not(user_id: current_user.id).distinct.pluck(:user_id)
     other_user_ids.each do |other_user_id|
-      save_notification_comment!(current_user, comment_id, other_user_id['user_id'])
+      save_notification_comment!(current_user, comment_id, other_user_id)
     end
     # 自分以外にコメントしている人がいない場合
     if other_user_ids.blank?

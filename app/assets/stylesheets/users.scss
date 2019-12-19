@@ -39,7 +39,6 @@
 	width: 100%;
 	margin-left: 20px;
 	z-index: 10;
-	height: 250px;
 	position: absolute;
 	top: 45px;
 }
@@ -87,8 +86,9 @@
 /*index_travelersページ*/
 .travelers-index-background1{
 	width: 100%;
-	height: 200px;
-	background-image: url(travelers_backgraund.jpg);
+	height: 400px;
+	background-image: url(autumn_leaf.jpg);
+	background-size: cover;
 	color: white;
 		h1{
 		margin: 0;
@@ -102,8 +102,9 @@
 /*index_localsページ*/
 .locals-index-background1{
 	width: 100%;
-	height: 250px;
-	background-image: url(travelers_backgraund.jpg);
+	height: 400px;
+	background-image: url(summer_yukata.jpg);
+	background-size: cover;
 	color: white;
 		h1{
 		margin: 0;

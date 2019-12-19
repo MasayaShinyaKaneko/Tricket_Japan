@@ -1,7 +1,7 @@
 <% if @user.picture_background? %>
-	<%= image_tag @user.picture_background.background.url, :size => '400x200', class: "background" %>
+	<%= image_tag @user.picture_background.background.url, :size => '400x300', class: "background" %>
 <% else %>
-	<%= image_tag "/assets/default.jpg", :size => '400x200', class: "background"  %>
+	<%= image_tag "/assets/default.jpg", :size => '400x300', class: "background"  %>
 <% end %>
 
 <div class="user-headline clearfix">
