@@ -9,6 +9,12 @@ class User < ApplicationRecord
   validates :name_first, presence: true, length: {in: 1..20}
   validates :name_last, presence: true, length: {in: 1..20}
   validates :name_user, presence: true, uniqueness: true, length: {in: 1..20}
+  validates :type_user, presence: true
+  validates :gender, presence: true
+  validates :birthday, presence: true
+  validates :nationality, presence: true
+  validates :country, presence: true
+  validates :language_first, presence: true
 
 	has_many :posts, dependent: :destroy
   has_many :contacts, dependent: :destroy

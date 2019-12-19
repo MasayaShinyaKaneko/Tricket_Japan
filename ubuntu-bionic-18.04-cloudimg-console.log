@@ -656,3 +656,137 @@ ubuntu-bionic login: [ 4475.185127] BUG: unable to handle kernel paging request 
 [ 4475.264132] RIP: 0x1fe00000101 RSP: ffffb4014074fa70
 [ 4475.264851] CR2: 000001fe00000101
 [ 4475.265413] ---[ end trace ee0827f304253515 ]---
+[ 8004.205981] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [kswapd0:41]
+[ 8004.258310] Modules linked in: vboxsf isofs input_leds video serio_raw vboxguest sch_fq_codel ib_iser rdma_cm iw_cm ib_cm ib_core iscsi_tcp libiscsi_tcp libiscsi scsi_transport_iscsi ip_tables x_tables autofs4 btrfs zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear crct10dif_pclmul crc32_pclmul ghash_clmulni_intel pcbc aesni_intel mptspi aes_x86_64 scsi_transport_spi crypto_simd mptscsih glue_helper cryptd psmouse mptbase e1000
+[ 8004.569214] CPU: 0 PID: 41 Comm: kswapd0 Tainted: G      D          4.15.0-72-generic #81-Ubuntu
+[ 8004.582994] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 8004.584589] RIP: 0010:native_safe_halt+0x12/0x20
+[ 8004.587952] RSP: 0000:ffffb40140323bb8 EFLAGS: 00000202 ORIG_RAX: ffffffffffffff11
+[ 8004.595997] RAX: 0000000000000003 RBX: 0000000000000246 RCX: 0000000000000008
+[ 8004.597326] RDX: 0000000000000000 RSI: 0000000000000003 RDI: ffff89d924ca7d18
+[ 8004.620246] RBP: ffffb40140323bb8 R08: 0000000000000008 R09: 00000000000000a8
+[ 8004.692473] R10: 0000000000000b32 R11: 0000000000000894 R12: ffff89d93fc22400
+[ 8004.742208] R13: 0000000000000001 R14: 0000000000000100 R15: 0000000000000000
+[ 8004.789600] FS:  0000000000000000(0000) GS:ffff89d93fc00000(0000) knlGS:0000000000000000
+[ 8004.799330] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 8004.800423] CR2: 00007f8783a60fe0 CR3: 000000003f40a000 CR4: 00000000000406f0
+[ 8004.842221] Call Trace:
+[ 8004.867908]  kvm_wait+0x54/0x60
+[ 8004.895887]  __pv_queued_spin_lock_slowpath+0x21d/0x290
+[ 8004.930418]  _raw_spin_lock+0x21/0x30
+[ 8004.965943]  shrink_dentry_list+0x277/0x320
+[ 8004.984372]  prune_dcache_sb+0x5a/0x80
+[ 8005.006083]  super_cache_scan+0x104/0x1b0
+[ 8005.033858]  shrink_slab.part.51+0x1e7/0x440
+[ 8005.059688]  shrink_slab+0x29/0x30
+[ 8005.060547]  shrink_node+0x11e/0x300
+[ 8005.067838]  kswapd+0x2ae/0x730
+[ 8005.115556]  kthread+0x121/0x140
+[ 8005.162764]  ? mem_cgroup_shrink_node+0x190/0x190
+[ 8005.202224]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 8005.230053]  ret_from_fork+0x35/0x40
+[ 8005.247860] Code: 00 f0 80 48 02 20 48 8b 00 a8 08 0f 84 7b ff ff ff eb bd 90 90 90 90 90 90 55 48 89 e5 e9 07 00 00 00 0f 00 2d 30 c9 44 00 fb f4 <5d> c3 66 90 66 2e 0f 1f 84 00 00 00 00 00 55 48 89 e5 e9 07 00 
+[ 8032.206325] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [kswapd0:41]
+[ 8032.291363] Modules linked in: vboxsf isofs input_leds video serio_raw vboxguest sch_fq_codel ib_iser rdma_cm iw_cm ib_cm ib_core iscsi_tcp libiscsi_tcp libiscsi scsi_transport_iscsi ip_tables x_tables autofs4 btrfs zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 mmltipath linear crct10dif_pclmul crc32_pclmul ghash_clmulni_intel pcbc aesni_intel mptspi aes_x86_64 scsi_transport_spi crypto_simd mptscsih glue_helper cryptd psmouse mptbase e1000
+[ 8032.557289] CPU: 0 PID: 41 Comm: kswapd0 Tainted: G      D      L   4.15.0-72-generic #81-Ubuntu
+[ 8032.658604] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 8032.742321] RIP: 0010:native_safe_halt+0x12/0x20
+[ 8032.771576] RSP: 0000:ffffb40140323bb8 EFLAGS: 00000202 ORIG_RAX: ffffffffffffff11
+[ 8032.773075] RAX: 0000000000000003 RBX: 0000000000000246 RCX: 0000000000000008
+[ 8032.798777] RDX: 0000000000000000 RSI: 0000000000000003 RDI: ffff89d924ca7d18
+[ 8032.800098] RBP: ffffb40140323bb8 R08: 0000000000000008 R09: 00000000000000a8
+[ 8032.859070] R10: 0000000000000b32 R11: 0000000000000894 R12: ffff89d93fc22400
+[ 8032.902633] R13: 0000000000000001 R14: 0000000000000100 R15: 0000000000000000
+[ 8032.930630] FS:  0000000000000000(0000) GS:ffff89d93fc00000(0000) knlGS:0000000000000000
+[ 8032.938877] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 8032.947909] CR2: 00007f8783a60fe0 CR3: 000000003f40a000 CR4: 00000000000406f0
+[ 8032.949247] Call Trace:
+[ 8032.982181]  kvm_wait+0x54/0x60
+[ 8033.011304]  __pv_queued_spin_lock_slowpath+0x21d/0x290
+[ 8033.066302]  _raw_spin_lock+0x21/0x30
+[ 8033.080977]  shrink_dentry_list+0x277/0x320
+[ 8033.109944]  prune_dcache_sb+0x5a/0x80
+[ 8033.146236]  super_cache_scan+0x104/0x1b0
+[ 8033.161049]  shrink_slab.part.51+0x1e7/0x440
+[ 8033.201948]  shrink_slab+0x29/0x30
+[ 8033.242426]  shrink_node+0x11e/0x300
+[ 8033.270166]  kswapd+0x2ae/0x730
+[ 8033.313812]  kthread+0x121/0x140
+[ 8033.370217]  ? mem_cgroup_shrink_node+0x190/0x190
+[ 8033.434943]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 8033.482138]  ret_from_fork+0x35/0x40
+[ 8033.488339] Code: 00 f0 80 48 02 20 48 8b 00 a8 08 0f 84 7b ff ff ff eb bd 90 90 90 90 90 90 55 48 89 e5 e9 07 00 00 00 0f 00 2d 30 c9 44 00 fb f4 <5d> c3 66 90 66 2e 0f 1f 84 00 00 00 00 00 55 48 89 e5 e9 07 00 
+[ 8038.886035] INFO: rcu_sched self-detected stall on CPU
+[ 8038.919413] 	0-....: (14283 ticks this GP) idle=5da/140000000000001/0 softirq=123744/123744 fqs=6087 
+[ 8038.970449] 	 (t=15000 jiffies g=67751 c=67750 q=6760)
+[ 8039.003174] NMI backtrace for cpu 0
+[ 8039.071708] CPU: 0 PID: 41 Comm: kswapd0 Tainted: G      D      L   4.15.0-72-generic #81-Ubuntu
+[ 8039.170098] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 8039.211691] Call Trace:
+[ 8039.227526]  <IRQ>
+[ 8039.227986]  dump_stack+0x63/0x8e
+[ 8039.228664]  nmi_cpu_backtrace+0x94/0xa0
+[ 8039.242376]  ? lapic_can_unplug_cpu+0xb0/0xb0
+[ 8039.278139]  nmi_trigger_cpumask_backtrace+0xe6/0x130
+[ 8039.301984]  arch_trigger_cpumask_backtrace+0x19/0x20
+[ 8039.341015]  rcu_dump_cpu_stacks+0xa3/0xdb
+[ 8039.394418]  rcu_check_callbacks+0x6cd/0x8e0
+[ 8039.411563]  ? tick_sched_do_timer+0x50/0x50
+[ 8039.423565]  update_process_times+0x2f/0x60
+[ 8039.458179]  tick_sched_handle+0x26/0x70
+[ 8039.467891]  ? tick_sched_do_timer+0x3f/0x50
+[ 8039.498134]  tick_sched_timer+0x39/0x80
+[ 8039.531827]  __hrtimer_run_queues+0xdf/0x230
+[ 8039.550167]  hrtimer_interrupt+0xa0/0x1d0
+[ 8039.551049]  smp_apic_timer_interrupt+0x6f/0x140
+[ 8039.559324]  apic_timer_interrupt+0x8c/0xa0
+[ 8039.571872]  </IRQ>
+[ 8039.572468] RIP: 0010:native_safe_halt+0x12/0x20
+[ 8039.584419] RSP: 0000:ffffb40140323bb8 EFLAGS: 00000202 ORIG_RAX: ffffffffffffff11
+[ 8039.602188] RAX: 0000000000000003 RBX: 0000000000000246 RCX: 0000000000000008
+[ 8039.619451] RDX: 0000000000000000 RSI: 0000000000000003 RDI: ffff89d924ca7d18
+[ 8039.638906] RBP: ffffb40140323bb8 R08: 0000000000000008 R09: 00000000000000a8
+[ 8039.649054] R10: 0000000000000b32 R11: 0000000000000894 R12: ffff89d93fc22400
+[ 8039.712884] R13: 0000000000000001 R14: 0000000000000100 R15: 0000000000000000
+[ 8039.730383]  kvm_wait+0x54/0x60
+[ 8039.770149]  __pv_queued_spin_lock_slowpath+0x21d/0x290
+[ 8039.838339]  _raw_spin_lock+0x21/0x30
+[ 8039.880147]  shrink_dentry_list+0x277/0x320
+[ 8039.891494]  prune_dcache_sb+0x5a/0x80
+[ 8039.892284]  super_cache_scan+0x104/0x1b0
+[ 8039.893103]  shrink_slab.part.51+0x1e7/0x440
+[ 8039.926016]  shrink_slab+0x29/0x30
+[ 8039.926850]  shrink_node+0x11e/0x300
+[ 8039.970279]  kswapd+0x2ae/0x730
+[ 8040.000523]  kthread+0x121/0x140
+[ 8040.039482]  ? mem_cgroup_shrink_node+0x190/0x190
+[ 8040.079097]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 8040.111640]  ret_from_fork+0x35/0x40
+[ 8064.205583] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [kswapd0:41]
+[ 8064.232552] Modules linked in: vboxsf isofs input_leds video serio_raw vboxguest sch_fq_codel ib_iser rdma_cm iw_cm ib_cm ib_core iscsi_tcp libiscsi_tcp libiscsi scsi_transport_iscsi ip_tables x_tables autofs4 btrfs zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear crct10dif_pclmul crc32_pclmul ghash_clmulni_intel pcbc aesni_intel mptspi aes_x86_64 scsi_transport_spi crypto_simd mptscsih glue_helper cryptd psmouse mptbase e1000
+[ 8064.417827] CPU: 0 PID: 41 Comm: kswapd0 Tainted: G      D      L   4.15.0-72-generic #81-Ubuntu
+[ 8064.447049] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 8064.448593] RIP: 0010:__pv_queued_spin_lock_slowpath+0xec/0x290
+[ 8064.461999] RSP: 0000:ffffb40140323be0 EFLAGS: 00000206 ORIG_RAX: ffffffffffffff11
+[ 8064.473359] RAX: 0000000000000003 RBX: ffff89d924ca7d18 RCX: 0000000000000008
+[ 8064.508181] RDX: 0000000000006803 RSI: 0000000000000003 RDI: 0000000000000246
+[ 8064.522891] RBP: ffffb40140323c18 R08: 0000000000000008 R09: 00000000000000a8
+[ 8064.553072] R10: 0000000000000b32 R11: 0000000000000894 R12: ffff89d93fc22400
+[ 8064.578775] R13: 0000000000000001 R14: 0000000000000100 R15: 0000000000000000
+[ 8064.580093] FS:  0000000000000000(0000) GS:ffff89d93fc00000(0000) knlGS:0000000000000000
+[ 8064.600164] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 8064.606856] CR2: 00007f8783a60fe0 CR3: 000000003f40a000 CR4: 00000000000406f0
+[ 8064.634587] Call Trace:
+[ 8064.647557]  _raw_spin_lock+0x21/0x30
+[ 8064.654027]  shrink_dentry_list+0x277/0x320
+[ 8064.691331]  prune_dcache_sb+0x5a/0x80
+[ 8064.716055]  super_cache_scan+0x104/0x1b0
+[ 8064.722281]  shrink_slab.part.51+0x1e7/0x440
+[ 8064.723122]  shrink_slab+0x29/0x30
+[ 8064.723822]  shrink_node+0x11e/0x300
+[ 8064.724543]  kswapd+0x2ae/0x730
+[ 8064.725185]  kthread+0x121/0x140
+[ 8064.725863]  ? mem_cgroup_shrink_node+0x190/0x190
+[ 8064.726772]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 8064.727752]  ret_from_fork+0x35/0x40
+[ 8064.736316] Code: 24 44 41 bd 01 00 00 00 41 be 00 01 00 00 3c 02 0f 94 c0 0f b6 c0 48 89 45 c8 41 c6 44 24 44 00 ba 00 80 00 00 c6 43 01 01 eb 0b <f3> 90 83 ea 01 0f 84 08 01 00 00 0f b6 03 84 c0 75 ee 44 89 f0 
