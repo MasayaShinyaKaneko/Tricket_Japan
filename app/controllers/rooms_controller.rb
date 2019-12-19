@@ -3,9 +3,8 @@ class RoomsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@rooms = Room.order("updated_at desc").joins(:room_users).where("room_users.user_id = ?", current_user.id).distinct
+			@rooms = Room.new_message(current_user)
 	end
-
 	def show
 	    @room = Room.find(params[:id])
 	    if RoomUser.where(user_id: current_user.id, room_id: @room.id).present?
@@ -16,7 +15,6 @@ class RoomsController < ApplicationController
 	    	redirect_to user_path(current_user)
 	    end
 	end
-
 	def create
 	    @room = Room.create
 	    RoomUser.create(:room_id => @room.id, :user_id => current_user.id)
@@ -25,7 +23,7 @@ class RoomsController < ApplicationController
 	end
 
 	private
-	    def room_user_params
-	    	params.require(:room_user).permit(:user_id, :room_id)
-	    end
+    def room_user_params
+    	params.require(:room_user).permit(:user_id, :room_id)
+    end
 end

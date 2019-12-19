@@ -1,17 +1,17 @@
 <div class="container-fluid">
 	<div class="row">
-        <div class="col-md-12">
-        	<h1 style="text-decoration: underline;">Tricket一覧</h1>
-        	<div class="admin-Trickets-search">
-        		<div class="search-form-tag">
-        			<%= form_tag(admins_posts_search_path, method: :get) do %>
+    <div class="col-md-12">
+    	<h1 style="text-decoration: underline;">Tricket一覧</h1>
+    	<div class="admin-Trickets-search">
+    		<div class="search-form-tag">
+    			<%= form_tag(admins_posts_search_path, method: :get) do %>
 						<%= label_tag "日付(yy-mm-dd)" %>
 						<%= hidden_field_tag :search_flag, 1 %>
 						<%= text_field_tag :date_search %>
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        		<div class="search-form-tag">
+        <div class="search-form-tag">
 					<%= form_tag(admins_posts_search_path, method: :get) do %>
 						<%= label_tag "タイトル" %>
 						<%= hidden_field_tag :search_flag, 2 %>
@@ -19,7 +19,7 @@
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        		<div class="search-form-tag">
+        <div class="search-form-tag">
 					<%= form_tag(admins_posts_search_path, method: :get) do %>
 						<%= label_tag "ユーザ名" %>
 						<%= radio_button_tag :delete_flag, 0, checked: true %>全て
@@ -30,11 +30,11 @@
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        	</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+      </div>
+   	</div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -43,7 +43,7 @@
 						<th>タイトル</th>
 						<th>ユーザid</th>
 						<th>ユーザ名</th>
-						<th>人気</th>
+						<th>人気 <%= link_to "▲", admins_posts_sort_path(sort_flag: 1) %><%= link_to "▼", admins_posts_sort_path(sort_flag: 2) %></th>
 						<th>達成</th>
 						<th>表示</th>
 						<th>フラグ</th>
@@ -58,7 +58,7 @@
 						<td style="width: 350px;"><%= post.title.truncate(40) %></td>
 						<td style="width: 75px;"><%= post.user.id %></td>
 						<td style="width: 200px;"><%= post.user.name_user.truncate(15) %></td>
-						<td style="width: 75px;"><%= post.likes.count %></td>
+						<td style="width: 100px;"><%= post.likes.count %></td>
 						<td style="width: 75px;"><%= post.status_accomplishment_i18n %></td>
 						<td style="width: 75px;"><%= post.status_display_i18n %></td>
 						<% if post.deleted_at.nil? %>

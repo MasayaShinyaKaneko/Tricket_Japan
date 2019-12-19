@@ -55,7 +55,7 @@
 						<td style="width: 200px;"><%= user.name_user.truncate(15) %></td>
 						<td style="width: 75px;"><%= user.gender %></td>
 						<td style="width: 50px;"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></td>
-						<td style="width: 100px;"><%= user.nationality %></td>
+						<td style="width: 100px;"><%= user.nationality.truncate(10) %></td>
 						<td style="width: 75px;"><%= user.posts.count %></td>
 						<td style="width: 75px;"><%= user.posts.where(status_accomplishment: 1).count %></td>
 						<td style="width: 75px;"><%= user.followers.count %></td>

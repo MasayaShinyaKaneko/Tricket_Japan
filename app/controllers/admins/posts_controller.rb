@@ -22,7 +22,11 @@ class Admins::PostsController < ApplicationController
 		render :index
 	end
 	def sort
-
+		if params[:sort_flag] == "1"
+			@posts = Post.all.joins(:likes).order('sum_like_id DESC').group(:post_id).sum(:like_id)
+			render :index
+		else
+		end
 	end
 	def show
 

@@ -37,7 +37,7 @@ en:
         Ongoing: "未達成"
         Accomplished: "達成"
       status_display:
-        open: "表示"
+        open: "表示中"
         closed: "非表示"
     contact:
       status_reply:

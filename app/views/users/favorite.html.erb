@@ -113,7 +113,7 @@
 			<div class="user-review-headline">
 				<h1 class="title_type1" style="margin: 0;">Trickets (you commented on)</h1>
 				<% if @comments.present? %>
-					<% @posts_comment.each do |p| %>
+					<% @post_comments.each do |p| %>
 						<% if p.user != current_user %>
 							<div class="favorite-Tricket-content clearfix">
 								<div style="width: 15%; float:left;">
