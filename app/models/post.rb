@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
 
-	validates :title, presence: true, length: {in: 1..100}
+	validates :title, presence: true, length: {in: 1..50}, uniqueness: { scope: :user_id }
 	validates :content, presence: true, length: {in: 1..500}
 	validates :time_todo, presence: true, length: {in: 1..30}
 	validates :place_todo, presence: true, length: {in: 1..30}
