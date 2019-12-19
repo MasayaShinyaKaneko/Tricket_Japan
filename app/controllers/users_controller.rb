@@ -126,7 +126,7 @@ class UsersController < ApplicationController
    			@user.update(status_user: 0)
    		end
 	end
-	def status_flag
+	def destroy
 		current_user.destroy
 		Devise.sign_out_all_scopes ? sign_out : sign_out(current_user)
 		redirect_to users_unsubscribe_complete_path

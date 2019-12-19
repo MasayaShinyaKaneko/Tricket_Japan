@@ -5,7 +5,7 @@
 
 		<h3>Are you sure to unsubscribe Tricket?</h3>
 
-		<h4><%= link_to "unsubscribe", users_flag_path(current_user), method: :patch, data: { confirm: "Are you sure to unsubscribe Tricket?" }, class:"label label-danger" %> <%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
+		<h4><%= link_to "unsubscribe", user_path(current_user), method: :delete, data: { confirm: "Are you sure to unsubscribe Tricket?" }, class:"label label-danger" %> <%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
 
 		</div>
 	</div>

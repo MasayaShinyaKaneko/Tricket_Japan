@@ -22,11 +22,18 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :room_users, dependent: :destroy
-
   has_many :favorites
   has_many :followings, through: :favorites, source: :follow
   has_many :reverse_of_favorites, class_name: 'Favorite', foreign_key: 'follow_id'
   has_many :followers, through: :reverse_of_favorites, source: :user
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
+  mount_uploader :picture_profile, ImageUploader
+  mount_uploader :picture_background, ImageUploader
+
+  enum type_user: { Traveler: 0, Local: 1 }
+  enum status_user: { Active: 0, Busy: 1, Away: 2 }
 
   def follow(other_user)
     if self != other_user
@@ -42,14 +49,4 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
-
-  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
-  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-
-  mount_uploader :picture_profile, ImageUploader
-  mount_uploader :picture_background, ImageUploader
-
-  enum type_user: { Traveler: 0, Local: 1 }
-  enum status_user: { Active: 0, Busy: 1, Away: 2 }
-
 end
