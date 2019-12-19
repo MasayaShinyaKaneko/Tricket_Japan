@@ -5,6 +5,8 @@ class Post < ApplicationRecord
 	validates :time_todo, presence: true, length: {in: 1..30}
 	validates :place_todo, presence: true, length: {in: 1..30}
 
+  acts_as_paranoid
+
 	belongs_to :user
 	has_many :likes, dependent: :destroy
 	has_many :comments, dependent: :destroy

@@ -615,4 +615,44 @@ cloud-init[682]: ci-info: +--------+------+-----------------------------+-------
 
 Ubuntu 18.04.3 LTS ubuntu-bionic ttyS0
 
-ubuntu-bionic login: 
+ubuntu-bionic login: [ 4475.185127] BUG: unable to handle kernel paging request at 000001fe00000101
+[ 4475.195394] IP: 0x1fe00000101
+[ 4475.195967] PGD 0 P4D 0 
+[ 4475.196465] Oops: 0010 [#1] SMP PTI
+[ 4475.197131] Modules linked in: vboxsf isofs input_leds video serio_raw vboxguest sch_fq_codel ib_iser rdma_cm iw_cm ib_cm ib_core iscsi_tcp libiscsi_tcp libiscsi scsi_transport_iscsi ip_tables x_tables autofs4 btrfs zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear crct10dif_pclmul crc32_pclmul ghash_clmulni_intel pcbc aesni_intel mptspi aes_x86_64 scsi_transport_spi crypto_simd mptscsih glue_helper cryptd psmouse mptbase e1000
+[ 4475.211153] CPU: 1 PID: 3376 Comm: thread_pool.rb* Not tainted 4.15.0-72-generic #81-Ubuntu
+[ 4475.215205] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 4475.216379] RIP: 0010:0x1fe00000101
+[ 4475.216884] RSP: 0018:ffffb4014074fa70 EFLAGS: 00010246
+[ 4475.217612] RAX: 0000000000000001 RBX: ffffb4014074fb30 RCX: ffff89d924ca9f80
+[ 4475.220507] RDX: ffff89d924ca7980 RSI: dead0000000000ff RDI: ffff89d93a14f640
+[ 4475.231590] RBP: 00000003ffffffff R08: 00000000000260e0 R09: ffff89d91e312c00
+[ 4475.232871] R10: ffffe49200eec1c0 R11: 000000000000006c R12: ffff89d924ca8000
+[ 4475.234216] R13: ffffb4014074fb38 R14: ffffffff24ca7cc0 R15: ffff89d924ca8058
+[ 4475.235551] FS:  00007efd9ec80700(0000) GS:ffff89d93fd00000(0000) knlGS:0000000000000000
+[ 4475.237176] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 4475.238282] CR2: 000001fe00000101 CR3: 00000000393aa000 CR4: 00000000000406e0
+[ 4475.239619] Call Trace:
+[ 4475.240158]  ? select_collect+0x90/0x90
+[ 4475.240922]  ? d_invalidate+0xb8/0x110
+[ 4475.241676]  ? lookup_fast+0x2cd/0x320
+[ 4475.242437]  ? _cond_resched+0x19/0x40
+[ 4475.243185]  ? walk_component+0x49/0x470
+[ 4475.243961]  ? __inode_permission+0x5b/0x160
+[ 4475.244795]  ? link_path_walk+0x1bc/0x5a0
+[ 4475.245586]  ? path_init+0x180/0x310
+[ 4475.246323]  ? path_openat+0xe1/0x1960
+[ 4475.247084]  ? make_kgid+0x17/0x20
+[ 4475.247784]  ? sf_inode_revalidate+0xc6/0xe0 [vboxsf]
+[ 4475.248763]  ? do_filp_open+0x9b/0x110
+[ 4475.249518]  ? __check_object_size+0xc8/0x1b0
+[ 4475.250409]  ? __alloc_fd+0xb2/0x170
+[ 4475.251129]  ? do_sys_open+0x1bb/0x2c0
+[ 4475.251810]  ? do_sys_open+0x1bb/0x2c0
+[ 4475.252396]  ? SyS_openat+0x14/0x20
+[ 4475.252972]  ? do_syscall_64+0x73/0x130
+[ 4475.253567]  ? entry_SYSCALL_64_after_hwframe+0x3d/0xa2
+[ 4475.254374] Code:  Bad RIP value.
+[ 4475.264132] RIP: 0x1fe00000101 RSP: ffffb4014074fa70
+[ 4475.264851] CR2: 000001fe00000101
+[ 4475.265413] ---[ end trace ee0827f304253515 ]---

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  acts_as_paranoid
+
   validates :name_first, presence: true, length: {in: 1..20}
   validates :name_last, presence: true, length: {in: 1..20}
   validates :name_user, presence: true, uniqueness: true, length: {in: 1..20}

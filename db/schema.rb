@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_104630) do
+ActiveRecord::Schema.define(version: 2019_12_19_050029) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -93,11 +93,12 @@ ActiveRecord::Schema.define(version: 2019_12_18_104630) do
     t.string "place_todo", null: false
     t.integer "status_accomplishment", default: 0, null: false
     t.integer "status_display", default: 0, null: false
-    t.integer "delete_flag", default: 0, null: false
     t.string "comment_accomplishment"
     t.string "image_accomplishment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
   end
 
   create_table "room_users", force: :cascade do |t|
@@ -137,9 +138,10 @@ ActiveRecord::Schema.define(version: 2019_12_18_104630) do
     t.string "hobby"
     t.string "introduction"
     t.integer "status_user", default: 0, null: false
-    t.integer "delete_flag", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -24,13 +24,17 @@ class UsersController < ApplicationController
         @language = LANGUAGE
 		@users = User.where(type_user: 1)
 		@most_favorited_usersId = Favorite.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).group(:follow_id).order('count(follow_id) desc').pluck(:follow_id)
+
+#多い順のuseridが出てくる。5番までだし
 		@most_favorited_users = []
 		@most_favorited_usersId.each do |f|
+			unless User.find_by(id: f).nil?
 			if User.find(f).type_user_before_type_cast == 1
 				@most_favorited_users  << User.find(f)
 				if @most_favorited_users.count == 5
 					break
 			    end
+			end
 			end
 		end
 	end
@@ -123,7 +127,7 @@ class UsersController < ApplicationController
    		end
 	end
 	def status_flag
-		current_user.update(delete_flag: 1)
+		current_user.destroy
 		Devise.sign_out_all_scopes ? sign_out : sign_out(current_user)
 		redirect_to users_unsubscribe_complete_path
 	end
