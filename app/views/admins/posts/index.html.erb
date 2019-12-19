@@ -13,17 +13,20 @@
 				</div>
         		<div class="search-form-tag">
 					<%= form_tag(admins_posts_search_path, method: :get) do %>
-						<%= label_tag "ユーザ名" %>
+						<%= label_tag "タイトル" %>
 						<%= hidden_field_tag :search_flag, 2 %>
-						<%= text_field_tag :user_search %>
+						<%= text_field_tag :title_search %>
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
         		<div class="search-form-tag">
 					<%= form_tag(admins_posts_search_path, method: :get) do %>
-						<%= label_tag "タイトル" %>
+						<%= label_tag "ユーザ名" %>
+						<%= radio_button_tag :delete_flag, 0, checked: true %>全て
+						<%= radio_button_tag :delete_flag, 1 %>問題無
+						<%= radio_button_tag :delete_flag, 2 %>削除済
 						<%= hidden_field_tag :search_flag, 3 %>
-						<%= text_field_tag :title_search %>
+						<%= text_field_tag :user_search %>
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
@@ -43,7 +46,7 @@
 						<th>人気</th>
 						<th>達成</th>
 						<th>表示</th>
-						<th>削除</th>
+						<th>フラグ</th>
 						<th>詳細</th>
 					</tr>
 				</thead>
@@ -58,7 +61,11 @@
 						<td style="width: 75px;"><%= post.likes.count %></td>
 						<td style="width: 75px;"><%= post.status_accomplishment_i18n %></td>
 						<td style="width: 75px;"><%= post.status_display_i18n %></td>
-						<td style="width: 50px;"><%= post.delete_flag %></td>
+						<% if post.deleted_at.nil? %>
+							<td style="width: 75px;">問題無</td>
+						<% else %>
+							<td style="width: 75px; color: red;">削除済</td>
+						<% end %>
 						<th style="width: 75px;"><%= link_to "詳細", admins_post_path(post.id) %></td>
 					</tr>
 				</tbody>

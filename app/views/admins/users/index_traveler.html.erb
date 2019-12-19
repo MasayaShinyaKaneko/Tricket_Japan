@@ -1,7 +1,75 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-		<p>Travelers一覧</p>
+        <div class="col-md-12">
+        	<h1 style="text-decoration: underline;">Travelers一覧</h1>
+        	<div class="admin-Travelers-search">
+        		<div class="search-form-tag">
+					<%= form_tag(admins_users_travelers_search_path, method: :get) do %>
+						<%= label_tag "氏名" %>
+						<%= radio_button_tag :delete_flag, 0, checked: true %>全て
+						<%= radio_button_tag :delete_flag, 1 %>問題無
+						<%= radio_button_tag :delete_flag, 2 %>削除済
+						<%= hidden_field_tag :search_flag, 1 %>
+						<%= text_field_tag :user_search %>
+						<%= submit_tag "検索" %>
+					<% end %>
+				</div>
+        		<div class="search-form-tag">
+					<%= form_tag(admins_users_travelers_search_path, method: :get) do %>
+						<%= label_tag "ユーザ名" %>
+						<%= radio_button_tag :delete_flag, 0, checked: true %>全て
+						<%= radio_button_tag :delete_flag, 1 %>問題無
+						<%= radio_button_tag :delete_flag, 2 %>削除済
+						<%= hidden_field_tag :search_flag, 2 %>
+						<%= text_field_tag :user_name_search %>
+						<%= submit_tag "検索" %>
+					<% end %>
+				</div>
+        	</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>氏名</th>
+						<th>ユーザ名</th>
+						<th>性別</th>
+						<th>年齢</th>
+						<th>国籍</th>
+						<th>投稿数</th>
+						<th>達成数</th>
+						<th>人気</th>
+						<th>表示</th>
+						<th>フラグ</th>
+						<th>詳細</th>
+					</tr>
+				</thead>
+				<% @users.each do |user| %>
+				<tbody>
+					<tr>
+						<th style="width: 75px;"><%= user.id %></th>
+						<th style="width: 250px;"><%= user.name_first %> <%= user.name_last %></th>
+						<td style="width: 200px;"><%= user.name_user.truncate(15) %></td>
+						<td style="width: 75px;"><%= user.gender %></td>
+						<td style="width: 50px;"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></td>
+						<td style="width: 100px;"><%= user.nationality %></td>
+						<td style="width: 75px;"><%= user.posts.count %></td>
+						<td style="width: 75px;"><%= user.posts.where(status_accomplishment: 1).count %></td>
+						<td style="width: 75px;"><%= user.followers.count %></td>
+						<td style="width: 75px;"><%= user.status_user %></td>
+						<% if user.deleted_at.nil? %>
+							<td style="width: 75px;">問題無</td>
+						<% else %>
+							<td style="width: 75px; color: red;">削除済</td>
+						<% end %>
+						<th style="width: 75px;"><%= link_to "詳細", admins_user_path(user.id) %></td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
 		</div>
 	</div>
 </div>
