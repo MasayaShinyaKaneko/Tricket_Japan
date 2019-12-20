@@ -23,13 +23,13 @@ class UsersController < ApplicationController
       @nationality = NATIOALITY
       @language = LANGUAGE
 			@users = User.locals
-			@most_favorited_usersId = Favorite.most_favorited_userId
-			@most_favorited_users = []
+			@most_favorited_usersId = Favorite.most_favorited_userId_month
+			@most_favorited_locals = []
 			@most_favorited_usersId.each do |f|
 				unless User.find_by(id: f).nil? #gem"paranoia"用
 					if User.find(f).type_user_before_type_cast == 1
-						@most_favorited_users  << User.find(f)
-						if @most_favorited_users.count == 5 #ranking5位まで
+						@most_favorited_locals  << User.find(f)
+						if @most_favorited_locals.count == 5 #ranking5位まで
 							break
 					    end
 					end

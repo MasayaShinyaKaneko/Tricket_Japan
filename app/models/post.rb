@@ -25,6 +25,10 @@ class Post < ApplicationRecord
 
   scope :open, -> { where(status_display: 0) }
 
+  def self.only_post_deleted_not_user
+      self.with_deleted.where("name_user LIKE ?", "%%").joins(:user)
+  end
+
   def liked_by?(user)
       likes.where(user_id: user.id).exists?
   end

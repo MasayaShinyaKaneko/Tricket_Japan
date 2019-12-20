@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 	  #admins/users controller
     get '/users/travelers', to: 'users#index_traveler'
     get '/users/travelers/search', to: 'users#search_traveler'
-    get '/users/travelers/sort', to: 'users#travelers_local'
+    get '/users/travelers/sort', to: 'users#sort_traveler'
     get '/users/locals', to: 'users#index_local'
     get '/users/locals/search', to: 'users#search_local'
     get '/users/locals/sort', to: 'users#sort_local'

@@ -4,6 +4,23 @@
       <div class="signup-headline title_type1">
         <h1>Sign up</h1>
       </div>
+
+      <% if flash[:name_notice] %>
+        <div id="flash" class="alert alert-danger" role="alert">
+          <%= flash[:name_notice] %>
+        </div>
+      <% end %>
+      <% if flash[:email_notice] %>
+        <div id="flash" class="alert alert-danger" role="alert">
+          <%= flash[:email_notice]  %>
+        </div>
+      <% end %>
+      <% if flash[:password_notice] %>
+        <div id="flash" class="alert alert-danger" role="alert">
+          <%= flash[:password_notice] %>
+        </div>
+      <% end %>
+
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 

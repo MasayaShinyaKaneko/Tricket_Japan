@@ -5,25 +5,34 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   # GET /resource/sign_up
   def new
-    @nationality = NATIOALITY
-    @country = COUNTRY
-    @language = LANGUAGE
-    if params[:type_user] == "0"
-      @view = 0
-    elsif params[:type_user] == "1"
-      @view = 1
-    end
-    super
+      @nationality = NATIOALITY
+      @country = COUNTRY
+      @language = LANGUAGE
+      if params[:type_user] == "0"
+        @view = 0
+      elsif params[:type_user] == "1"
+        @view = 1
+      end
+      super
   end
-
 
   # POST /resource
   def create
-    @nationality = NATIOALITY
-    @country = COUNTRY
-    @language = LANGUAGE
-    flash[:success] = "You have created account successfully."
-    super
+      @nationality = NATIOALITY
+      @country = COUNTRY
+      @language = LANGUAGE
+      #下記if文はparanoia用
+      if User.only_deleted.pluck(:name_user).include?(user_params[:name_user])
+        flash[:name_notice] = "This user name is already taken."
+        redirect_to new_user_registration_path
+      elsif User.only_deleted.pluck(:email).include?(user_params[:email])
+        flash[:email_notice] = "This email address is not available."
+        redirect_to new_user_registration_path
+      else
+      #ここまで
+        flash[:success] = "You have created account successfully."
+        super
+      end
   end
 
   # GET /resource/edit
@@ -49,6 +58,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+  private #paranoia用
+    def user_params
+        params.require(:user).permit(:type_user, :name_first, :name_last, :name_user, :gender, :birthday, :nationality, :country, :language_first, :language_second, :language_third, :hobby, :introduction, :picture_profile, :picture_background, :email)
+    end
 
   protected
 
