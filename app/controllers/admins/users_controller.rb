@@ -99,6 +99,7 @@ class Admins::UsersController < ApplicationController
 	end
 	def show
 			@user = User.with_deleted.find(params[:id])
+			@posts = @user.posts.with_deleted
 	end
 	def destroy
       user = User.find(params[:id])

@@ -46,6 +46,6 @@ class Admins::PostsController < ApplicationController
 		  comment = Comment.find(params[:id])
       @post = Post.with_deleted.joins(:comments).where("comments.id = ?", comment.id).first
       comment.destroy
-      redirect_to admins_post_path(@post)
+      redirect_to admins_user_path(comment.user)
 	end
 end

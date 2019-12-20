@@ -101,10 +101,58 @@
 			</table>
 		</div>
 	</div>
-
-
-
-
-
-
+	<div class="row">
+		<h3 style="text-decoration: underline; margin-left: 20px;">ユーザのコメント一覧</h3>
+		<div class="col-md-12">
+			<table class="table table-condensed">
+				<% @user.comments.reverse.each do |comment| %>
+				<tbody class="comments-content">
+					<tr>
+						<th style="width: 250px;"><%= link_to "#{comment.post.title.truncate(30)}", admins_post_path(comment.post.id) %></th>
+						<td style="width: 550px;"><%= comment.content %></td>
+						<td><%= comment.created_at.to_s(:long) %></td>
+						<td><%= link_to "delete", admins_comment_delete_path(comment.id), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %></td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+		</div>
+	</div>
+	<% if @user.type_user_before_type_cast == 0 %>
+		<div class="row">
+			<h3 style="text-decoration: underline; margin-left: 20px;">ユーザのTricket一覧</h3>
+			<div class="col-md-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>投稿日</th>
+							<th>タイトル</th>
+							<th>人気</th>
+							<th>達成</th>
+							<th>表示</th>
+							<th>フラグ</th>
+						</tr>
+					</thead>
+					<% @posts.each do |post| %>
+					<tbody>
+						<tr>
+							<th style="width: 75px;"><%= post.id %></th>
+							<td style="width: 200px;"><%= post.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
+							<td style="width: 350px;"><%= post.title.truncate(40) %></td>
+							<td style="width: 100px;"><%= post.likes.count %></td>
+							<td style="width: 75px;"><%= post.status_accomplishment_i18n %></td>
+							<td style="width: 75px;"><%= post.status_display_i18n %></td>
+							<% if post.deleted_at.nil? %>
+								<td style="width: 75px;">問題無</td>
+							<% else %>
+								<td style="width: 75px; color: red;">削除済</td>
+							<% end %>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		</div>
+	<% end %>
 </div>
