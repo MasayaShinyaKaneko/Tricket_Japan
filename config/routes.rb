@@ -3,11 +3,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
    :registrations => 'users/registrations',
   }
-  # devise_scope :user do
-  #   get "sign_up", :to => "users/registrations#new"
-  #   post "/users", :to => "users/registrations#create"
-  # end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'users#top'
   #users controller
@@ -55,13 +50,14 @@ Rails.application.routes.draw do
     get '/users/locals', to: 'users#index_local'
     get '/users/locals/search', to: 'users#search_local'
     get '/users/locals/sort', to: 'users#sort_local'
-    patch '/users/:id/status_flag', to: 'users#status_flag'
-	  resources :users, only: [:show, :edit, :update]
+    patch '/users/:id/restore', to: 'users#restore', as: "user_restore"
+	  resources :users, only: [:show, :edit, :update, :destroy]
     #admins/posts controller
     get '/posts/search', to: 'posts#search'
     get '/posts/sort', to: 'posts#sort'
-    patch '/posts/:id/status_flag', to: 'posts#status_flag'
-    resources :posts, only:[:index, :show, :edit, :update]
+    patch '/posts/:id/restore', to: 'posts#restore', as: "post_restore"
+    resources :posts, only:[:index, :show, :destroy]
+    delete '/comments/:id', to: 'posts#comment_destroy', as: "comment_delete"
     #admins/contacts controller
     get '/contacts/search', to: 'contacts#search'
     resources :contacts, only:[:index, :show, :update]

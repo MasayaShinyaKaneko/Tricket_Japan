@@ -3,7 +3,7 @@ class Admins::PostsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-			@posts = 	Post.only_post_deleted_not_user.reverse #paranoia用
+			@posts = Post.only_post_deleted_not_user.reverse #paranoia用
 	end
 	def search
 			if params[:search_flag] == "1"
@@ -31,15 +31,21 @@ class Admins::PostsController < ApplicationController
 			end
 	end
 	def show
-
+			@post = Post.with_deleted.find(params[:id])
+			@user = @post.user
 	end
-	def status_flag
-
+	def destroy
+      post = Post.find(params[:id])
+      post.destroy
 	end
-	def edit
-
+	def restore
+      post = Post.only_deleted.find(params[:id])
+      post.restore
 	end
-	def update
-
+	def comment_destroy
+		  comment = Comment.find(params[:id])
+      @post = Post.with_deleted.joins(:comments).where("comments.id = ?", comment.id).first
+      comment.destroy
+      redirect_to admins_post_path(@post)
 	end
 end

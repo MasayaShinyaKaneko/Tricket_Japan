@@ -1,17 +1,144 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-		<p>Tricket詳細</p>
+		<h1 style="text-decoration: underline; margin-left: 20px;">Tricket詳細</h1>
+		<div class="col-md-6">
+			<% if @post.post_image? %>
+				<% if @post.post_image.file.content_type.include?('image/') %>
+					<%= image_tag @post.post_image.post.url, width: "100%", height: "350px" %>
+				<% elsif @post.post_image.file.content_type.include?('video/') %>
+				    <%= video_tag @post.post_image.url, width: "100%", height: "350px",
+	              controls: true, autobuffer: true %>
+	            <% end %>
+	        <% else %>
+				<%= image_tag "/assets/default.jpg", width: "100%", height: "350px" %>
+			<% end %>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>ユーザid</th>
+						<th><%= @user.id %></th>
+					</tr>
+					<tr>
+						<th>ユーザ名</th>
+						<th><%= @user.name_user.truncate(15) %></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>Tricket id</th>
+						<th><%= @post.id %></th>
+					</tr>
+					<tr>
+						<th>タイトル</th>
+						<th><%= @post.title %></th>
+					</tr>
+					<tr>
+						<th>日付</th>
+						<th><%= @post.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></th>
+					</tr>
+					<tr>
+						<th>人気</th>
+						<th><%= @post.likes.count %></th>
+					</tr>
+					<tr>
+						<th>エリア</th>
+						<th><%= @post.area %></th>
+					</tr>
+					<tr>
+						<th>季節</th>
+						<th><%= @post.season %></th>
+					</tr>
+					<tr>
+						<th>興味</th>
+						<th><%= @post.interest %></th>
+					</tr>
+					<tr>
+						<th>いつ</th>
+						<th><%= @post.time_todo %></th>
+					</tr>
+					<tr>
+						<th>どこで</th>
+						<th><%= @post.place_todo %></th>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>本文</p>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>本文</th>
+						<th><%= @post.content %></th>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-		<p>グループチャット入れる？</p>
+		<div class="col-md-8">
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>達成ステータス</th>
+						<th><%= @post.status_accomplishment_i18n %></th>
+					</tr>
+					<tr>
+						<th>達成コメント</th>
+						<th><%= @post.comment_accomplishment %></th>
+					</tr>
+					<tr>
+						<th>表示ステータス</th>
+						<th><%= @post.status_display_i18n %></th>
+					</tr>
+					<tr>
+						<th>削除フラグ</th>
+						<% if @post.deleted_at.nil? %>
+						<th><%= link_to "問題無 (削除しますか?)", admins_post_path(@post), method: :delete, remote: true, :style=>"font-size: 20px;", id:"normal_post", class:"label label-success", data: { confirm: "このTricketを削除しますか?" } %>
+							<%= link_to "消去済 (復活しますか?)", admins_post_restore_path(@post), method: :patch, remote: true, :style=>"font-size: 20px; display: none;", id:"deleted_post", class:"label label-danger", data: { confirm: "このTricketを復活しますか?" } %></th>
+						<% else %>
+						<th><%= link_to "問題無 (削除しますか?)", admins_post_path(@post), method: :delete, remote: true, :style=>"font-size: 20px; display: none;", id:"normal_post", class:"label label-success", data: { confirm: "このTricketを削除しますか?" } %>
+							<%= link_to "消去済 (復活しますか?)", admins_post_restore_path(@post), method: :patch, remote: true, :style=>"font-size: 20px;", id:"deleted_post", class:"label label-danger", data: { confirm: "このTricketを復活しますか?" } %></th>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+		<div class="col-md-4">
+			<% if @post.image_accomplishment? %>
+				<% if @post.image_accomplishment.file.content_type.include?('image/') %>
+					<%= image_tag @post.image_accomplishment.post.url, width: "80%", height: "200px" %>
+				<% elsif @post.image_accomplishment.file.content_type.include?('video/') %>
+				    <%= video_tag @post.image_accomplishment.url, width: "80%", height: "200px",
+                  controls: true, autobuffer: true %>
+                <% end %>
+            <% else %>
+				<%= image_tag "/assets/default.jpg", width: "80%", height: "200px" %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		<% if @post.deleted_at.nil? %>
+			<h3 style="text-decoration: underline; margin-left: 20px;">Tricketに対するコメント</h3>
+			<div class="col-md-12">
+				<table class="table table-condensed">
+					<% @post.comments.reverse.each do |comment| %>
+					<tbody class="comments-content">
+						<tr>
+							<th style="width: 200px;"><%= link_to "#{comment.user.name_user.truncate(15)}", admins_user_path(comment.user.id) %></th>
+							<td style="width: 600px;"><%= comment.content %></td>
+							<td><%= comment.created_at.to_s(:long) %></td>
+							<td><%= link_to "delete", admins_comment_delete_path(comment.id), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %></td>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		<% end %>
 	</div>
 </div>

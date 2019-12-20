@@ -97,18 +97,15 @@ class Admins::UsersController < ApplicationController
 			end
 			render :index_local
 	end
-
 	def show
-
+			@user = User.with_deleted.find(params[:id])
 	end
-	def status_flag
-
+	def destroy
+      user = User.find(params[:id])
+      user.destroy
 	end
-	def edit
-
-	end
-
-	def update
-
+	def restore
+      user = User.only_deleted.find(params[:id])
+      user.restore
 	end
 end

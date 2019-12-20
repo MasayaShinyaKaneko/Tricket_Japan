@@ -1,32 +1,110 @@
-<!-- travelers用とlocals用必要 -->
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-		<p>Travelers詳細</p>
+		<h1 style="text-decoration: underline; margin-left: 20px;"><%= @user.type_user %>詳細</h1>
+		<div class="col-md-6">
+			<% if @user.picture_profile? %>
+				<div style="text-align: center;"><%= image_tag @user.picture_profile.profile.url, :size => '200x200', :style=>"border-radius: 200px;" %></div>
+			<% else %>
+				<div style="text-align: center;"><%= image_tag "/assets/default.jpg", :size => '200x200', :style=>"border-radius: 200px;" %></div>
+			<% end %>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>ユーザid</th>
+						<th><%= @user.id %></th>
+					</tr>
+					<tr>
+						<th>氏名</th>
+						<th><%= @user.name_first %> <%= @user.name_last %></th>
+					</tr>
+					<tr>
+						<th>ユーザ名</th>
+						<th><%= @user.name_user %></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>性別</th>
+						<th><%= @user.gender %></th>
+					</tr>
+					<tr>
+						<th>年齢</th>
+						<th><%= (Date.today.strftime("%Y%m%d").to_i - @user.birthday.strftime("%Y%m%d").to_i) / 10000 %></th>
+					</tr>
+					<tr>
+						<th>生年月日</th>
+						<th><%= @user.birthday.strftime("%Y/%m/%d") %></th>
+					</tr>
+					<tr>
+						<th>国籍</th>
+						<th><%= @user.nationality %></th>
+					</tr>
+					<tr>
+						<th>居住地</th>
+						<th><%= @user.country %></th>
+					</tr>
+					<tr>
+						<th>言語1</th>
+						<th><%= @user.language_first %></th>
+					</tr>
+					<tr>
+						<th>言語2</th>
+						<th><%= @user.language_second %></th>
+					</tr>
+					<tr>
+						<th>言語3</th>
+						<th><%= @user.language_third %></th>
+					</tr>
+					<tr>
+						<th>メールアドレス</th>
+						<th><%= @user.email %></th>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<p>趣味以降？</p>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>趣味</th>
+						<th><%= @user.hobby %></th>
+					</tr>
+					<tr>
+						<th>自己紹介</th>
+						<th><%= @user.introduction %></th>
+					</tr>
+					<tr>
+						<th>人気</th>
+						<th><%= @user.followers.count %></th>
+					</tr>
+					<tr>
+						<th>利用ステータス</th>
+						<th><%= @user.status_user %></th>
+					</tr>
+					<tr>
+						<th>削除フラグ</th>
+						<% if @user.deleted_at.nil? %>
+						<th><%= link_to "問題無 (削除しますか?)", admins_user_path(@user), method: :delete, remote: true, :style=>"font-size: 20px;", id:"normal_user", class:"label label-success", data: { confirm: "このユーザを削除しますか?" } %>
+							<%= link_to "消去済 (復活しますか?)", admins_user_restore_path(@user), method: :patch, remote: true, :style=>"font-size: 20px; display: none;", id:"deleted_user", class:"label label-danger", data: { confirm: "このユーザを復活しますか?" } %></th>
+						<% else %>
+						<th><%= link_to "問題無 (削除しますか?)", admins_user_path(@user), method: :delete, remote: true, :style=>"font-size: 20px; display: none;", id:"normal_user", class:"label label-success", data: { confirm: "このユーザを削除しますか?" } %>
+							<%= link_to "消去済 (復活しますか?)", admins_user_restore_path(@user), method: :patch, remote: true, :style=>"font-size: 20px;", id:"deleted_user", class:"label label-danger", data: { confirm: "このユーザを復活しますか?" } %></th>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-		<p>Trickets一覧</p>
-		</div>
-	</div>
-</div>
 
-<!-- travelers用とlocals用必要 -->
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-		<p>Locals詳細</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		<p>趣味以降？</p>
-		</div>
-	</div>
+
+
+
+
+
 </div>
