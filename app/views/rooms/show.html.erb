@@ -1,40 +1,40 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="title_type1">Messages</h1>
-            <% @roomusers.each do |ru| %>
-            <% if ru.user_id != current_user.id %>
-                <% if ru.user.picture_profile? %>
-                    <%= image_tag ru.user.picture_profile.profile.url, :size => '100x100', :style=>"border-radius: 100px;" %> <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %>
-                <% else %>
-                    <%= image_tag "/assets/default.jpg", :size => '100x100', :style=>"border-radius: 100px;" %> <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %>
-                <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="title_type1">Messages</h1>
+      <% @roomusers.each do |ru| %>
+        <% if ru.user_id != current_user.id %>
+          <% if ru.user.picture_profile? %>
+            <%= image_tag ru.user.picture_profile.profile.url, :size => '100x100', :style=>"border-radius: 100px;" %> <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %>
+          <% else %>
+            <%= image_tag "/assets/default.jpg", :size => '100x100', :style=>"border-radius: 100px;" %> <%= link_to "#{ru.user.name_user}", user_path(ru.user.id) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <form class="messageInputForm">
+        <label>Type messages:</label>
+        <input type="text" data-behavior="room_speaker" class="messageInputForm_input" placeholder="type messages" style="width: 500px;">
+      </form>
+      <div id="message-container" style="height: 400px; overflow: scroll; margin: 30px; padding: 30px;background-color:#EFE9D1;">
+        <div class="messagesArea messages">
+          <% if @messages.present? %>
+            <%@messages.each do |message| %>
+              <%= render "messages/message", user: current_user, message: message %>
             <% end %>
-            <% end %>
-
-            <form class="messageInputForm">
-                <label>Type messages:</label>
-                <input type="text" data-behavior="room_speaker" class="messageInputForm_input" placeholder="type messages" style="width: 500px;">
-            </form>
-            <div id="message-container" style="height: 400px; overflow: scroll; margin: 30px; padding: 30px;background-color:#EFE9D1;">
-                <div class="messagesArea messages">
-                <% if @messages.present? %>
-                    <%@messages.each do |message| %>
-                        <%= render "messages/message", user: current_user, message: message %>
-                    <% end %>
-                <% end %>
-                </div>
-            </div>
-            <script>
-                $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
-                $('.messageInputForm_input').on('keypress', function(event){
-                    if (event.keyCode === 13) {
-                    $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
-                    }
-                });
-            </script>
+          <% end %>
         </div>
+      </div>
+      <!--messageをした時に最新のものにスクロールするため -->
+      <script>
+          $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
+          $('.messageInputForm_input').on('keypress', function(event){
+              if (event.keyCode === 13) {
+              $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
+              }
+          });
+      </script>
     </div>
+  </div>
 </div>
 
 <div id="another_user_id" style="display: none;">

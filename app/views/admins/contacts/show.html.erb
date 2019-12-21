@@ -1,13 +1,12 @@
 <div class="container-fluid">
 	<div class="row">
-        <div class="col-md-12">
-        	<h1 style="text-decoration: underline;">お問い合わせ詳細</h1>
+    <div class="col-md-12">
+    	<h1 style="text-decoration: underline;">お問い合わせ詳細</h1>
 			<% if @contact.status_reply_before_type_cast == 0 %>
 				<div style="width: 75px; background-color: red; color: white; text-align: center;"><%= @contact.status_reply_i18n %></div>
 			<% elsif @contact.status_reply_before_type_cast == 1 %>
 				<div style="width: 75px; background-color: green; color: white; text-align: center;"><%= @contact.status_reply_i18n %></div>
 			<% end %>
-
 			<table class="table table-bordered">
 				<tr>
 					<td style="width:150px;">お問い合わせid</td>
@@ -41,11 +40,9 @@
 			<%= button_to "一覧へ戻る" ,admins_contacts_path, method: :get %>
 		</div>
 	</div>
-
 	<div class="row">
-        <div class="col-md-12">
+    <div class="col-md-12">
 			<h1 style="text-decoration: underline;">お問い合わせ返信</h1>
-
 			<% if flash[:notice] %>
 				<div id="flash">
 					<%= flash[:notice] %>
@@ -64,7 +61,6 @@
 					<%= f.submit "送信" %>
 				</div>
 			<% end %>
-
 			<table class="table table-bordered">
 				<tr>
 					<td style="width:150px;">返信内容</td>

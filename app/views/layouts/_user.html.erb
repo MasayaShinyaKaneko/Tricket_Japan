@@ -23,27 +23,26 @@
 <% else %>
   <div class="nav-container">
     <div id="brand">Tricket</div>
-      <form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="P0g+9HVJINRYxTfgA1LgRwDHENu82oZ4iEir6cZNNOkVlNZc3jkOJH3pVyDLkSkDlNRd3AJ+4faY4ea/EU7UbQ==">
-        <div class="field">
-          <input id="login_space" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]" id="user_email" placeholder="email">
-        </div>
-        <div class="field">
-          <input id="login_space" autocomplete="current-password" type="password" name="user[password]" id="user_password"  placeholder="passward">
-        </div>
-        <div class="actions">
-          <input id="login_button" type="submit" name="commit" value="Log in" data-disable-with="Log in">
-        </div>
-      </form>
-      <%= link_to "Home", root_path, class:"nav-button-home" %>
+    <form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="P0g+9HVJINRYxTfgA1LgRwDHENu82oZ4iEir6cZNNOkVlNZc3jkOJH3pVyDLkSkDlNRd3AJ+4faY4ea/EU7UbQ==">
+      <div class="field">
+        <input id="login_space" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]" id="user_email" placeholder="email">
+      </div>
+      <div class="field">
+        <input id="login_space" autocomplete="current-password" type="password" name="user[password]" id="user_password"  placeholder="passward">
+      </div>
+      <div class="actions">
+        <input id="login_button" type="submit" name="commit" value="Log in" data-disable-with="Log in">
+      </div>
+    </form>
+    <%= link_to "Home", root_path, class:"nav-button-home" %>
   </div>
 <% end %>
 
-    <!-- headerのためのspace -->
+<!-- headerのためのspace -->
 <div class="space-top"></div>
 <%= yield %>
 <!-- footerのためのspace -->
 <div class="space-bottom"></div>
-
 <!-- footer -->
 <footer id="footer_user">
 </footer>

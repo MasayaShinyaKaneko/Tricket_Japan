@@ -1,9 +1,9 @@
 <div class="container-fluid">
 	<div class="row">
-        <div class="col-md-12">
-        	<h1 style="text-decoration: underline;">Locals一覧</h1>
-        	<div class="admin-Travelers-search">
-        		<div class="search-form-tag">
+    <div class="col-md-12">
+    	<h1 style="text-decoration: underline;">Locals一覧</h1>
+    	<div class="admin-Travelers-search">
+	    	<div class="search-form-tag">
 					<%= form_tag(admins_users_locals_search_path, method: :get) do %>
 						<%= label_tag "氏名" %>
 						<%= radio_button_tag :delete_flag, 0, checked: true %>全て
@@ -14,7 +14,7 @@
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        		<div class="search-form-tag">
+	    	<div class="search-form-tag">
 					<%= form_tag(admins_users_locals_search_path, method: :get) do %>
 						<%= label_tag "ユーザ名" %>
 						<%= radio_button_tag :delete_flag, 0, checked: true %>全て
@@ -25,11 +25,11 @@
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        	</div>
-        </div>
+    	</div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+  </div>
+  <div class="row">
+    <div class="col-md-12">
 			<table class="table table-striped">
 				<thead>
 					<tr>

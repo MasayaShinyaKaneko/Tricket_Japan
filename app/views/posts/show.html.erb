@@ -9,31 +9,32 @@
 					<span class="label label-default" style="font-size: 20px;">Season: <%= @post.season %></span>
 					<span class="label label-default" style="font-size: 20px;">Interest: <%= @post.interest %></span>
 
-				<!-- Tricketに対するいいね機能 -->
+				<!-- Tricket(投稿)に対するいいね機能 -->
 					<div style="float:right;">
 					<% if current_user %>
-					<% if current_user != @user %>
-					 	If you like this Tricket, click /
-						<% if @post.liked_by?(current_user) %>
-						    <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
-								<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;"%>
+						<% if current_user != @user %>
+						 	If you like this Tricket, click /
+							<% if @post.liked_by?(current_user) %>
+							  <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
+									<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;"%>
 						    <% end %>
 						    <%= link_to post_likes_path(@post), id:"notliked", :style=>"display: none;", remote: true, method: :post do %>
-								<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
-						    <% end %>
+									<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
+						  	<% end %>
+							<% else %>
+							  <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
+									<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;" %>
+							  <% end %>
+							  <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
+									<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
+							  <% end %>
+							<% end %>
+							<span id="count"><%= @count %> good!</span>
 						<% else %>
-						    <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
-								<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;" %>
-						    <% end %>
-						    <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
-								<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
-						    <% end %>
+							<span id="count"><%= @count %> good!</span>
 						<% end %>
-						 <span id="count"><%= @count %> good!</span>
-					<% else %>
-						 <span id="count"><%= @count %> good!</span>
 					<% end %>
-					<% end %>
+				<!-- ここまで -->
 					<%= link_to 'Share Facebook', "https://www.facebook.com/sharer/sharer.php?u=#{request.url}&text=Tricket_Japan_#{@post.title}", class: 'facebook', title: 'Facebook', target: '_blank' %>
 					</div>
 				</div>
@@ -44,7 +45,6 @@
 					</div>
 				<% end %>
 
-
 				<div class="title">
 					<% if @post.status_accomplishment_before_type_cast == 0 %>
 						<h1><%= @post.title %></h1>
@@ -54,51 +54,54 @@
 				</div>
 				<div class="user_info clearfix">
 					<div class="user_info-right">
-					   <!-- message -->
-					    <% if current_user %>
-						<% if @user.id == current_user.id %>
-						<% else %>
-							<% if @user.status_user_before_type_cast != 2 %>
-							<% if @isRoom == true %>
-					    		<h2><%= link_to "message", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %></h2>
-					  		<% else %>
-						    	<%= form_for @room do |f| %>
-						      		<%= fields_for @roomusernew do |e| %>
-				        			<%= e.hidden_field :user_id, value:@user.id %>
+
+					<!-- messageボタンについて -->
+					  <% if current_user %>
+							<% if @user.id != current_user.id %>
+								<% if @user.status_user_before_type_cast != 2 %>
+									<% if @isRoom == true %>
+						    		<h2><%= link_to "message", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %></h2>
+						  		<% else %>
+							    	<%= form_for @room do |f| %>
+							      	<%= fields_for @roomusernew do |e| %>
+					        			<%= e.hidden_field :user_id, value:@user.id %>
+							    		<% end %>
+						      		<%= f.submit "new message", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px; height:35px; margin-top:20px;" %>
 						    		<% end %>
-					      			<%= f.submit "new message", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px; height:35px; margin-top:20px;" %>
-					    		<% end %>
-					  		<% end %>
-					  		<% end %>
+						  		<% end %>
+						  	<% end %>
+							<% end %>
 						<% end %>
-						<% end %>
+					<!-- ここまで -->
 					</div>
 					<div class="user_info-middle">
 						<h3 style="margin: 10px 0 0 0;"><%= link_to "#{@user.name_user}", user_path(@user) %></h3>
 						<p style="text-align:center; margin: 0;"><%= @user.nationality %></p>
+
 					<!-- ユーザに対するいいね機能 -->
 						<% if current_user %>
-						<% if current_user != @user %>
+							<% if current_user != @user %>
 						  	<% if current_user.following?(@user) %>
 							    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
-									<%= icon 'fa', 'heart', :style=>"color: red; font-size: 20px;"%>
+										<%= icon 'fa', 'heart', :style=>"color: red; font-size: 20px;"%>
 							    <% end %>
 							    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
-									<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 20px;"%>
+										<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 20px;"%>
 							    <% end %>
 						  	<% else %>
 							    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
-									<%= icon 'fa', 'heart', :style=>"color: red; font-size: 20px;"%>
+										<%= icon 'fa', 'heart', :style=>"color: red; font-size: 20px;"%>
 							    <% end %>
 							    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
-									<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 20px;"%>
+										<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 20px;"%>
 							    <% end %>
 						  	<% end %>
 						  	<span id="favorite_count"><%= @favorite_count %> favorites</span>
-						<% else %>
+							<% else %>
 						  	<span id="favorite_count"><%= @favorite_count %> favorites</span>
+							<% end %>
 						<% end %>
-						<% end %>
+					<!-- ここまで -->
 					</div>
 					<div class="user_info-left">
 						<% if @user.picture_profile? %>
@@ -113,16 +116,16 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-		<% if @post.post_image? %>
-			<% if @post.post_image.file.content_type.include?('image/') %>
-				<%= image_tag @post.post_image.post.url, width: "100%", height: "100%" %>
-			<% elsif @post.post_image.file.content_type.include?('video/') %>
-			    <%= video_tag @post.post_image.url, width: "100%", height: "100%", 
-              controls: true, autobuffer: true %>
-            <% end %>
-        <% else %>
-			<%= image_tag "/assets/default.jpg", width: "100%", height: "100%" %>
-		<% end %>
+			<% if @post.post_image? %>
+				<% if @post.post_image.file.content_type.include?('image/') %>
+					<%= image_tag @post.post_image.post.url, width: "100%", height: "100%" %>
+				<% elsif @post.post_image.file.content_type.include?('video/') %>
+				  <%= video_tag @post.post_image.url, width: "100%", height: "100%",
+	              controls: true, autobuffer: true %>
+	      <% end %>
+	    <% else %>
+				<%= image_tag "/assets/default.jpg", width: "100%", height: "100%" %>
+			<% end %>
 		</div>
 		<div class="col-md-6">
 			<h2>When</h2>
@@ -144,6 +147,7 @@
 	</div>
 	<h3 style="text-align: center;"><%= link_to "Back to Trickets", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
 
+<!-- Tricket達成時の投稿表示 -->
 	<% if @post.status_accomplishment_before_type_cast == 1 %>
 	<div class="row" style="background-color:#EFE9D1;">
 		<h1 class="title_type1_traveler">This Tricket had come true!!</h1>
@@ -152,10 +156,10 @@
 				<% if @post.image_accomplishment.file.content_type.include?('image/') %>
 					<%= image_tag @post.image_accomplishment.post.url, width: "100%", height: "100%" %>
 				<% elsif @post.image_accomplishment.file.content_type.include?('video/') %>
-				    <%= video_tag @post.image_accomplishment.url, width: "100%", height: "100%", 
+				  <%= video_tag @post.image_accomplishment.url, width: "100%", height: "100%", 
                   controls: true, autobuffer: true %>
-                <% end %>
-            <% else %>
+        <% end %>
+      <% else %>
 				<%= image_tag "/assets/default.jpg", width: "100%", height: "100%" %>
 			<% end %>
 		</div>
@@ -170,16 +174,17 @@
 		</div>
 	</div>
 	<% end %>
-
+<!-- ここまで -->
+<!-- コメント一覧-->
 	<div class="row">
 		<div class="col-md-12">
 		<h1 class="title_type1_traveler">Discuss on this Tricket</h1>
 			<div class="comments-form">
 				<%= form_for(@comment, url:post_comments_path(post_id: @post.id), method: :post) do |f| %>
-			      <div class="field">
-			        <%= f.label :comment %><br>
-			        <%= f.text_area :content, autofocus: true, placeholder: "content", :style=>"width: 80%;"%>
-			      </div>
+			    <div class="field">
+		        <%= f.label :comment %><br>
+		        <%= f.text_area :content, autofocus: true, placeholder: "content", :style=>"width: 80%;"%>
+			    </div>
 				  <div class="actions">
 				    <%= f.submit "comment", :style=>"background-color: #c77eb5; color: white; width: 200px; border-radius: 5px;" %>
 				  </div>
@@ -192,10 +197,10 @@
 						<th style="width: 200px;"><%= link_to "#{comment.user.name_user.truncate(15)}", user_path(comment.user) %></th>
 						<td id="comment-<%= comment.id %>" style="width: 600px;"><%= comment.content %></td>
 						<%= form_for(comment, data: { remote: true }) do |f| %>
-						<td id="comment-edit-<%= comment.id %>" style="display:none;">
-							<%= f.text_field :content, :style=>"width: 500px;" %>
-							<%= f.submit "update", :style=>"width: 100px float:left;", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
-						</td>
+							<td id="comment-edit-<%= comment.id %>" style="display:none;">
+								<%= f.text_field :content, :style=>"width: 500px;" %>
+								<%= f.submit "update", :style=>"width: 100px float:left;", :style=>"background-color: #c77eb5; color: white; width: 50px; border-radius: 5px;" %>
+							</td>
 						<% end %>
 						<td><%= comment.created_at.to_s(:long) %></td>
 						<% if comment.user == current_user %>
@@ -208,66 +213,71 @@
 			</table>
 		</div>
 	</div>
-
+<!-- ここまで -->
+<!-- Tricket達成時の投稿フォーム -->
 	<% if current_user %>
-	<% if @user.id == current_user.id %>
-	<div class="row" style="background-color:#EFE9D1;">
-		<div class="col-md-12">
-		<h1 class="title_type1_traveler">Post accomplished message</h1>
+		<% if @user.id == current_user.id %>
+			<div class="row" style="background-color:#EFE9D1;">
+				<div class="col-md-12">
+					<h1 class="title_type1_traveler">Post accomplished message</h1>
 
-		<% if flash[:accomplish] %>
-			<div id="flash" class="alert alert-success" role="alert">
-				<%= flash[:accomplish] %>
+					<% if flash[:accomplish] %>
+						<div id="flash" class="alert alert-success" role="alert">
+							<%= flash[:accomplish] %>
+						</div>
+					<% end %>
+					<% if flash[:error] %>
+						<div id="flash" class="alert alert-danger" role="alert">
+							<%= flash[:error] %>
+						</div>
+					<% end %>
+
+					<%= form_for(@post, url:update_accomplish_path, method: :patch) do |f| %>
+			      <div class="field">
+			        <%= f.label :comment %><br>
+			        <%= f.text_area :comment_accomplishment, autofocus: true, placeholder: "After your Tricket had come true, share your accomplishment with everyone who helped you", :style=>"width: 80%;"%>
+			      </div>
+			      <div class="field">
+	        		<%= f.label :image %>
+	        		<%= f.file_field :image_accomplishment, accept: 'image/jpeg,image/gif,image/png,video/*' %>
+	      		  </div>
+				  	<div class="actions">
+				    	<%= f.submit "share your accomplishment", :style=>"background-color: #c77eb5; color: white; width: 200px; border-radius: 5px;" %>
+				  	</div>
+					<% end %>
+					<h4><%= link_to "reset your accomplishment", reset_accomplish_path(@post), method: :patch, class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
+				</div>
 			</div>
 		<% end %>
-		<% if flash[:error] %>
-			<div id="flash" class="alert alert-danger" role="alert">
-				<%= flash[:error] %>
-			</div>
-		<% end %>
-
-			<%= form_for(@post, url:update_accomplish_path, method: :patch) do |f| %>
-		      <div class="field">
-		        <%= f.label :comment %><br>
-		        <%= f.text_area :comment_accomplishment, autofocus: true, placeholder: "After your Tricket had come true, share your accomplishment with everyone who helped you", :style=>"width: 80%;"%>
-		      </div>
-		      <div class="field">
-        		<%= f.label :image %>
-        		<%= f.file_field :image_accomplishment, accept: 'image/jpeg,image/gif,image/png,video/*' %>
-      		  </div>
-			  <div class="actions">
-			    <%= f.submit "share your accomplishment", :style=>"background-color: #c77eb5; color: white; width: 200px; border-radius: 5px;" %>
-			  </div>
-			<% end %>
-			<h4><%= link_to "reset your accomplishment", reset_accomplish_path(@post), method: :patch, class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
-		</div>
-	</div>
 	<% end %>
-	<% end %>
+<!-- ここまで -->
 </div>
 
+<!-- 下記はTricketの表示ステータスが非表示の場合 -->
 <% else %>
 	<h1>This Tricket is closed now.</h1>
 	<div class="Trikcket-detail-headline">
 		<div class="title">
 			<h1><%= @post.title %></h1>
+
 			<!-- Tricketに対するいいね機能 -->
 			<% if @post.liked_by?(current_user) %>
-			    <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
+		    <%= link_to post_like_path(@post), id:"liked", remote: true, method: :delete do %>
 					<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;"%>
-			    <% end %>
-			    <%= link_to post_likes_path(@post), id:"notliked", :style=>"display: none;", remote: true, method: :post do %>
+		    <% end %>
+		    <%= link_to post_likes_path(@post), id:"notliked", :style=>"display: none;", remote: true, method: :post do %>
 					<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
-			    <% end %>
+		    <% end %>
 			<% else %>
-			    <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
+		    <%= link_to post_like_path(@post), id:"liked", :style=>"display: none;", remote: true, method: :delete do %>
 					<%= icon 'fa', 'thumbs-up', :style=>"color: red; font-size: 30px;" %>
-			    <% end %>
-			    <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
+		    <% end %>
+		    <%= link_to post_likes_path(@post), id:"notliked", remote: true, method: :post do %>
 					<%= icon 'fa', 'thumbs-up', :style=>"color: grey; font-size: 30px;" %>
-			    <% end %>
+		    <% end %>
 			<% end %>
-			 <span id="count"><%= @count %> good!</span>
+			<span id="count"><%= @count %> good!</span>
+			<!-- ここまで -->
 		</div>
 		<div style="width: 400px; margin: 0 auto;">
 			<div class="user_info-middle">

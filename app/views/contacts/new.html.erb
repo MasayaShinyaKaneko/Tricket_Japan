@@ -18,12 +18,11 @@
   </div>
 <% end %>
 
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="title_type1">Contact Form</h1>
-			<%= form_for(@contact, url: contacts_path) do |f| %>
+			  <%= form_for(@contact, url: contacts_path) do |f| %>
 				<div class="field">
 					<%= f.label :subject %>
 					<%= f.text_field :subject, autofocus: true, placeholder: "subject", :style=>"width: 100%;" %>

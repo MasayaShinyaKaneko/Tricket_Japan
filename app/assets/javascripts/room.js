@@ -5,7 +5,6 @@ if(/room/.test(window.location.pathname)) {
     connected: function() {},
     disconnected: function() {},
     received: function(data) {
-        // var message_content = $('.messages').append(data['content']);
         var message_content = $(data['content']).appendTo('.messages');
         $('#message-container').animate({ scrollTop: $('#message-container')[0].scrollHeight});
         var another_user_id = $("#another_user_id").text();
@@ -21,6 +20,7 @@ if(/room/.test(window.location.pathname)) {
     }
   });
   $(document).on('keypress', '[data-behavior~=room_speaker]', function(event) {
+    console.log(event)
     if (event.keyCode === 13) {
       App.room.speak(event.target.value);
       event.target.value = '';

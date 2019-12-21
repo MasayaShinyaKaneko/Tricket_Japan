@@ -7,42 +7,34 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-			<% if @notifications.exists? %>
-				<div class="col-md-6">
-				<h2 class="title_type1_traveler">Your Trickets</h1>
-				<hr>
-					<% @notifications.reverse.each do |n| %>
-						<% if n.post.user == current_user %>
-							<p><span class="label label-default" style="background-color: #f8b500;">Your Tricket</span> <%= link_to "#{n.post.title}", post_path(n.post.id) %> got a new comment by <%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %> <small>/<%= time_ago_in_words(n.created_at) %> ago</small></p>
-								<hr>
-						<% end %>
-					<% end %>
-				</div>
-				<div class="col-md-6">
-				<h2 class="title_type1_local">Trickets you commented on</h1>
-				<hr>
-					<% @notifications.reverse.each do |n| %>
-						<% if n.post.user != current_user %>
-							<% if n.accomplish == true %>
-								<p><span class="label label-default" style="background-color: red;">Accomplish notification</span> Tricket "<%= link_to "#{n.post.title}", post_path(n.post.id) %>" came true!! /<%= time_ago_in_words(n.created_at) %> ago</small></p>
-								<hr>
-							<% else %>
-								<p><span class="label label-default" style="background-color: #9e3d3f;">Trickets (you commented on)</span> <%= link_to "#{n.post.title}", post_path(n.post.id) %> got a new comment by <%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %> <small>/<%= time_ago_in_words(n.created_at) %> ago</small></p>
-								<hr>
-							<% end %>
-						<% end %>
-					<% end %>
-				</div>
-			<% else %>
-				<h3>There is no notification.</h3>
+		<% if @notifications.exists? %>
+		<div class="col-md-6">
+			<h2 class="title_type1_traveler">Your Trickets</h1>
+			<hr>
+			<% @notifications.reverse.each do |n| %>
+				<% if n.post.user == current_user %>
+					<p><span class="label label-default" style="background-color: #f8b500;">Your Tricket</span> <%= link_to "#{n.post.title}", post_path(n.post.id) %> got a new comment by <%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %> <small>/<%= time_ago_in_words(n.created_at) %> ago</small></p>
+						<hr>
+				<% end %>
 			<% end %>
 		</div>
+		<div class="col-md-6">
+			<h2 class="title_type1_local">Trickets you commented on</h1>
+			<hr>
+			<% @notifications.reverse.each do |n| %>
+				<% if n.post.user != current_user %>
+					<% if n.accomplish == true %>
+						<p><span class="label label-default" style="background-color: red;">Accomplish notification</span> Tricket "<%= link_to "#{n.post.title}", post_path(n.post.id) %>" came true!! /<%= time_ago_in_words(n.created_at) %> ago</small></p>
+						<hr>
+					<% else %>
+						<p><span class="label label-default" style="background-color: #9e3d3f;">Trickets (you commented on)</span> <%= link_to "#{n.post.title}", post_path(n.post.id) %> got a new comment by <%= link_to "#{n.visitor.name_user}", user_path(n.visitor.id) %> <small>/<%= time_ago_in_words(n.created_at) %> ago</small></p>
+						<hr>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<% else %>
+			<h3>There is no notification.</h3>
+		<% end %>
 	</div>
 </div>
-
-
-
-
-
-

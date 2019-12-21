@@ -1,19 +1,18 @@
 <% if admin_signed_in? %>
 	<div class="nav-container-admin">
-        <div id="brand_admin">Tricket (Admin)</div>
-        <div class="nav-lists-admin">
-          <%= link_to "Trickets", admins_posts_path, class:"nav-button-admin" %>
-          <%= link_to "Travelers",  admins_users_travelers_path, class:"nav-button-admin" %>
-          <%= link_to "Locals", admins_users_locals_path, class:"nav-button-admin" %>
-          <%= link_to "お問い合わせ", admins_contacts_path, class:"nav-button-admin" %>
-          <%= link_to "out", destroy_admin_session_path, method: :delete, class:"nav-button-admin" %>
-        </div>
-      </div>
-<% else %>
-<div class="nav-container-admin">
     <div id="brand_admin">Tricket (Admin)</div>
+    <div class="nav-lists-admin">
+      <%= link_to "Trickets", admins_posts_path, class:"nav-button-admin" %>
+      <%= link_to "Travelers",  admins_users_travelers_path, class:"nav-button-admin" %>
+      <%= link_to "Locals", admins_users_locals_path, class:"nav-button-admin" %>
+      <%= link_to "お問い合わせ", admins_contacts_path, class:"nav-button-admin" %>
+      <%= link_to "out", destroy_admin_session_path, method: :delete, class:"nav-button-admin" %>
     </div>
-</div>
+  </div>
+<% else %>
+  <div class="nav-container-admin">
+    <div id="brand_admin">Tricket (Admin)</div>
+  </div>
 <% end %>
 
 <!-- headerのためのspace -->
@@ -21,7 +20,6 @@
 <%= yield %>
 <!-- footerのためのspace -->
 <div class="space-bottom"></div>
-
 <!-- footer -->
 <footer id="footer_admin">
 </footer>

@@ -7,7 +7,6 @@
 					<%= flash[:error] %>
 				</div>
 			<% end %>
-
 			<% if @post.errors.any? %>
 			  <div class="alert alert-warning">
 			    <ul>
@@ -18,50 +17,49 @@
 			  </div>
 			<% end %>
 
-
 			<h1 class="title_type1_traveler">New Tricket</h1>
 			<%= form_for(@post) do |f| %>
-		    <div class="field">
-		        <%= f.label :title %>
-		        <%= f.text_field :title, autofocus: true, placeholder: "title", :style=>"width: 400px;" %>
-		    </div>
-		    <div class="field">
-	    		<%= f.label :post_image %>
-	    		<%= f.file_field :post_image, accept: 'image/jpeg,image/gif,image/png,video/*' %>
-	  		</div>
-		    <div class="field">
-		        <%= f.label :display_choice %>
-		        <%= f.select :status_display, [["open", "open"],["closed", "closed"]] %>
-		    </div>
-		    <div class="field">
-		        <%= f.label :area %>
-	    		<%= f.select :area, @area %>
-		        <%= f.label :season %>
-	    		<%= f.select :season, @season %>
-		        <%= f.label :interest %>
-	    		<%= f.select :interest, @interest %>
-		    </div>
-		    <div class="field">
-		        <%= f.label :when %>
-		        <%= f.text_field :time_todo, autofocus: true, placeholder: "when do you wanna accomplish?", :style=>"width: 300px;" %>
-		    </div>
-		    <div class="field">
-		        <%= f.label :where %>
-		        <%= f.text_field :place_todo, autofocus: true, placeholder: "where do you wanna accomplish?", :style=>"width: 300px;" %>
-		    </div>
-		    <div class="field">
-		        <%= f.label :content %><br>
-		        <%= f.text_area :content, autofocus: true, placeholder: "content", :style=>"width: 450px; height: 200px;" %>
-		    </div>
+	    <div class="field">
+	      <%= f.label :title %>
+	      <%= f.text_field :title, autofocus: true, placeholder: "title", :style=>"width: 400px;" %>
+	    </div>
+	    <div class="field">
+    		<%= f.label :post_image %>
+    		<%= f.file_field :post_image, accept: 'image/jpeg,image/gif,image/png,video/*' %>
+  		</div>
+	    <div class="field">
+	      <%= f.label :display_choice %>
+	      <%= f.select :status_display, [["open", "open"],["closed", "closed"]] %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :area %>
+    		<%= f.select :area, @area %>
+	      <%= f.label :season %>
+    		<%= f.select :season, @season %>
+	      <%= f.label :interest %>
+    		<%= f.select :interest, @interest %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :when %>
+	      <%= f.text_field :time_todo, autofocus: true, placeholder: "when do you wanna accomplish?", :style=>"width: 300px;" %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :where %>
+	      <%= f.text_field :place_todo, autofocus: true, placeholder: "where do you wanna accomplish?", :style=>"width: 300px;" %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :content %><br>
+	      <%= f.text_area :content, autofocus: true, placeholder: "content", :style=>"width: 450px; height: 200px;" %>
+	    </div>
 		</div>
 	</div>
 	<div class="row" style="background-color: #EFE9D1;">
-	    <div class="col-md-12">
-	      <div class="actions" style="width: 100%; margin: 0 auto;">
-	      <%= f.submit "post", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
-	      </div>
-	      <% end %>
-	      <h4><%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
-	    </div>
+    <div class="col-md-12">
+      <div class="actions" style="width: 100%; margin: 0 auto;">
+      	<%= f.submit "post", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
+      </div>
+      <% end %>
+      <h4><%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
+    </div>
 	</div>
 </div>

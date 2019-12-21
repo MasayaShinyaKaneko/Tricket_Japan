@@ -1,17 +1,17 @@
 <div class="container-fluid">
 	<div class="row">
-        <div class="col-md-12">
-        	<h1 style="text-decoration: underline;">お問い合わせ一覧</h1>
-        	<div class="admin-contacts-search">
-        		<div class="search-form-tag">
-        			<%= form_tag(admins_contacts_search_path, method: :get) do %>
+    <div class="col-md-12">
+    	<h1 style="text-decoration: underline;">お問い合わせ一覧</h1>
+    	<div class="admin-contacts-search">
+    		<div class="search-form-tag">
+    			<%= form_tag(admins_contacts_search_path, method: :get) do %>
 						<%= label_tag "日付(yy-mm-dd)" %>
 						<%= hidden_field_tag :search_flag, 1 %>
 						<%= text_field_tag :date_search %>
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        		<div class="search-form-tag">
+    		<div class="search-form-tag">
 					<%= form_tag(admins_contacts_search_path, method: :get) do %>
 						<%= label_tag "ユーザ名" %>
 						<%= hidden_field_tag :search_flag, 2 %>
@@ -19,7 +19,7 @@
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        		<div class="search-form-tag">
+    		<div class="search-form-tag">
 					<%= form_tag(admins_contacts_search_path, method: :get) do %>
 						<%= label_tag "eメールアドレス" %>
 						<%= hidden_field_tag :search_flag, 3 %>
@@ -27,16 +27,16 @@
 						<%= submit_tag "検索" %>
 					<% end %>
 				</div>
-        		<div class="search-form-tag">
-        			<%= label_tag "返信有無ソート：" %>
-	    			<%= link_to "返信未", admins_contacts_search_path(search_flag: 4, sort_flag: 0), :style=>"width: 75px; font-size: 16px; background-color: red; color:white;" %>
-	    			<%= link_to "返信済", admins_contacts_search_path(search_flag: 4, sort_flag: 1), :style=>"width: 75px; font-size: 16px; background-color: green; color:white;" %>
+    		<div class="search-form-tag">
+    			<%= label_tag "返信有無ソート：" %>
+	  			<%= link_to "返信未", admins_contacts_search_path(search_flag: 4, sort_flag: 0), :style=>"width: 75px; font-size: 16px; background-color: red; color:white;" %>
+	  			<%= link_to "返信済", admins_contacts_search_path(search_flag: 4, sort_flag: 1), :style=>"width: 75px; font-size: 16px; background-color: green; color:white;" %>
 				</div>
-        	</div>
-        </div>
+    	</div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+	</div>
+  <div class="row">
+    <div class="col-md-12">
 			<table class="table table-striped">
 				<thead>
 					<tr>
