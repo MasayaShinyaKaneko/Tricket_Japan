@@ -60,7 +60,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   private #paranoia用
     def user_params
-        params.require(:user).permit(:type_user, :name_first, :name_last, :name_user, :gender, :birthday, :nationality, :country, :language_first, :language_second, :language_third, :hobby, :introduction, :picture_profile, :picture_background, :email)
+        params.require(:user).permit(:type_user, :name_first, :name_last, :name_user, :gender, :birthday, :nationality, :country, :language_first, :language_second, :language_third, :hobby, :introduction, :picture_profile, :picture_background, :email, :deleted_at)
     end
 
   protected
