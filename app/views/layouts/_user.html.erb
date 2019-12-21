@@ -4,7 +4,7 @@
     <% if current_user.picture_profile? %>
       <%= image_tag current_user.picture_profile.profile.url, :size => '35x35', :style=>"border-radius: 35px;" %>
     <% else %>
-      <%= image_tag asset_path "default.jpg", :size => '35x35', :style=>"border-radius: 35px;" %>
+      <%= image_tag asset_path "default.jpg" %>
     <% end %>
     <%= link_to "#{current_user.name_user}さん", user_path(current_user), class:"nav-button", :style=>"margin-left: 0;" %>
     <div class="nav-lists">
