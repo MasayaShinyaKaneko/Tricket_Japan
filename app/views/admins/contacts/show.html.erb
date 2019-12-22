@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
 			<h1 style="text-decoration: underline;">お問い合わせ返信</h1>
 
 			<% if flash[:success] %>
@@ -74,6 +74,26 @@
 					<td><%= @contact.reply %></td>
 				</tr>
 			</table>
+		</div>
+		<div class="col-md-6">
+				<h4 style="text-decoration: underline;">英語のテンプレート</h4>
+				<h4>Dear Mr./Ms.<%= @contact.user.name_last %>,</h4>
+				<p>Thank you for your inquiry.<br>
+				The following are answers to your inquiry.</p>
+
+				<p style="color: red;">"こちらに返信内容が入ります。"</p>
+
+				<p>Thank you for your continued support.</p>
+				<p>Please do not reply to this email as this is a send-only address.</p>
+				<h4 style="text-decoration: underline;">日本語のテンプレート</h4>
+				<h4><%= @contact.user.name_last %> <%= @contact.user.name_first %> 様</h4>
+				<p>この度は、お問い合わせありがとうございました。<br>
+				お問い合わせの件下記にご回答申し上げます。</p>
+
+				<p style="color: red;">"こちらに返信内容が入ります。"</p>
+
+				<p>今後とも「Tricket Japan」をよろしくお願いいたします。</p>
+				<p>尚、このメールにはご返信いただけません。</p>
 		</div>
 	</div>
 </div>
