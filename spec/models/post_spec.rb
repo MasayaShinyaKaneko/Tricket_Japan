@@ -53,17 +53,6 @@ RSpec.describe Post, type: :model do
     end
   end
 
-	# 	@user.posts.create(
- #      title: 		  "Test Post", #validation_check!
- #      content: 	  "Test content",
- #      time_todo: 	"Test time",
- #      place_todo: "Test place",
- #      area:       "area",
- #      season: 	  "season",
- #      interest: 	"interest",
- #      status_accomplishment: 0,
- #      status_display: 0,
-	# 	)
  #  		new_post = @user.posts.build(
  #    	title: 		  "Test Post", #validation_check!
  #    	content: 	  "Test content",
@@ -78,6 +67,8 @@ RSpec.describe Post, type: :model do
  #  	new_post.valid?
  #  	expect(new_post.errors[:title]).to include("has already been taken")
 	# end
+
+
 
  #  it "allows two users to share a post title" do
  #    # user = User.create(
