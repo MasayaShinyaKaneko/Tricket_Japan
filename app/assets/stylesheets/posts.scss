@@ -10,7 +10,7 @@
 	color: white;
 	background-size: cover;
 
-		h1{
+	h1{
 		margin: 0;
 		}
 }
@@ -18,11 +18,22 @@
 	width: 50%;
 	height: 100px;
 	float: left;
+
+	.Trickets-top-user-image img{
+    width: 85px;
+    height: 80px;
+    border-radius: 50px;
+	}
 }
 .search-form-tag{
 	margin: 10px;
 	height: 40px;
 	float: left;
+}
+.travelers-index-items .thumbnail img{
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
 }
 
 /*Tricket indexページ*/

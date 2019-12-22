@@ -15,9 +15,9 @@
 					<div style="width: 15%; float:left;">
 						<div class="Trickets-top-user-image">
 							<% if p.user.picture_profile? %>
-								<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+								<%= image_tag asset_path p.user.picture_profile.profile.url %>
 							<% else %>
-								<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+								<%= image_tag asset_path "default.jpg" %>
 							<% end %>
 							<p style="text-align:center;"><%= p.user.nationality %></p>
 						</div>
@@ -87,9 +87,9 @@
 				<div style="width: 15%; float:left;">
 					<div class="Trickets-top-user-image clearfix">
 						<% if p.user.picture_profile? %>
-							<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+							<%= image_tag asset_path p.user.picture_profile.profile.url %>
 						<% else %>
-							<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+							<%= image_tag asset_path "default.jpg" %>
 						<% end %>
 						<p style="text-align:center;"><%= p.user.nationality %></p>
 					</div>
@@ -149,9 +149,9 @@
 				<div class="travelers-index-items">
 					<div class="thumbnail">
 						<% if user.picture_profile? %>
-							<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+							<%= image_tag asset_path user.picture_profile.profile.url %>
 						<% else %>
-							<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+							<%= image_tag  asset_path "default.jpg" %>
 						<% end %>
 						<div class="caption">
 							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
