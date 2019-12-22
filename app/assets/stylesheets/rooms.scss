@@ -5,9 +5,26 @@
 .messages-container-items{
 	width: 20%;
 	float: left;
+
+  .thumbnail img{
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+  }
+}
+.message-user img{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
 }
 .message-content{
 	width: 100%;
+
+  img{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
 }
 .message-items-left{
 	width: 50%;

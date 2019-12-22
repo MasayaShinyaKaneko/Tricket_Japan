@@ -11,9 +11,9 @@
 							<div class="messages-container-items">
 								<div class="thumbnail" style="background-color:#EFE9D1;">
 									<% if ru.user.picture_profile? %>
-										<%= image_tag ru.user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+										<%= image_tag asset_path ru.user.picture_profile.profile.url %>
 									<% else %>
-										<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+										<%= image_tag asset_path "default.jpg" %>
 									<% end %>
 									<div class="caption">
 										<% if ru.user.status_user_before_type_cast == 0 %>

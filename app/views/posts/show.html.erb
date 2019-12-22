@@ -105,9 +105,9 @@
 					</div>
 					<div class="user_info-left">
 						<% if @user.picture_profile? %>
-							<%= image_tag @user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+							<%= image_tag asset_path @user.picture_profile.profile.url %>
 						<% else %>
-							<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+							<%= image_tag asset_path "default.jpg" %>
 						<% end %>
 					</div>
 				</div>
@@ -116,16 +116,18 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-			<% if @post.post_image? %>
-				<% if @post.post_image.file.content_type.include?('image/') %>
-					<%= image_tag @post.post_image.post.url, width: "100%", height: "100%" %>
-				<% elsif @post.post_image.file.content_type.include?('video/') %>
-				  <%= video_tag @post.post_image.url, width: "100%", height: "100%",
-	              controls: true, autobuffer: true %>
-	      <% end %>
-	    <% else %>
-				<%= image_tag "/assets/default.jpg", width: "100%", height: "100%" %>
-			<% end %>
+			<div class="Tricket-post-image">
+				<% if @post.post_image? %>
+					<% if @post.post_image.file.content_type.include?('image/') %>
+						<%= image_tag asset_path @post.post_image.post.url %>
+					<% elsif @post.post_image.file.content_type.include?('video/') %>
+					  <%= video_tag @post.post_image.url, width: "100%", height: "100%",
+		              controls: true, autobuffer: true %>
+		      <% end %>
+		    <% else %>
+					<%= image_tag asset_path "default.jpg" %>
+				<% end %>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<h2>When</h2>
@@ -152,16 +154,18 @@
 	<div class="row" style="background-color:#EFE9D1;">
 		<h1 class="title_type1_traveler">This Tricket had come true!!</h1>
 		<div class="col-md-6">
-			<% if @post.image_accomplishment? %>
-				<% if @post.image_accomplishment.file.content_type.include?('image/') %>
-					<%= image_tag @post.image_accomplishment.post.url, width: "100%", height: "100%" %>
-				<% elsif @post.image_accomplishment.file.content_type.include?('video/') %>
-				  <%= video_tag @post.image_accomplishment.url, width: "100%", height: "100%", 
-                  controls: true, autobuffer: true %>
-        <% end %>
-      <% else %>
-				<%= image_tag "/assets/default.jpg", width: "100%", height: "100%" %>
-			<% end %>
+			<div class="Tricket-post-image">
+				<% if @post.image_accomplishment? %>
+					<% if @post.image_accomplishment.file.content_type.include?('image/') %>
+						<%= image_tag asset_path @post.image_accomplishment.post.url %>
+					<% elsif @post.image_accomplishment.file.content_type.include?('video/') %>
+					  <%= video_tag @post.image_accomplishment.url, width: "100%", height: "100%",
+	                  controls: true, autobuffer: true %>
+	        <% end %>
+	      <% else %>
+					<%= image_tag asset_path "default.jpg" %>
+				<% end %>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<h2>Comment from <%= link_to "#{@user.name_user}", user_path(@user) %></h2>

@@ -151,7 +151,7 @@
 						<% if user.picture_profile? %>
 							<%= image_tag asset_path user.picture_profile.profile.url %>
 						<% else %>
-							<%= image_tag  asset_path "default.jpg" %>
+							<%= image_tag asset_path "default.jpg" %>
 						<% end %>
 						<div class="caption">
 							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>

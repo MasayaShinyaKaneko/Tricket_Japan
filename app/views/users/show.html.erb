@@ -1,9 +1,10 @@
-<% if @user.picture_background? %>
-	<%= image_tag @user.picture_background.background.url, :size => '400x300', class: "background" %>
-<% else %>
-	<%= image_tag "/assets/default.jpg", :size => '400x300', class: "background"  %>
-<% end %>
-
+<div class="user-background">
+	<% if @user.picture_background? %>
+		<%= image_tag asset_path @user.picture_background.background.url %>
+	<% else %>
+		<%= image_tag asset_path "default.jpg" %>
+	<% end %>
+</div>
 <div class="profile-headline">
 	<% if @user.type_user_before_type_cast == 0 %>
 		<h1 class="title_type1_traveler"><%= @user.type_user %></h1>
@@ -11,7 +12,6 @@
 		<h1 class="title_type1_local"><%= @user.type_user %></h1>
 	<% end %>
 </div>
-
 <div class="user-headline clearfix">
     <div class="user-headline-left">
     	<% if @user == current_user %>
@@ -37,9 +37,9 @@
 	</div>
 	<div class="user-headline-image">
 		<% if @user.picture_profile? %>
-			<%= image_tag @user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+			<%= image_tag asset_path @user.picture_profile.profile.url %>
 		<% else %>
-			<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+			<%= image_tag asset_path "default.jpg" %>
 		<% end %>
 	</div>
 	<div class="user-headline-rigth">

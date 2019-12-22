@@ -51,9 +51,8 @@
 	padding-left: 50px;
 }
 
-
 /*showページ*/
-.background{
+.user-background img{
 	width: 100%;
 	height: 400px;
 	opacity: 0.5;
@@ -83,6 +82,12 @@
 .user-headline-image{
 	width: 15%;
 	float:left;
+
+	img{
+	  width: 150px;
+	  height: 150px;
+	  border-radius: 150px;
+	}
 }
 .user-headline-right{
 	width: 30%;
@@ -102,11 +107,22 @@
 .favorite-users{
 	width: 20%;
 	float: left;
+
+	 .thumbnail img{
+	  width: 150px;
+	  height: 150px;
+	  border-radius: 150px;
+	}
 }
 .favorite-Tricket-content{
 	width: 50%;
 	height: 100px;
 	float: left;
+}
+.favorite-Tricket-content-image img{
+  width: 85px;
+  height: 80px;
+  border-radius: 50px;
 }
 
 
@@ -114,9 +130,9 @@
 .travelers-index-background1{
 	width: 100%;
 	height: 400px;
-	background-image: url(autumn_leaf.jpg);
+	background-image: image-url("autumn_leaf.jpg");
 	background-size: cover;
-	color: white;
+	color: black;
 		h1{
 		margin: 0;
 		}
@@ -124,13 +140,20 @@
 .travelers-index-items{
 	width: 20%;
 	float: left;
+
+	.thumbnail img{
+	  width: 150px;
+	  height: 150px;
+	  border-radius: 150px;
+	}
 }
+
 
 /*index_localsページ*/
 .locals-index-background1{
 	width: 100%;
 	height: 400px;
-	background-image: url(summer_yukata.jpg);
+	background-image: image-url("summer_yukata.jpg");
 	background-size: cover;
 	color: white;
 		h1{
@@ -143,6 +166,12 @@
 .locals-index-items{
 	width: 20%;
 	float: left;
+
+	.thumbnail img{
+	  width: 150px;
+	  height: 150px;
+	  border-radius: 150px;
+	}
 }
 
 

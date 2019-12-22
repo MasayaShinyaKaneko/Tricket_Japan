@@ -1,9 +1,10 @@
-<% if @user.picture_background? %>
-	<%= image_tag @user.picture_background.background.url, :size => '400x200', class: "background" %>
-<% else %>
-	<%= image_tag "/assets/default.jpg", :size => '400x200', class: "background"  %>
-<% end %>
-
+<div class="user-background">
+	<% if @user.picture_background? %>
+		<%= image_tag asset_path @user.picture_background.background.url %>
+	<% else %>
+		<%= image_tag asset_path "default.jpg" %>
+	<% end %>
+</div>
 <div class="profile-headline">
 	<% if @user.type_user_before_type_cast == 0 %>
 		<h1 class="title_type1_traveler"><%= @user.type_user %></h1>
@@ -22,9 +23,9 @@
 	</div>
 	<div class="user-headline-image">
 		<% if @user.picture_profile? %>
-			<%= image_tag @user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+			<%= image_tag asset_path @user.picture_profile.profile.url %>
 		<% else %>
-			<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+			<%= image_tag asset_path "default.jpg" %>
 		<% end %>
 	</div>
 	<div class="user-headline-rigth">
@@ -52,9 +53,9 @@
 				<div class="favorite-users">
 					<div class="thumbnail">
 						<% if user.picture_profile? %>
-							<%= image_tag user.picture_profile.profile.url, :size => '150x150', :style=>"border-radius: 150px;" %>
+							<%= image_tag asset_path user.picture_profile.profile.url %>
 						<% else %>
-							<%= image_tag "/assets/default.jpg", :size => '150x150', :style=>"border-radius: 150px;" %>
+							<%= image_tag asset_path "default.jpg" %>
 						<% end %>
 						<div class="caption">
 							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
@@ -119,9 +120,9 @@
 								<div style="width: 15%; float:left;">
 									<div class="favorite-Tricket-content-image clearfix">
 										<% if p.user.picture_profile? %>
-											<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+											<%= image_tag asset_path p.user.picture_profile.profile.url %>
 										<% else %>
-											<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+											<%= image_tag asset_path "default.jpg" %>
 										<% end %>
 										<p style="text-align:center;"><%= p.user.nationality %></p>
 									</div>
