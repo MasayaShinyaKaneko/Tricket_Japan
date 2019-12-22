@@ -2,11 +2,13 @@
 	<div class="row">
 		<h1 style="text-decoration: underline; margin-left: 20px;"><%= @user.type_user %>詳細</h1>
 		<div class="col-md-6">
-			<% if @user.picture_profile? %>
-				<div style="text-align: center;"><%= image_tag @user.picture_profile.profile.url, :size => '200x200', :style=>"border-radius: 200px;" %></div>
-			<% else %>
-				<div style="text-align: center;"><%= image_tag "/assets/default.jpg", :size => '200x200', :style=>"border-radius: 200px;" %></div>
-			<% end %>
+			<div class="admin-user-image">
+				<% if @user.picture_profile? %>
+					<%= image_tag asset_path @user.picture_profile.profile.url %>
+				<% else %>
+					<%= image_tag asset_path "default.jpg" %>
+				<% end %>
+			</div>
 			<table class="table table-striped">
 				<tbody>
 					<tr>
