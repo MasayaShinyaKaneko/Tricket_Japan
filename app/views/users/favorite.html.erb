@@ -82,9 +82,9 @@
 					<div style="width: 15%; float:left;">
 						<div class="favorite-Tricket-content-image clearfix">
 							<% if p.user.picture_profile? %>
-								<%= image_tag p.user.picture_profile.profile.url, :size => '85x80', :style=>"border-radius: 50px;" %>
+								<%= image_tag asset_path p.user.picture_profile.profile.url %>
 							<% else %>
-								<%= image_tag "/assets/default.jpg", :size => '85x80', :style=>"border-radius: 50px;" %>
+								<%= image_tag asset_path "default.jpg" %>
 							<% end %>
 							<p style="text-align:center;"><%= p.user.nationality %></p>
 						</div>

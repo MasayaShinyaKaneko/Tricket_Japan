@@ -43,11 +43,18 @@
 	<div class="row">
     <div class="col-md-12">
 			<h1 style="text-decoration: underline;">お問い合わせ返信</h1>
-			<% if flash[:notice] %>
-				<div id="flash">
-					<%= flash[:notice] %>
+
+			<% if flash[:success] %>
+				<div id="flash" class="alert alert-success" role="alert">
+					<%= flash[:success] %>
 				</div>
 			<% end %>
+			<% if flash[:error] %>
+				<div id="flash" class="alert alert-danger" role="alert">
+					<%= flash[:error] %>
+				</div>
+			<% end %>
+
 			<%= form_for(@contact, url: admins_contact_path, method: :patch) do |f| %>
 				<div class="field">
 					<%= f.label :reply_language, "言語選択" %><br>

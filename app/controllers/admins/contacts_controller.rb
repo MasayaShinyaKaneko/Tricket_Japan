@@ -29,15 +29,15 @@ class Admins::ContactsController < ApplicationController
     	if  @contact.update(contact_params)
     		if @contact.reply_language == 1
     			ContactMailer.send_when_admin_reply_japanese(@user, @contact).deliver
-        	flash[:notice] = "日本語で送信が完了いたしました。"
+        	flash[:success] = "日本語で送信が完了いたしました。"
         else @contact.reply_language == 2
 				  ContactMailer.send_when_admin_reply_english(@user, @contact).deliver
-		      flash[:notice] = "英語で送信が完了いたしました。"
+		      flash[:success] = "英語で送信が完了いたしました。"
 		    end
         @contact.update(status_reply: 1)
     		render :show
       else
-        flash[:notice] = "エラー。送信でできませんでした。"
+        flash[:error] = "エラー。送信でできませんでした。"
     		render :show
       end
 	end
