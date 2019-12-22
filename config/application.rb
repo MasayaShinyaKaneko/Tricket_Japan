@@ -20,7 +20,6 @@ module TricketJapan
     # the framework and any gems in your application.
     config.generators do |g|
       g.test_framework :rspec,
-          fixtures: false,
           view_specs: false,
           helper_specs: false
     end
