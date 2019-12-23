@@ -46,79 +46,22 @@ RSpec.describe Post, type: :model do
   end
 
   context "uniqueness validation" do
+    before do
+      post = create(:post, title: "Test Post")
+    end
+# ユーザを合わせる？
     it "does not allow duplicate post titles per user" do
-      post = create(:post)
-
-
+      post = build(:post, title: "Test Post")
+      expect(post).to_not be_valid
+    end
+    it "does not allow singular post titles per user" do
+      post = build(:post, title: "Test Post2")
+      expect(post).to be_valid
+    end
+# もう一人のユーザをどうやって作る？
+    it "allows two users to share a post title" do
+      post = build(:post, title: "Test Post")
+      expect(post).to be_valid
     end
   end
-
- #  		new_post = @user.posts.build(
- #    	title: 		  "Test Post", #validation_check!
- #    	content: 	  "Test content",
- #    	time_todo: 	"Test time",
- #    	place_todo: "Test place",
- #    	area:       "area",
- #  		season: 	  "season",
- #  		interest: 	"interest",
- #  		status_accomplishment: 0,
- #  		status_display: 0,
-	# 	)
- #  	new_post.valid?
- #  	expect(new_post.errors[:title]).to include("has already been taken")
-	# end
-
-
-
- #  it "allows two users to share a post title" do
- #    # user = User.create(
- #    #   name_first: "Masaya",
- #    #   name_last:  "Kaneko",
- #    #   name_user:  "MSK",
- #    #   type_user:  1,
- #    #   gender:     "man",
- #    #   birthday:   "2019-07-13",
- #    #   nationality: "Japanese",
- #    #   country:    "Japan",
- #    #   language_first:   "Japanese",
- #    #   email:      "tester@example.com",
- #    #   password:   "111111",
- #    # )
- #    @user.posts.create(
- #      title:      "Test Post", #validation_check!
- #      content:    "Test content",
- #      time_todo:  "Test time",
- #      place_todo: "Test place",
- #      area:       "area",
- #      season:     "season",
- #      interest:   "interest",
- #      status_accomplishment: 0,
- #      status_display: 0,
- #    )
- #    other_user = User.create(
- #      name_first: "Tetsuya",
- #      name_last:  "Kaneko",
- #      name_user:  "TK",
- #      type_user:  1,
- #      gender:     "man",
- #      birthday:   "2019-02-11",
- #      nationality: "Japanese",
- #      country:    "Japan",
- #      language_first:   "Japanese",
- #      email:      "tester@example.com",
- #      password:   "111111",
- #    )
- #    other_post = other_user.posts.build(
- #      title:      "Test Post", #validation_check!
- #      content:    "Test content",
- #      time_todo:  "Test time",
- #      place_todo: "Test place",
- #      area:       "area",
- #      season:     "season",
- #      interest:   "interest",
- #      status_accomplishment: 0,
- #      status_display: 0,
- #    )
- #    expect(other_post).to be_valid
- #  end
 end

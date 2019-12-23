@@ -13,27 +13,28 @@
 	<% end %>
 </div>
 <div class="user-headline clearfix">
-    <div class="user-headline-left">
-    	<% if @user == current_user %>
-		<%= link_to "your favorites", user_favorite_page_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
-		<%= link_to "edit profile", edit_user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
-		<%= link_to "unsubscribe", users_unsubscribe_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+  <div class="user-headline-left">
+    <% if @user == current_user %>
+			<%= link_to "your favorites", user_favorite_page_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+			<%= link_to "edit profile", edit_user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+			<%= link_to "unsubscribe", users_unsubscribe_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
 		<% end %>
-		<!-- message -->
+	<!-- message機能 -->
 		<% if @user != current_user %>
 		<% if @user.status_user_before_type_cast != 2 %>
 			<% if @isRoom == true %>
-	    		<%= link_to "message", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %>
-	  		<% else %>
-		    	<%= form_for @room do |f| %>
-		      		<%= fields_for @roomusernew do |e| %>
-		        		<%= e.hidden_field :user_id, value:@user.id %>
-		    		<% end %>
-	      			<%= f.submit "new message", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
-	    		<% end %>
-	  		<% end %>
+	    	<%= link_to "message", room_path(@roomId), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+	  	<% else %>
+		    <%= form_for @room do |f| %>
+		      <%= fields_for @roomusernew do |e| %>
+		        <%= e.hidden_field :user_id, value:@user.id %>
+		    	<% end %>
+	      	<%= f.submit "new message", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
+	    	<% end %>
 	  	<% end %>
+	  <% end %>
 		<% end %>
+	<!-- ここまで -->
 	</div>
 	<div class="user-headline-image">
 		<% if @user.picture_profile? %>
@@ -45,27 +46,28 @@
 	<div class="user-headline-rigth">
 		<p>User Name</p>
 		<p style="font-size: 30px; font-weight: bold;"><%= @user.name_user %></p>
-		<!-- ユーザに対するいいね機能 -->
+	<!-- ユーザに対するいいね機能 -->
 		<% if current_user != @user %>
-		  	<% if current_user.following?(@user) %>
-			    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
+		  <% if current_user.following?(@user) %>
+			  <%= link_to favorite_path(follow_id: @user.id), id:"favorited", remote: true, method: :delete do %>
 					<%= icon 'fa', 'heart', :style=>"color: red; font-size: 30px;"%>
-			    <% end %>
-			    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
+			  <% end %>
+			  <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", :style=>"display: none;", remote: true, method: :post do %>
 					<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 30px;"%>
-			    <% end %>
-		  	<% else %>
-			    <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
+			  <% end %>
+		  <% else %>
+			  <%= link_to favorite_path(follow_id: @user.id), id:"favorited", :style=>"display: none;", remote: true, method: :delete do %>
 					<%= icon 'fa', 'heart', :style=>"color: red; font-size: 30px;"%>
-			    <% end %>
-			    <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
+			  <% end %>
+			  <%= link_to favorites_path(follow_id: @user.id), id:"notfavorited", remote: true, method: :post do %>
 					<%= icon 'fa', 'heart', :style=>"color: grey; font-size: 30px;"%>
-			    <% end %>
-		  	<% end %>
-		  	<span id="favorite_count" style="font-size: 20px;"><%= @favorite_count %> favorites</span>
+			  <% end %>
+		  <% end %>
+		  <span id="favorite_count" style="font-size: 20px;"><%= @favorite_count %> favorites</span>
 		<% else %>
-		  	<span id="favorite_count" style="font-size: 20px;"><%= @favorite_count %> favorites</span>
+		  <span id="favorite_count" style="font-size: 20px;"><%= @favorite_count %> favorites</span>
 		<% end %>
+	<!-- ここまで -->
 		<% if @user == current_user %>
 			<% if @user.status_user_before_type_cast == 0 %>
 				<%= link_to @user.status_user, user_status_path(@user), method: :patch, remote: true, :style=>"font-size: 20px;", class:"label label-success" %>
@@ -170,36 +172,36 @@
 					<div class="user-Tricket-headline clearfix">
 						<h1 class="title_type1_traveler" style="margin: 0; float: left">Trickets</h1>
 						<% if @user == current_user %>
-						<h3 style="margin: 12px 0 20px 0; float: left;"><%= link_to "new Tricket", new_post_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
+							<h3 style="margin: 12px 0 20px 0; float: left;"><%= link_to "new Tricket", new_post_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
 						<% end %>
 					</div>
 					<% if @posts_unaccomplish.exists? %>
-					<% if @posts_unaccomplish.where(status_display: 0).exists? || @user == current_user %>
-						<% @posts_unaccomplish.reverse.each do |p| %>
-						<% unless p.status_display == 1 && @user != current_user %>
-						<div class="user-Tricket-content">
-							<div class="panel panel-default">
-								<div class="panel-heading" style="background-color:#f8b500;">
-									<h5 class="panel-title">Title: <%= p.title.truncate(50) %></h5>
-								</div>
-								<div class="panel-body">
-									<h4 class="label label-default"><%= p.area %></h4>
-									<h4 class="label label-default"><%= p.season %></h4>
-									<h4 class="label label-default"><%= p.interest %></h4>
-									<div style="float:right;">
-										<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-										<% if @user == current_user %>
-										<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-										<% end %>
+						<% if @posts_unaccomplish.where(status_display: 0).exists? || @user == current_user %>
+							<% @posts_unaccomplish.reverse.each do |p| %>
+								<% unless p.status_display == 1 && @user != current_user %>
+									<div class="user-Tricket-content">
+										<div class="panel panel-default">
+											<div class="panel-heading" style="background-color:#f8b500;">
+												<h5 class="panel-title">Title: <%= p.title.truncate(50) %></h5>
+											</div>
+											<div class="panel-body">
+												<h4 class="label label-default"><%= p.area %></h4>
+												<h4 class="label label-default"><%= p.season %></h4>
+												<h4 class="label label-default"><%= p.interest %></h4>
+												<div style="float:right;">
+													<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+													<% if @user == current_user %>
+														<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+													<% end %>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
+								<% end %>
+							<% end %>
+						<% else %>
+							<p>There is no Tricket.</p>
 						<% end %>
-						<% end %>
-					<% else %>
-						<p>There is no Tricket.</p>
-					<% end %>
 					<% else %>
 						<p>There is no Tricket.</p>
 					<% end %>
@@ -211,33 +213,33 @@
 						<h1 class="title_type1_traveler" style="margin: 0; border-color:#5cb85c;">Accomplishments</h1>
 					</div>
 					<% if @posts_accomplish.exists? %>
-					<% if @posts_accomplish.where(status_display: 0).exists? || @user == current_user %>
-						<% @posts_accomplish.reverse.each do |p| %>
-						<% unless p.status_display == 1 && @user != current_user %>
-						<div class="user-Tricket-content">
-							<div class="panel panel-default">
-								<div class="panel-heading" style="background-color:#5cb85c">
-									<h5 class="panel-title">Title: <%= p.title %></h5>
-								</div>
-								<div class="panel-body">
-									<h4 class="label label-default"><%= p.area %></h4>
-									<h4 class="label label-default"><%= p.season %></h4>
-									<h4 class="label label-default"><%= p.interest %></h4>
-									<h4 class="label label-success"><%= p.status_accomplishment %></h4>
-									<div style="float:right;">
-										<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-										<% if @user == current_user %>
-										<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
-										<% end %>
+						<% if @posts_accomplish.where(status_display: 0).exists? || @user == current_user %>
+							<% @posts_accomplish.reverse.each do |p| %>
+								<% unless p.status_display == 1 && @user != current_user %>
+									<div class="user-Tricket-content">
+										<div class="panel panel-default">
+											<div class="panel-heading" style="background-color:#5cb85c">
+												<h5 class="panel-title">Title: <%= p.title %></h5>
+											</div>
+											<div class="panel-body">
+												<h4 class="label label-default"><%= p.area %></h4>
+												<h4 class="label label-default"><%= p.season %></h4>
+												<h4 class="label label-default"><%= p.interest %></h4>
+												<h4 class="label label-success"><%= p.status_accomplishment %></h4>
+												<div style="float:right;">
+													<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+													<% if @user == current_user %>
+														<%= link_to "edit Tricket", edit_post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+													<% end %>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
+								<% end %>
+							<% end %>
+						<% else %>
+							<p>There is no accomplishment.</p>
 						<% end %>
-						<% end %>
-					<% else %>
-						<p>There is no accomplishment.</p>
-					<% end %>
 					<% else %>
 						<p>There is no accomplishment.</p>
 					<% end %>

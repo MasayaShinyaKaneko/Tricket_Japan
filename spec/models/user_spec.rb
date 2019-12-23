@@ -55,17 +55,26 @@ RSpec.describe User, type: :model do
       end
     end
 
+#uniquenessのテストはこれで合ってる？
     context "uniquness validation" do
       before do
-        user = create(:user, email: "example@test.com")
+        user = create(:user, email: "example@test.com", name_user: "MSK")
       end
       it "is invalid with a duplicate email address" do
-        user = build(:user, email: "example@test.com")
+        user = build(:user, email: "example@test.com", name_user: "MSK2")
         expect(user).to_not be_valid
       end
+      it "is valid with a singular email address" do
+        user = build(:user, email: "example2@test.com", name_user: "MSK2")
+        expect(user).to be_valid
+      end
       it "is invalid with a duplicate user name" do
-        user = build(:user, name_user: "MSK")
+        user = build(:user, email: "example2@test.com", name_user: "MSK")
         expect(user).to_not be_valid
+      end
+      it "is valid with a singular user name" do
+        user = build(:user, email: "example2@test.com", name_user: "MSK2")
+        expect(user).to be_valid
       end
     end
 

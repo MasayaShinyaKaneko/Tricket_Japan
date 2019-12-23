@@ -8,30 +8,30 @@
 	</div>
 
 	<% if @search_flag != 0 %>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="locals-populer-content clearfix">
-			<h1 class="title_type1_local">Populer Locals (monthly)</h1>
-				<% @most_favorited_locals.each do |user| %>
-				<div class="locals-index-items">
-					<div class="thumbnail">
-						<% if user.picture_profile? %>
-							<%= image_tag asset_path user.picture_profile.profile.url %>
-						<% else %>
-							<%= image_tag asset_path "default.jpg" %>
-						<% end %>
-						<div class="caption">
-							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
-							<p>Nationality: <%= user.nationality %></p>
-							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
-						<p><%= user.followers.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).count %> favorites</p>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="locals-populer-content clearfix">
+					<h1 class="title_type1_local">Populer Locals (monthly)</h1>
+					<% @most_favorited_locals.each do |user| %>
+						<div class="locals-index-items">
+							<div class="thumbnail">
+								<% if user.picture_profile? %>
+									<%= image_tag asset_path user.picture_profile.profile.url %>
+								<% else %>
+									<%= image_tag asset_path "default.jpg" %>
+								<% end %>
+								<div class="caption">
+									<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+									<p>Nationality: <%= user.nationality %></p>
+									<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+								<p><%= user.followers.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).count %> favorites</p>
+								</div>
+							</div>
 						</div>
-					</div>
+					<% end %>
 				</div>
-				<% end %>
 			</div>
 		</div>
-	</div>
 	<% end %>
 
 	<div class="row" style="background-color:#EFE9D1;">
@@ -64,26 +64,26 @@
 				</div>
 			</div>
 			<div class="locals-index-headline clearfix">
-			<% if @users.present? %>
-				<% @users.reverse.each do |user| %>
-				<div class="locals-index-items">
-					<div class="thumbnail">
-						<% if user.picture_profile? %>
-							<%= image_tag asset_path user.picture_profile.profile.url %>
-						<% else %>
-							<%= image_tag asset_path "default.jpg" %>
-						<% end %>
-						<div class="caption">
-							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
-							<p>Nationality: <%= user.nationality %></p>
-							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+				<% if @users.present? %>
+					<% @users.reverse.each do |user| %>
+						<div class="locals-index-items">
+							<div class="thumbnail">
+								<% if user.picture_profile? %>
+									<%= image_tag asset_path user.picture_profile.profile.url %>
+								<% else %>
+									<%= image_tag asset_path "default.jpg" %>
+								<% end %>
+								<div class="caption">
+									<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+									<p>Nationality: <%= user.nationality %></p>
+									<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+					<% end %>
+				<% else %>
+					<h1>Not applicable.</h1>
 				<% end %>
-			<% else %>
-				<h1>Not applicable.</h1>
-			<% end %>
 			</div>
 			<% if @search_flag == 0 %>
 				<div class="row" style="background-color:#EFE9D1;">

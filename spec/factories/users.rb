@@ -9,7 +9,7 @@ FactoryBot.define do
     nationality { "Japanese" }
     country { "Japan" }
     language_first { "Japanese" }
-    sequence(:email) { |n| "example@test#{n}.com" }
+    sequence(:email) { |n| "example#{n}@test.com" }
     password { "password" }
     password_confirmation { "password" }
   end

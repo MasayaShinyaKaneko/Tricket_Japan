@@ -12,13 +12,12 @@
 		<h1 class="title_type1_local"><%= @user.type_user %></h1>
 	<% end %>
 </div>
-
 <div class="user-headline clearfix">
-    <div class="user-headline-left">
-    	<% if @user == current_user %>
-		<%= link_to "your favorites", user_favorite_page_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
-		<%= link_to "edit profile", edit_user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
-		<%= link_to "unsubscribe", users_unsubscribe_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+  <div class="user-headline-left">
+  	<% if @user == current_user %>
+			<%= link_to "your favorites", user_favorite_page_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+			<%= link_to "edit profile", edit_user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
+			<%= link_to "unsubscribe", users_unsubscribe_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %>
 		<% end %>
 	</div>
 	<div class="user-headline-image">
@@ -40,7 +39,6 @@
 		<% end %>
 	</div>
 </div>
-<!-- travelers用とlocals用必要 -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -49,22 +47,22 @@
 			</div>
 			<div class="favorite-users-content clearfix">
 				<% if @users.exists? %>
-				<% @users.each do |user| %>
-				<div class="favorite-users">
-					<div class="thumbnail">
-						<% if user.picture_profile? %>
-							<%= image_tag asset_path user.picture_profile.profile.url %>
-						<% else %>
-							<%= image_tag asset_path "default.jpg" %>
-						<% end %>
-						<div class="caption">
-							<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
-							<p>Nationality: <%= user.nationality %></p>
-							<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+					<% @users.each do |user| %>
+					<div class="favorite-users">
+						<div class="thumbnail">
+							<% if user.picture_profile? %>
+								<%= image_tag asset_path user.picture_profile.profile.url %>
+							<% else %>
+								<%= image_tag asset_path "default.jpg" %>
+							<% end %>
+							<div class="caption">
+								<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
+								<p>Nationality: <%= user.nationality %></p>
+								<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<% end %>
+					<% end %>
 				<% else %>
 					<p>There is no favorite user.</p>
 				<% end %>
@@ -78,31 +76,31 @@
 			</div>
 			<% if @posts_like.present? %>
 				<% @posts_like.each do |p| %>
-				<div class="favorite-Tricket-content clearfix">
-					<div style="width: 15%; float:left;">
-						<div class="favorite-Tricket-content-image clearfix">
-							<% if p.user.picture_profile? %>
-								<%= image_tag asset_path p.user.picture_profile.profile.url %>
-							<% else %>
-								<%= image_tag asset_path "default.jpg" %>
-							<% end %>
-							<p style="text-align:center;"><%= p.user.nationality %></p>
+					<div class="favorite-Tricket-content clearfix">
+						<div style="width: 15%; float:left;">
+							<div class="favorite-Tricket-content-image clearfix">
+								<% if p.user.picture_profile? %>
+									<%= image_tag asset_path p.user.picture_profile.profile.url %>
+								<% else %>
+									<%= image_tag asset_path "default.jpg" %>
+								<% end %>
+								<p style="text-align:center;"><%= p.user.nationality %></p>
+							</div>
 						</div>
-					</div>
-					<div class="panel panel-default" style="width: 80%; float:left;">
-						<div class="panel-heading" style="background-color:#f8b500;">
-							<h5 class="panel-title">Title: <%= p.title.truncate(40) %></h5>
-						</div>
-						<div class="panel-body">
-							<h4 class="label label-default"><%= p.area %></h4>
-							<h4 class="label label-default"><%= p.season %></h4>
-							<h4 class="label label-default"><%= p.interest %></h4>
-							<div style="float:right;">
-								<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+						<div class="panel panel-default" style="width: 80%; float:left;">
+							<div class="panel-heading" style="background-color:#f8b500;">
+								<h5 class="panel-title">Title: <%= p.title.truncate(40) %></h5>
+							</div>
+							<div class="panel-body">
+								<h4 class="label label-default"><%= p.area %></h4>
+								<h4 class="label label-default"><%= p.season %></h4>
+								<h4 class="label label-default"><%= p.interest %></h4>
+								<div style="float:right;">
+									<%= link_to "Tricket detail", post_path(p.id), class:"label label-default", :style=>"background-color: #c77eb5" %>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				<% end %>
 			<% else %>
 				<p>There is no favorite Tricket.</p>

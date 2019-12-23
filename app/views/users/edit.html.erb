@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="profile-edit-headline title_type1">
-       <h1>Edit Profile</h1>
+        <h1>Edit Profile</h1>
       </div>
 
       <% if flash[:error] %>
@@ -10,7 +10,6 @@
           <%= flash[:error] %>
         </div>
       <% end %>
-
       <% if @user.errors.any? %>
         <div class="alert alert-warning">
           <ul>
@@ -23,33 +22,28 @@
 
       <%= form_for(@user) do |f| %>
       <div class="field">
-         <%= f.label :usertype %>
-          <%= f.radio_button :type_user, :Traveler, checked: true %>
-          <h1 class="label label-default" style="background-color:#f8b500; font-size: 20px;">Travelers</h1>
-          <%= f.radio_button :type_user, :Local %>
-          <h1 class="label label-default" style="background-color:#9e3d3f; font-size: 20px;">Locals</h1>
+        <%= f.label :usertype %>
+        <%= f.radio_button :type_user, :Traveler, checked: true %>
+        <h1 class="label label-default" style="background-color:#f8b500; font-size: 20px;">Travelers</h1>
+        <%= f.radio_button :type_user, :Local %>
+        <h1 class="label label-default" style="background-color:#9e3d3f; font-size: 20px;">Locals</h1>
       </div>
-
       <div class="field">
         <%= f.label :firstname %>
         <%= f.text_field :name_first, autofocus: true, placeholder: "first name" %>
       </div>
-
       <div class="field">
         <%= f.label :lastname %>
         <%= f.text_field :name_last, autofocus: true, placeholder: "last name" %>
       </div>
-
       <div class="field">
         <%= f.label :username %>
         <%= f.text_field :name_user, autofocus: true, placeholder: "user name" %>
       </div>
-
       <div class="field">
         <%= f.label :gender %>
         <%= f.select :gender, [["man","man"],["woman","woman"]] %>
       </div>
-
       <div class="field">
         <%= f.label :birthday %>
         <%= f.datetime_select :birthday, start_year: 1930, end_year: (Time.now.year - 18), default: Date.new(1990, 1, 1),:discard_hour => true, :discard_minute => true %>
@@ -58,27 +52,22 @@
         <%= f.label :nationality %>
         <%= f.select :nationality, @nationality %>
       </div>
-
       <div class="field">
         <%= f.label :livingcountry %>
         <%= f.select :country, @country %>
       </div>
-
       <div class="field">
         <%= f.label :native_language %>
         <%= f.select :language_first, @language %>
       </div>
-
       <div class="field">
         <%= f.label :second_language %>
         <%= f.select :language_second, @language %>
       </div>
-
       <div class="field">
         <%= f.label :third_language %>
         <%= f.select :language_third, @language %>
       </div>
-
       <div class="field">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
@@ -110,7 +99,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="actions" style="width: 100%; margin: 0 auto;">
-      <%= f.submit "Update", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
+        <%= f.submit "Update", :style=>"background-color: #c77eb5; color: white; width: 100px; border-radius: 5px;" %>
       </div>
       <% end %>
       <h4><%= link_to "mypage", user_path(current_user), class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
