@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     name_first { "Masaya" }
     name_last { "Kaneko" }
-    name_user { "MSK" }
+    sequence(:name_user) {  |n| "MSK#{n}" }
     type_user { 1 }
     gender { "man" }
     birthday { "2019-07-13" }
