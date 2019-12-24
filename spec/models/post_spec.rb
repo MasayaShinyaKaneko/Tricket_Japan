@@ -55,7 +55,7 @@ RSpec.describe Post, type: :model do
         post = build(:post, title: "Test Post", user: @post.user)
         expect(post).to_not be_valid
       end
-      it "does not allow singular post titles per user" do
+      it "allow singular post titles per user" do
         post = build(:post, title: "Test Post2")
         expect(post).to be_valid
       end
