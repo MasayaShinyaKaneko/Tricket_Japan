@@ -40,7 +40,7 @@
 	</div>
 </div>
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" style="background-color:#EFE9D1; padding-bottom:10px;">
 		<div class="col-md-12">
 			<div class="favorite-users-headline">
 				<h1 class="title_type1">Your favorites</h1>
@@ -109,10 +109,10 @@
 			<% end %>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" style="background-color:#EFE9D1;">
 		<div class="col-md-12">
 			<div class="user-review-headline">
-				<h1 class="title_type1" style="margin: 0;">Trickets (you commented on)</h1>
+				<h1 class="title_type1">Trickets (you commented on)</h1>
 				<% if @comments.present? %>
 					<% @post_comments.each do |p| %>
 						<% if p.user != current_user %>
