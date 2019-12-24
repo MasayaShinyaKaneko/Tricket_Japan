@@ -49,18 +49,16 @@ RSpec.describe Post, type: :model do
 
     context "uniqueness validation" do
       before do
-        post = create(:post, title: "Test Post")
+        @post = create(:post, title: "Test Post")
       end
-  # ユーザを合わせる？
       it "does not allow duplicate post titles per user" do
-        post = build(:post, title: "Test Post")
+        post = build(:post, title: "Test Post", user: @post.user)
         expect(post).to_not be_valid
       end
       it "does not allow singular post titles per user" do
         post = build(:post, title: "Test Post2")
         expect(post).to be_valid
       end
-  # もう一人のユーザをどうやって作る？
       it "allows two users to share a post title" do
         post = build(:post, title: "Test Post")
         expect(post).to be_valid
