@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #posts controller
   get '/posts/top', to: 'posts#top'
   get '/posts/sort', to: 'posts#sort'
+  get '/posts/photos', to: 'posts#index_photo', as: "photos"
   resources :posts do
     resources :likes, only:[:create, :destroy]
     resources :comments, only: [:create]

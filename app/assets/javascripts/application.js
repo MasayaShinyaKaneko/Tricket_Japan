@@ -14,3 +14,21 @@
 //= require rails-ujs
 //= require bootstrap-sprockets
 //= require_tree .
+
+// photosページ
+$(document).ready(function() {
+  $('.photo-items').on('mouseover', function () {
+    $(this).children('.photo-text').stop().fadeIn();
+  });
+  $('.photo-items').on('mouseout', function () {
+    $(this).children('.photo-text').stop().fadeOut();
+  });
+});
+$(document).ready(function() {
+  $('.video-items').on('mouseover', function () {
+    $(this).children('.video-text').stop().fadeIn();
+  });
+  $('.video-items').on('mouseout', function () {
+    $(this).children('.video-text').stop().fadeOut();
+  });
+});

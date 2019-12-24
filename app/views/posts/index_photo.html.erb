@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row" style="background-color:#EFE9D1;">
+    <div class="col-md-12">
+      <h1 class="title_type1_traveler">Accomplishment Photos</h1>
+      <div class="photo-content clearfix">
+        <% @posts.reverse.each do |p| %>
+          <% if p.status_accomplishment_before_type_cast == 1 %>
+            <% if p.image_accomplishment? %>
+              <% if p.image_accomplishment.file.content_type.include?('image/') %>
+                <div class="photo-items">
+                  <div class="photo-img">
+                    <%= link_to post_path(p.id) do %>
+                      <%= image_tag asset_path p.image_accomplishment.post.url %>
+                    <% end %>
+                  </div>
+                  <div class="photo-text">
+                    <% if p.user.picture_profile? %>
+                      <%= image_tag asset_path p.user.picture_profile.profile.url %>
+                    <% end %>
+                    <%= p.user.name_user %>
+                  </div>
+                </div>
+              <% elsif p.image_accomplishment.file.content_type.include?('video/') %>
+                <div class="video-items">
+                  <div class="video-img">
+                    <%= link_to post_path(p.id) do %>
+                      <%= video_tag p.image_accomplishment.url, width: "330px", height: "230px",autobuffer: true, autoplay: true, muted: true, loop: :true %>
+                    <% end %>
+                  </div>
+                  <div class="video-text">
+                    <% if p.user.picture_profile? %>
+                      <%= image_tag asset_path p.user.picture_profile.profile.url %>
+                    <% end %>
+                    <%= p.user.name_user %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

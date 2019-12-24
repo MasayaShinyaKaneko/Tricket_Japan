@@ -115,3 +115,75 @@
 	box-shadow: 0 2px 0 #1B3D82;
 }
 
+/*photosページ*/
+.photo-content{
+	margin: 0 auto;
+	width: 1010px;
+	padding: 10px;
+}
+.photo-items:hover{
+	box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+	transform: translateY(-10px);
+	transition-duration: 0.5s;
+}
+.photo-items{
+	position: relative;
+	width: 330px;
+	height: 230px;
+	float:left;
+	background-color: #EFE9E7;
+
+  img{
+		width: 330px;
+	  height: 230px;
+	}
+	.photo-text {
+	  position: absolute;
+	  left: 0;
+	  bottom: 0;
+	  width: 100%;
+	  height: 50px;
+	  background-color: #000;
+	  color: white;
+	  font-weight: bold;
+	  text-align: center;
+	  opacity: 0.8;
+	  display: none;
+
+	  img{
+	   	width: 50px;
+	   	height: 50px;
+	   	border-radius: 50px;
+	  }
+	}
+}
+.video-items:hover{
+	box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+	transform: translateY(-10px);
+	transition-duration: 0.5s;
+}
+.video-items{
+	width: 330px;
+	height: 230px;
+	float:left;
+	background-color: #EFE9E7;
+
+	.video-text{
+	  width: 100%;
+	  height: 50px;
+	  margin-top: -55px;
+	  background-color: #000;
+	  color: white;
+	  font-weight: bold;
+	  text-align: center;
+	  opacity: 0.8;
+		display: none;
+
+	  img{
+	   	width: 50px;
+	   	height: 50px;
+	   	border-radius: 50px;
+	  }
+	}
+}
+

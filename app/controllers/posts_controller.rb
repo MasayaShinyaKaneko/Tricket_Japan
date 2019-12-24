@@ -144,6 +144,9 @@ class PostsController < ApplicationController
       post.destroy
       redirect_to user_path(current_user)
 	end
+  def index_photo
+      @posts = Post.open.all
+  end
 
 	private
     def post_params
