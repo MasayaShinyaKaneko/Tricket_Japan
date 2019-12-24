@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" style="min-height: 600px; background-color:#EFE9D1;">
 		<div class="col-md-12">
 			<h1 class="title_type1">Messages</h1>
 			<div class="messages-container clearfix">
@@ -9,28 +9,30 @@
 						<% if ru.user_id != current_user.id %>
 							<% if r.messages.exists? %>
 							<div class="messages-container-items">
-								<div class="thumbnail" style="background-color:#EFE9D1;">
-									<% if ru.user.picture_profile? %>
-										<%= image_tag asset_path ru.user.picture_profile.profile.url %>
-									<% else %>
-										<%= image_tag asset_path "default.jpg" %>
-									<% end %>
-									<div class="caption">
-										<% if ru.user.status_user_before_type_cast == 0 %>
-											<h5 style="text-align: center;"><%= link_to "#{ru.user.name_user.truncate(10)}", room_path(id: r.id) %> <span class="label label-success" style="font-size: 20px;"><%= ru.user.status_user %></span></h5>
-										<% elsif ru.user.status_user_before_type_cast == 1 %>
-											<h5 style="text-align: center;"><%= link_to "#{ru.user.name_user.truncate(10)}", room_path(id: r.id) %> <span class="label label-warning" style="font-size: 20px;"><%= ru.user.status_user %></span></h5>
-										<% elsif ru.user.status_user_before_type_cast == 2 %>
-											<h5 style="text-align: center;"><%= link_to "#{ru.user.name_user.truncate(10)}", room_path(id: r.id) %> <span class="label label-danger" style="font-size: 20px;"><%= ru.user.status_user %></span></h5>
+								<%= link_to room_path(id: r.id), :style=>"text-decoration: none;" do %>
+									<div class="thumbnail">
+										<% if ru.user.picture_profile? %>
+											<%= image_tag asset_path ru.user.picture_profile.profile.url %>
+										<% else %>
+											<%= image_tag asset_path "default.jpg" %>
 										<% end %>
-										<div class="height: 300px;">
-											<p style="border-bottom: solid; width: 85px;">last message</p>
-											<p><%= r.messages.last.user.name_user.truncate(9) %> :
-											   <%= r.messages.last.content.truncate(9) %></p>
-											<p><%= r.messages.last.created_at.to_s(:long) %></p>
+										<div class="caption">
+											<% if ru.user.status_user_before_type_cast == 0 %>
+												<h5 style="text-align: center;"><%= ru.user.name_user.truncate(10) %> <span class="label label-success" style="font-size: 20px;"><%= ru.user.status_user %></span></h5>
+											<% elsif ru.user.status_user_before_type_cast == 1 %>
+												<h5 style="text-align: center;"><%= ru.user.name_user.truncate(10) %> <span class="label label-warning" style="font-size: 20px;"><%= ru.user.status_user %></span></h5>
+											<% elsif ru.user.status_user_before_type_cast == 2 %>
+												<h5 style="text-align: center;"><%= ru.user.name_user.truncate(10) %> <span class="label label-danger" style="font-size: 20px;"><%= ru.user.status_user %></span></h5>
+											<% end %>
+											<div class="height: 300px;">
+												<p style="border-bottom: solid; width: 85px;">last message</p>
+												<p><%= r.messages.last.user.name_user.truncate(9) %> :
+												   <%= r.messages.last.content.truncate(9) %></p>
+												<p><%= r.messages.last.created_at.to_s(:long) %></p>
+											</div>
 										</div>
 									</div>
-								</div>
+								<% end %>
 							</div>
 							<% end %>
 						<% end %>

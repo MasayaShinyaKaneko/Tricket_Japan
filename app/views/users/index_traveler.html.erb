@@ -38,18 +38,20 @@
 				<% if @users.present? %>
 					<% @users.reverse.each do |user| %>
 						<div class="travelers-index-items">
-							<div class="thumbnail">
-								<% if user.picture_profile? %>
-									<%= image_tag asset_path user.picture_profile.profile.url %>
-								<% else %>
-									<%= image_tag asset_path "default.jpg" %>
-								<% end %>
-								<div class="caption">
-									<h4><%= link_to "#{user.name_user}" ,user_path(user) %></h4>
-									<p>Nationality: <%= user.nationality %></p>
-									<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+							<%= link_to user_path(user) do %>
+								<div class="thumbnail">
+									<% if user.picture_profile? %>
+										<%= image_tag asset_path user.picture_profile.profile.url %>
+									<% else %>
+										<%= image_tag asset_path "default.jpg" %>
+									<% end %>
+									<div class="caption">
+										<h4><%= user.name_user %></h4>
+										<p>Nationality: <%= user.nationality %></p>
+										<p>Age: <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000 %></p>
+									</div>
 								</div>
-							</div>
+							<% end %>
 						</div>
 					<% end %>
 				<% else %>

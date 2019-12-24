@@ -2,14 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.messages-container-items:hover{
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+  transform: translateY(-10px);
+  transition-duration: 0.5s;
+}
 .messages-container-items{
 	width: 20%;
 	float: left;
 
-  .thumbnail img{
-    width: 150px;
-    height: 150px;
-    border-radius: 150px;
+  .thumbnail{
+    margin: 0;
+
+    img{
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+    }
   }
 }
 .message-user img{
