@@ -10,7 +10,7 @@
 		<div class="col-md-12">
 			<h1 class="title_type1_traveler">Most liked Trickets (monthly)</h1>
 			<% @most_liked_posts_two.each do |p| %>
-				<h2><%= p.likes.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).count %> likes</h2>
+				<h2 class="ranking-number"><%= p.likes.where(created_at: 1.month.ago.beginning_of_day..Time.zone.now.end_of_day).count %> likes</h2>
 				<div class="Trickets-top-content clearfix">
 					<div style="width: 15%; float:left;">
 						<div class="Trickets-top-user-image">
