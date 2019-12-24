@@ -17,7 +17,7 @@
         <label>Type messages:</label>
         <input type="text" data-behavior="room_speaker" class="messageInputForm_input" placeholder="type messages" style="width: 500px;">
       </form>
-      <div id="message-container" style="height: 400px; overflow: scroll; margin: 30px; padding: 30px;background-color:#EFE9D1;">
+      <div id="message-container" style="height: 350px; overflow: scroll; margin: 30px; padding: 20px;background-color:#EFE9D1; border-radius: 30px;">
         <div class="messagesArea messages">
           <% if @messages.present? %>
             <%@messages.each do |message| %>

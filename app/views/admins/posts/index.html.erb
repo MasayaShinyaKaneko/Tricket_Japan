@@ -54,10 +54,10 @@
 				<tbody>
 					<tr>
 						<th style="width: 75px;"><%= post.id %></th>
-						<td style="width: 200px;"><%= post.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
+						<td style="width: 225px;"><%= post.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
 						<td style="width: 350px;"><%= post.title.truncate(40) %></td>
 						<td style="width: 75px;"><%= post.user.id %></td>
-						<td style="width: 200px;"><%= post.user.name_user.truncate(15) %></td>
+						<td style="width: 175px;"><%= post.user.name_user.truncate(15) %></td>
 						<td style="width: 100px;"><%= post.likes.count %></td>
 						<td style="width: 75px;"><%= post.status_accomplishment_i18n %></td>
 						<td style="width: 75px;"><%= post.status_display_i18n %></td>
