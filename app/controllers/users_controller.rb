@@ -120,6 +120,12 @@ class UsersController < ApplicationController
 			Devise.sign_out_all_scopes ? sign_out : sign_out(current_user)
 			redirect_to users_unsubscribe_complete_path
 	end
+	def unsubscribe
+      @user = User.find(params[:id])
+			if @user != current_user
+      	redirect_to posts_top_path
+    	end
+	end
 
 	private
 		def user_params

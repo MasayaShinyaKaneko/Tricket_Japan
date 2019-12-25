@@ -3,7 +3,6 @@ FactoryBot.define do
     name_first { "Masaya" }
     name_last { "Kaneko" }
     sequence(:name_user) {  |n| "MSK#{n}" }
-    type_user { 1 }
     gender { "man" }
     birthday { "2019-07-13" }
     nationality { "Japanese" }
