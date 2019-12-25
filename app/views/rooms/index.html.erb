@@ -30,9 +30,9 @@
 												   <%= r.messages.last.content.truncate(9) %></p>
 												<p><%= r.messages.last.created_at.to_s(:long) %></p>
 												<% if r.messages.where(status_open: 0).where.not(user_id: current_user.id).exists? %>
-													<h5 style="color:red; font-weight:bold;">unopened</h5>
+													<h5 style="color:red; font-weight:bold;">Unopened</h5>
 												<% else %>
-													<h5>opened</h5>
+													<h5>Opened</h5>
 												<% end %>
 											</div>
 										</div>
