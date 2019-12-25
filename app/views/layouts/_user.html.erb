@@ -12,11 +12,15 @@
       <%= link_to "Photos", photos_path, class:"nav-button" %>
       <%= link_to "Locals", users_locals_path, class:"nav-button" %>
       <% if Notification.where(checked: false).where(visited_id: current_user.id).exists? %>
-        <%= link_to "Notifications", notifications_path, class:"nav-button", :style=>"color:red" %>
+        <%= link_to "Notifications", notifications_path, class:"nav-button", :style=>"color:red; font-weight:bold;" %>
       <% else %>
         <%= link_to "Notifications", notifications_path, class:"nav-button" %>
       <% end %>
-      <%= link_to "Messages", rooms_path, class:"nav-button" %>
+      <% if Room.joins(:room_users).where("room_users.user_id = ?", current_user.id).map(&:messages).flatten(1).select {|message| message.status_open == 0 && message.user_id != current_user.id }.present? %>
+        <%= link_to "Messages", rooms_path, class:"nav-button", :style=>"color:red; font-weight:bold;" %>
+      <% else %>
+        <%= link_to "Messages", rooms_path, class:"nav-button" %>
+      <% end %>
       <%= link_to "Contacts", new_contact_path, class:"nav-button" %>
       <%= link_to "out", destroy_user_session_path, method: :delete, class:"nav-button" %>
     </div>

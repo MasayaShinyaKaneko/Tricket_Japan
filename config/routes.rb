@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   #favorites controller
   resources :favorites, only: [:create, :destroy]
   #room controller
+  patch '/rooms/status_open'
   resources :rooms, :only => [:create, :show, :index]
   #message controller
   resources :messages, :only => [:create]

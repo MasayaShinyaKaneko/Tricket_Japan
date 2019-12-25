@@ -11,6 +11,8 @@ class RoomsController < ApplicationController
 		    @messages = @room.messages.includes(:user)
 		    @message = Message.new
 		    @roomusers = @room.room_users
+		    messages = @room.messages.where.not(user_id: current_user.id).where(status_open: 0)
+				messages.update(status_open: 1)
 	    else
 	    	redirect_to user_path(current_user)
 	    end
@@ -21,7 +23,11 @@ class RoomsController < ApplicationController
 	    RoomUser.create(room_user_params.merge(:room_id => @room.id))
 	    redirect_to room_path(@room.id)
 	end
-
+	def status_open
+			room = Room.find(params[:room_id])
+			messages = room.messages.where.not(user_id: current_user.id).where(status_open: 0)
+			messages.update(status_open: 1)
+	end
 	private
     def room_user_params
     	params.require(:room_user).permit(:user_id, :room_id)

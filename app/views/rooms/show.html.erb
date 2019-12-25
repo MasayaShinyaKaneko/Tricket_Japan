@@ -35,6 +35,15 @@
               }
           });
       </script>
+      <script>
+          $('#message-container').on("scroll", function(){
+            $.ajax({
+              url: '/rooms/status_open',
+              type: 'patch',
+              data: {room_id: <%= @room.id %>},
+            })
+          });
+      </script>
     </div>
   </div>
 </div>
