@@ -74,7 +74,7 @@ RSpec.describe RoomsController, type: :controller do
     #     room_params = attributes_for(:room)
     #     expect {
     #       post :create, params: { room: room_params }
-    #     }.to change(      , :count).by(1)
+    #     }.to change(Room.  .where(user_id: @user.id), :count).by(1)
     #   end
     # end
     context "as a guest" do
