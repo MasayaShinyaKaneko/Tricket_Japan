@@ -14,9 +14,6 @@ RSpec.describe UsersController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :index_traveler
         expect(response).to have_http_status "302"
@@ -39,9 +36,6 @@ RSpec.describe UsersController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :search_traveler
         expect(response).to have_http_status "302"
@@ -64,9 +58,6 @@ RSpec.describe UsersController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :index_local
         expect(response).to have_http_status "302"
@@ -89,9 +80,6 @@ RSpec.describe UsersController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :search_local
         expect(response).to have_http_status "302"

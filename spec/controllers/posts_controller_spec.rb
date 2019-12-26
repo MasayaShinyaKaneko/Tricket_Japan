@@ -14,9 +14,6 @@ RSpec.describe PostsController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :top
         expect(response).to have_http_status "302"
@@ -39,9 +36,6 @@ RSpec.describe PostsController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :index
         expect(response).to have_http_status "302"
@@ -64,9 +58,6 @@ RSpec.describe PostsController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :sort
         expect(response).to have_http_status "302"
@@ -91,7 +82,6 @@ RSpec.describe PostsController, type: :controller do
     end
     context "as a guest" do
       before do
-        @user = create(:user)
         @post = create(:post)
       end
       it "responds successfully" do
@@ -112,9 +102,6 @@ RSpec.describe PostsController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :new
         expect(response).to have_http_status "302"
@@ -137,9 +124,6 @@ RSpec.describe PostsController, type: :controller do
       end
     end
     context "as a guest" do
-      before do
-        @user = create(:user)
-      end
       it "returns a 302 response" do
         get :index_photo
         expect(response).to have_http_status "302"
@@ -176,7 +160,6 @@ RSpec.describe PostsController, type: :controller do
     end
     context "as a guest" do
       before do
-        @user = create(:user)
         @post = create(:post)
       end
       it "returns a 302 response" do
@@ -230,7 +213,6 @@ RSpec.describe PostsController, type: :controller do
     end
     context "as a guest" do
       before do
-        @user = create(:user)
         @post = create(:post)
       end
       it "returns a 302 response" do
@@ -260,7 +242,6 @@ RSpec.describe PostsController, type: :controller do
     end
     context "as a guest" do
       before do
-        @user = create(:user)
         @post = create(:post)
       end
       it "returns a 302 response" do
@@ -290,7 +271,6 @@ RSpec.describe PostsController, type: :controller do
     end
     context "as a guest" do
       before do
-        @user = create(:user)
         @post = create(:post)
       end
       it "returns a 302 response" do
@@ -320,7 +300,6 @@ RSpec.describe PostsController, type: :controller do
     end
     context "as a guest" do
       before do
-        @user = create(:user)
         @post = create(:post)
       end
       it "returns a 302 response" do
