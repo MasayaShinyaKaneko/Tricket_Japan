@@ -74,11 +74,14 @@ class UsersController < ApplicationController
 	    end
 	end
 	def favorite
-			@user = current_user
+			@user = User.find(params[:id])
 			@posts_like = @user.likes.map(&:post)
 			@users = @user.followings
 			@comments = Comment.where(user_id: @user.id)
 			@post_comments = @comments.map{|c| Post.find_by(id: c.post.id)}.uniq
+			if @user != current_user
+      	redirect_to posts_top_path
+      end
 	end
 	def edit
       @nationality = NATIOALITY
@@ -87,9 +90,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
 			if @user != current_user
       	redirect_to posts_top_path
-      else
-      	@user = User.find(params[:id])
-      	render :edit
       end
 	end
 	def update

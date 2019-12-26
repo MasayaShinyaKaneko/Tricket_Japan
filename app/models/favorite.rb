@@ -1,7 +1,6 @@
 class Favorite < ApplicationRecord
 
-  validates :user_id, presence: true, uniqueness: { scope: :follow_id }
-  validates :follow_id, presence: true
+  validates :user_id, uniqueness: { scope: :follow_id }
 
   belongs_to :user
   belongs_to :follow, class_name: 'User'

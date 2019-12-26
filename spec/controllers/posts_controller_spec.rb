@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe PostsController, type: :controller do
 
-  describe "GET #index_traveler" do
+  describe "GET #top" do
     context "as a logged in user" do
       before do
         @user = create(:user)
         sign_in @user
       end
       it "responds successfully" do
-        get :index_traveler
+        get :top
         expect(response).to be_successful
       end
     end
@@ -18,23 +18,23 @@ RSpec.describe UsersController, type: :controller do
         @user = create(:user)
       end
       it "returns a 302 response" do
-        get :index_traveler
+        get :top
         expect(response).to have_http_status "302"
       end
       it "redirects to the sign-in page" do
-        get :index_traveler
+        get :top
         expect(response).to redirect_to "/users/sign_in"
       end
     end
   end
-  describe "GET #search_traveler" do
+  describe "GET #index" do
     context "as a logged in user" do
       before do
         @user = create(:user)
         sign_in @user
       end
       it "responds successfully" do
-        get :search_traveler
+        get :index
         expect(response).to be_successful
       end
     end
@@ -43,23 +43,23 @@ RSpec.describe UsersController, type: :controller do
         @user = create(:user)
       end
       it "returns a 302 response" do
-        get :search_traveler
+        get :index
         expect(response).to have_http_status "302"
       end
       it "redirects to the sign-in page" do
-        get :search_traveler
+        get :index
         expect(response).to redirect_to "/users/sign_in"
       end
     end
   end
-  describe "GET #index_local" do
+  describe "GET #sort" do
     context "as a logged in user" do
       before do
         @user = create(:user)
         sign_in @user
       end
       it "responds successfully" do
-        get :index_local
+        get :sort
         expect(response).to be_successful
       end
     end
@@ -68,36 +68,11 @@ RSpec.describe UsersController, type: :controller do
         @user = create(:user)
       end
       it "returns a 302 response" do
-        get :index_local
+        get :sort
         expect(response).to have_http_status "302"
       end
       it "redirects to the sign-in page" do
-        get :index_local
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-  end
-  describe "GET #search_local" do
-    context "as a logged in user" do
-      before do
-        @user = create(:user)
-        sign_in @user
-      end
-      it "responds successfully" do
-        get :search_local
-        expect(response).to be_successful
-      end
-    end
-    context "as a guest" do
-      before do
-        @user = create(:user)
-      end
-      it "returns a 302 response" do
-        get :search_local
-        expect(response).to have_http_status "302"
-      end
-      it "redirects to the sign-in page" do
-        get :search_local
+        get :sort
         expect(response).to redirect_to "/users/sign_in"
       end
     end
@@ -107,46 +82,33 @@ RSpec.describe UsersController, type: :controller do
       before do
         @user = create(:user)
         sign_in @user
+        @post = create(:post)
       end
       it "responds successfully" do
-        get :show, params: { id: @user.id }
+        get :show, params: { id: @post.id }
         expect(response).to be_successful
       end
     end
     context "as a guest" do
       before do
         @user = create(:user)
+        @post = create(:post)
       end
-      it "returns a 302 response" do
-        get :show, params: { id: @user.id }
-        expect(response).to have_http_status "302"
-      end
-      it "redirects to the sign-in page" do
-        get :show, params: { id: @user.id }
-        expect(response).to redirect_to "/users/sign_in"
+      it "responds successfully" do
+        get :show, params: { id: @post.id }
+        expect(response).to be_successful
       end
     end
   end
-  describe "GET #favorite" do
-    context "as an authenticated user" do
+  describe "GET #new" do
+    context "as a logged in user" do
       before do
         @user = create(:user)
         sign_in @user
       end
       it "responds successfully" do
-        get :favorite, params: { id: @user.id }
+        get :new
         expect(response).to be_successful
-      end
-    end
-    context "as an unauthorized user" do
-      before do
-        @user = create(:user)
-        @other_user = create(:user)
-        sign_in @other_user
-      end
-      it "redirects to the dashboard" do
-        get :favorite, params: { id: @user.id }
-        expect(response).to redirect_to posts_top_path
       end
     end
     context "as a guest" do
@@ -154,171 +116,225 @@ RSpec.describe UsersController, type: :controller do
         @user = create(:user)
       end
       it "returns a 302 response" do
-        get :favorite, params: { id: @user.id }
+        get :new
         expect(response).to have_http_status "302"
       end
       it "redirects to the sign-in page" do
-        get :favorite, params: { id: @user.id }
+        get :new
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
+  describe "GET #index_photo" do
+    context "as a logged in user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+      end
+      it "responds successfully" do
+        get :index_photo
+        expect(response).to be_successful
+      end
+    end
+    context "as a guest" do
+      before do
+        @user = create(:user)
+      end
+      it "returns a 302 response" do
+        get :index_photo
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        get :index_photo
         expect(response).to redirect_to "/users/sign_in"
       end
     end
   end
   describe "GET #edit" do
-    context "as an authenticated user" do
-      before do
-        @user = create(:user)
-        sign_in @user
-      end
-      it "responds successfully" do
-        get :edit, params: { id: @user.id }
-        expect(response).to be_successful
-      end
-    end
-    context "as an unauthorized user" do
-      before do
-        @user = create(:user)
-        @other_user = create(:user)
-        sign_in @other_user
-      end
-      it "redirects to the dashboard" do
-        get :edit, params: { id: @user.id }
-        expect(response).to redirect_to posts_top_path
-      end
-    end
-    context "as a guest" do
-      before do
-        @user = create(:user)
-      end
-      it "returns a 302 response" do
-        get :edit, params: { id: @user.id }
-        expect(response).to have_http_status "302"
-      end
-      it "redirects to the sign-in page" do
-        get :edit, params: { id: @user.id }
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-  end
-  describe "GET #unsubscribe" do
-    context "as an authenticated user" do
-      before do
-        @user = create(:user)
-        sign_in @user
-      end
-      it "responds successfully" do
-        get :unsubscribe, params: { id: @user.id }
-        expect(response).to be_successful
-      end
-    end
-    context "as an unauthorized user" do
-      before do
-        @user = create(:user)
-        @other_user = create(:user)
-        sign_in @other_user
-      end
-      it "redirects to the dashboard" do
-        get :unsubscribe, params: { id: @user.id }
-        expect(response).to redirect_to posts_top_path
-      end
-    end
-    context "as a guest" do
-      before do
-        @user = create(:user)
-      end
-      it "returns a 302 response" do
-        get :unsubscribe, params: { id: @user.id }
-        expect(response).to have_http_status "302"
-      end
-      it "redirects to the sign-in page" do
-        get :unsubscribe, params: { id: @user.id }
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-  end
-  describe"PATCH #update"do
-    context "as an authenticated user" do
-      before do
-        @user = create(:user)
-        sign_in @user
-      end
-      it "updates a user" do
-        user_params = attributes_for(:user, name_user: "MSK")
-        patch :update, params: { id: @user.id, user: user_params }
-        expect(@user.reload.name_user).to eq "MSK"
-      end
-    end
-    context "as a guest" do
-      before do
-        @user = create(:user)
-      end
-      it "returns a 302 response" do
-        user_params = attributes_for(:user)
-        patch :update, params: { id: @user.id, user: user_params }
-        expect(response).to have_http_status "302"
-      end
-      it "redirects to the sign-in page" do
-        user_params = attributes_for(:user)
-        patch :update, params: { id: @user.id, user: user_params }
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-  end
-  describe "PATCH #status_user"do
-    context "as an authenticated user" do
-      before do
-        @user = create(:user)
-        sign_in @user
-      end
-      it "updates a user status" do
-        user_params = attributes_for(:user, status_user: 1)
-        patch :status_user, params: { id: @user.id, user: user_params }
-        expect(@user.reload.status_user).to eq 1
-      end
-    end
-    context "as a guest" do
-      before do
-        @user = create(:user)
-      end
-      it "returns a 302 response" do
-        user_params = attributes_for(:user)
-        patch :status_user, params: { id: @user.id, user: user_params }
-        expect(response).to have_http_status "302"
-      end
-      it "redirects to the sign-in page" do
-        user_params = attributes_for(:user)
-        patch :status_user, params: { id: @user.id, user: user_params }
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-  end
-  describe "DELETE #destroy" do
     context "as an authorized user" do
       before do
         @user = create(:user)
         sign_in @user
+        @post = create(:post, user: @user)
       end
-      it "deletes a user" do
-        expect {
-          delete :destroy, params: { id: @user.id }
-        }.to change(User, :count).by(-1)
+      it "responds successfully" do
+        get :edit, params: { id: @post.id }
+        expect(response).to be_successful
+      end
+    end
+    context "as an unauthorized user" do
+      before do
+        @user = create(:user)
+        @other_user = create(:user)
+        sign_in @user
+        @post = create(:post, user: @other_user)
+      end
+      it "redirects to the dashboard" do
+        get :edit, params: { id: @post.id }
+        expect(response).to redirect_to posts_top_path
       end
     end
     context "as a guest" do
       before do
         @user = create(:user)
+        @post = create(:post)
       end
       it "returns a 302 response" do
-        delete :destroy, params: { id: @user.id }
+        get :edit, params: { id: @post.id }
         expect(response).to have_http_status "302"
       end
       it "redirects to the sign-in page" do
-        delete :destroy, params: { id: @user.id }
+        get :edit, params: { id: @post.id }
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
+  describe"POST #create"do
+    context "as an authenticated user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+      end
+      it "adds a post" do
+        post_params = attributes_for(:post)
+        expect {
+          post :create, params: { post: post_params }
+        }.to change(@user.posts, :count).by(1)
+      end
+    end
+    context "as a guest" do
+      it "returns a 302 response" do
+        post_params = attributes_for(:post)
+        post :create, params: { post: post_params }
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        post_params = attributes_for(:post)
+        post :create, params: { post: post_params }
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
+  describe "PATCH #update_accomplish"do
+    context "as an authorized user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+        @post = create(:post, user: @user)
+      end
+      it "updates a post status for accomplishment" do
+        post_params = attributes_for(:post, status_accomplishment: 1)
+        patch :update_accomplish, params: { id: @post.id, post: post_params }
+        expect(@post.reload.status_accomplishment).to eq "Accomplished"
+      end
+    end
+    context "as a guest" do
+      before do
+        @user = create(:user)
+        @post = create(:post)
+      end
+      it "returns a 302 response" do
+        post_params = attributes_for(:post, status_accomplishment: 1)
+        patch :update_accomplish, params: { id: @post.id, post: post_params }
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        post_params = attributes_for(:post, status_accomplishment: 1)
+        patch :update_accomplish, params: { id: @post.id, post: post_params }
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
+  describe "PATCH #reset_accomplish"do
+    context "as an authorized user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+        @post = create(:post, user: @user, status_accomplishment: 1)
+      end
+      it "updates a post status for accomplishment" do
+        post_params = attributes_for(:post, status_accomplishment: 0)
+        patch :reset_accomplish, params: { id: @post.id, post: post_params }
+        expect(@post.reload.status_accomplishment).to eq "Ongoing"
+      end
+    end
+    context "as a guest" do
+      before do
+        @user = create(:user)
+        @post = create(:post)
+      end
+      it "returns a 302 response" do
+        post_params = attributes_for(:post, status_accomplishment: 0)
+        patch :reset_accomplish, params: { id: @post.id, post: post_params }
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        post_params = attributes_for(:post, status_accomplishment: 0)
+        patch :reset_accomplish, params: { id: @post.id, post: post_params }
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
+  describe "PATCH #update"do
+    context "as an authorized user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+        @post = create(:post, user: @user)
+      end
+      it "updates a post" do
+        post_params = attributes_for(:post, title: "Test Post")
+        patch :update, params: { id: @post.id, post: post_params }
+        expect(@post.reload.title).to eq "Test Post"
+      end
+    end
+    context "as a guest" do
+      before do
+        @user = create(:user)
+        @post = create(:post)
+      end
+      it "returns a 302 response" do
+        post_params = attributes_for(:post, title: "Test Post")
+        patch :update, params: { id: @post.id, post: post_params }
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        post_params = attributes_for(:post, title: "Test Post")
+        patch :update, params: { id: @post.id, post: post_params }
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
+  describe "DELETE #destroy"do
+    context "as an authorized user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+        @post = create(:post, user: @user)
+      end
+      it "deletes a post" do
+        expect {
+          delete :destroy, params: { id: @post.id }
+        }.to change(Post, :count).by(-1)
+      end
+    end
+    context "as a guest" do
+      before do
+        @user = create(:user)
+        @post = create(:post)
+      end
+      it "returns a 302 response" do
+        delete :destroy, params: { id: @post.id }
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        delete :destroy, params: { id: @post.id }
         expect(response).to redirect_to "/users/sign_in"
       end
       it "does not delete the user" do
         expect {
-          delete :destroy, params: { id: @user.id }
-        }.to_not change(User, :count)
+          delete :destroy, params: { id: @post.id }
+        }.to_not change(Post, :count)
       end
     end
   end
