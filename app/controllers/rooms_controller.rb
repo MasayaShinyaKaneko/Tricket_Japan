@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
 		    messages = @room.messages.where.not(user_id: current_user.id).where(status_open: 0)
 				messages.update(status_open: 1)
 	    else
-	    	redirect_to user_path(current_user)
+	    	redirect_to posts_top_path
 	    end
 	end
 	def create
