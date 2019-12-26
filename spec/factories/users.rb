@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :user, aliases: [:follow] do
     name_first { "Masaya" }
     name_last { "Kaneko" }
     sequence(:name_user) {  |n| "MSK#{n}" }
