@@ -24,7 +24,7 @@ URL: http://52.199.43.118/
 ・Ajax(非同期通信)  
 ・JQuery  
 ・Bootstrap  
-## サーバサイド  
+### サーバサイド  
 ・RSpec(テストコード) 
 ・Actionmailer(お問い合わせメール)  
 ・carrierwave(動画や写真投稿)  
