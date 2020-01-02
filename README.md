@@ -1,4 +1,6 @@
-# README
+# アプリケーション名 ”Tricket Japan”
+URL: http://52.199.43.118/
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
