@@ -172,17 +172,27 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-  describe"POST #create"do
+  describe"POST #create" do
     context "as an authenticated user" do
       before do
         @user = create(:user)
         sign_in @user
       end
-      it "adds a post" do
-        post_params = attributes_for(:post)
-        expect {
-          post :create, params: { post: post_params }
-        }.to change(@user.posts, :count).by(1)
+      context "with valid attributes" do
+        it "adds a post" do
+          post_params = attributes_for(:post)
+          expect {
+            post :create, params: { post: post_params }
+          }.to change(@user.posts, :count).by(1)
+        end
+      end
+      context "with invalid attributes" do
+        it "does not add a post" do
+          post_params = attributes_for(:post, :invalid)
+          expect {
+            post :create, params: { post: post_params }
+          }.to_not change(@user.posts, :count)
+        end
       end
     end
     context "as a guest" do
@@ -198,7 +208,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-  describe "PATCH #update_accomplish"do
+  describe "PATCH #update_accomplish" do
     context "as an authorized user" do
       before do
         @user = create(:user)
@@ -227,7 +237,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-  describe "PATCH #reset_accomplish"do
+  describe "PATCH #reset_accomplish" do
     context "as an authorized user" do
       before do
         @user = create(:user)
@@ -256,7 +266,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-  describe "PATCH #update"do
+  describe "PATCH #update" do
     context "as an authorized user" do
       before do
         @user = create(:user)
@@ -285,7 +295,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-  describe "DELETE #destroy"do
+  describe "DELETE #destroy" do
     context "as an authorized user" do
       before do
         @user = create(:user)

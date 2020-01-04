@@ -67,35 +67,35 @@ RSpec.describe Post, type: :model do
 
     context "length validation" do
       it "is invalid with title that has not less than 51 characters" do
-        post = build(:post, title: "a"*51)
+        post = build(:post, :too_long_title)
         expect(post).to_not be_valid
       end
       it "is valid with title that has not more than 50 characters" do
-        post = build(:post, title: "a"*50)
+        post = build(:post, :short_enough_title)
         expect(post).to be_valid
       end
       it "is invalid with content that has not less than 501 characters" do
-        post = build(:post, content: "a"*501)
+        post = build(:post, :too_long_content)
         expect(post).to_not be_valid
       end
       it "is valid with content that has not more than 500 characters" do
-        post = build(:post, content: "a"*500)
+        post = build(:post, :short_enough_content)
         expect(post).to be_valid
       end
       it "is invalid with time_todo that has not less than 51 characters" do
-        post = build(:post, time_todo: "a"*51)
+        post = build(:post, :too_long_time_todo)
         expect(post).to_not be_valid
       end
       it "is valid with time_todo that has not more than 50 characters" do
-        post = build(:post, time_todo: "a"*50)
+        post = build(:post, :short_enough_time_todo)
         expect(post).to be_valid
       end
       it "is invalid with place_todo that has not less than 51 characters" do
-        post = build(:post, place_todo: "a"*51)
+        post = build(:post, :too_long_place_todo)
         expect(post).to_not be_valid
       end
       it "is valid with place_todo that has not more than 50 characters" do
-        post = build(:post, place_todo: "a"*50)
+        post = build(:post, :short_enough_place_todo)
         expect(post).to be_valid
       end
     end

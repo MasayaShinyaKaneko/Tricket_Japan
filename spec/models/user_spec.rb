@@ -55,7 +55,6 @@ RSpec.describe User, type: :model do
       end
     end
 
-#uniquenessのテストはこれで合ってる？
     context "uniquness validation / email" do
       before do
         user = create(:user, email: "example@test.com")
@@ -86,34 +85,34 @@ RSpec.describe User, type: :model do
 
     context "length validation" do
       it "is invalid with first name that has not less than 21 characters" do
-        user = build(:user, name_first: "a"*21)
+        user = build(:user, :too_long_first_name)
         expect(user).to_not be_valid
       end
       it "is valid with first name that has not more than 20 characters" do
-        user = build(:user, name_first: "a"*20)
+        user = build(:user, :short_enough_first_name)
         expect(user).to be_valid
       end
       it "is invalid with last name that has not less than 21 characters" do
-        user = build(:user, name_last: "a"*21)
+        user = build(:user, :too_long_last_name)
         expect(user).to_not be_valid
       end
       it "is valid with last name that has not more than 20 characters" do
-        user = build(:user, name_last: "a"*20)
+        user = build(:user, :short_enough_last_name)
         expect(user).to be_valid
       end
       it "is invalid with password that has not more than 5 characters" do
-        user = build(:user, password: "a"*5, password_confirmation: "a"*5)
+        user = build(:user, :too_short_password)
         expect(user).to_not be_valid
       end
       it "is valid with password that has not less than 6 characters" do
-        user = build(:user, password: "a"*6, password_confirmation: "a"*6)
+        user = build(:user, :long_enough_password)
         expect(user).to be_valid
       end
     end
 
     context "other validation" do
       it "is invalid with password that has different confirmaiton" do
-        user = build(:user, password: "a"*6, password_confirmation: "b"*6)
+        user = build(:user, :different_password_confirmation)
         expect(user).to_not be_valid
       end
     end

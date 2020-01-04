@@ -21,19 +21,19 @@ RSpec.describe Contact, type: :model do
 
     context "length validation" do
       it "is invalid with subject that has not less than 51 characters" do
-        contact = build(:contact, subject: "a"*51)
+        contact = build(:contact, :too_long_subject)
         expect(contact).to_not be_valid
       end
       it "is valid with subject that has not more than 50 characters" do
-        contact = build(:contact, subject: "a"*50)
+        contact = build(:contact, :short_enough_subject)
         expect(contact).to be_valid
       end
       it "is invalid with content that has not less than 501 characters" do
-        contact = build(:contact, content: "a"*501)
+        contact = build(:contact, :too_long_content)
         expect(contact).to_not be_valid
       end
       it "is valid with content that has not more than 500 characters" do
-        contact = build(:contact, content: "a"*500)
+        contact = build(:contact, :short_enough_content)
         expect(contact).to be_valid
       end
     end
