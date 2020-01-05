@@ -64,19 +64,20 @@ RSpec.describe RoomsController, type: :controller do
       end
     end
   end
-  describe"POST #create"do
-    # context "as an authenticated user" do
-    #   before do
-    #     @user = create(:user)
-    #     sign_in @user
-    #   end
-    #   it "adds a room" do
-    #     room_params = attributes_for(:room)
-    #     expect {
-    #       post :create, params: { room: room_params }
-    #     }.to change(Room.  .where(user_id: @user.id), :count).by(1)
-    #   end
-    # end
+  describe "POST #create" do
+    context "as an authenticated user" do
+      before do
+        @user = create(:user)
+        @other_user = create(:user)
+        sign_in @user
+      end
+      it "adds a room" do
+        room_user_params = attributes_for(:room_user, user_id: @other_user.id)
+        expect {
+          post :create, params: { room_user: room_user_params }
+        }.to change(@user.rooms, :count).by(1)
+      end
+    end
     context "as a guest" do
       it "returns a 302 response" do
         room_params = attributes_for(:room)

@@ -252,17 +252,17 @@ RSpec.describe UsersController, type: :controller do
     end
   end
   describe "PATCH #status_user"do
-    # context "as an authenticated user" do
-    #   before do
-    #     @user = create(:user)
-    #     sign_in @user
-    #   end
-    #   it "updates a user status" do
-    #     user_params = attributes_for(:user, status_user: 1)
-    #     patch :status_user, params: { id: @user.id, user: user_params }
-    #     expect(@user.reload.status_user).to eq "Busy"
-    #   end
-    # end
+    context "as an authenticated user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+      end
+      it "updates a user status" do
+        user_params = attributes_for(:user, status_user: 1)
+        patch :status_user, xhr: true, params: { id: @user.id, user: user_params }
+        expect(@user.reload.status_user).to eq "Busy"
+      end
+    end
     context "as a guest" do
       before do
         @user = create(:user)

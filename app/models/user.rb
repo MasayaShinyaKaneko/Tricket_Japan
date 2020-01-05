@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :room_users, dependent: :destroy
+  has_many :rooms, through: :room_users
   has_many :favorites
   has_many :followings, through: :favorites, source: :follow
   has_many :reverse_of_favorites, class_name: 'Favorite', foreign_key: 'follow_id'
