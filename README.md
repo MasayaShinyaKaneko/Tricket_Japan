@@ -25,7 +25,7 @@ URL: http://52.199.43.118/
 ・JQuery  
 ・Bootstrap  
 ### サーバサイド  
-・RSpec(テストコード) 
+・RSpec(テストコード)  
 ・Actionmailer(お問い合わせメール)  
 ・carrierwave(動画や写真投稿)  
 ・enum(数字と値の変換)  
