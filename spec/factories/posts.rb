@@ -14,28 +14,28 @@ FactoryBot.define do
     end
 
     trait :too_long_title do
-      title { "a"*51 }
+      title { Faker::Lorem.characters(number: 51) }
     end
     trait :short_enough_title do
-      title { "a"*50 }
+      title { Faker::Lorem.characters(number: 50) }
     end
     trait :too_long_content do
-      content { "a"*501 }
+      content { Faker::Lorem.characters(number: 501) }
     end
     trait :short_enough_content do
-      content { "a"*500 }
+      content { Faker::Lorem.characters(number: 500) }
     end
     trait :too_long_time_todo do
-      time_todo { "a"*51 }
+      time_todo { Faker::Lorem.characters(number: 51) }
     end
     trait :short_enough_time_todo do
-      time_todo { "a"*50 }
+      time_todo { Faker::Lorem.characters(number: 50) }
     end
     trait :too_long_place_todo do
-      place_todo { "a"*51 }
+      place_todo { Faker::Lorem.characters(number: 51) }
     end
     trait :short_enough_place_todo do
-      place_todo { "a"*50 }
+      place_todo { Faker::Lorem.characters(number: 50) }
     end
   end
 end
