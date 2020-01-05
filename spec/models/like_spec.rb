@@ -6,7 +6,6 @@ RSpec.describe Like, type: :model do
   end
 
   describe "validation" do
-
     context "uniqueness validation" do
       before do
         @like = create(:like)

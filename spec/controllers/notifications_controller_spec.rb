@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe NotificationsController, type: :controller do
-
   describe "GET #index" do
     context "as a logged in user" do
       before do

@@ -14,7 +14,6 @@ FactoryBot.define do
     trait :invalid do
       title {}
     end
-
     trait :too_long_title do
       title { Faker::Lorem.characters(number: 51) }
     end

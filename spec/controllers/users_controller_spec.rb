@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
   describe "GET #index_traveler" do
     context "as a logged in user" do
       before do

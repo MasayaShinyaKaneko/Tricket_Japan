@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it "has a valid factory" do
     expect(create(:user)).to be_valid
   end
 
   describe "validation" do
-
     context "presence validation" do
     	it "is invalid without a first name" do
         user = build(:user, name_first: nil)
@@ -54,7 +52,6 @@ RSpec.describe User, type: :model do
         expect(user).to_not be_valid
       end
     end
-
     context "uniquness validation / email" do
       before do
         user = create(:user, email: "example@test.com")
@@ -68,7 +65,6 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
     end
-
     context "uniquness validation / user name" do
       before do
         user = create(:user, name_user: "MSK")
@@ -82,7 +78,6 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
     end
-
     context "length validation" do
       it "is invalid with first name that has not less than 21 characters" do
         user = build(:user, :too_long_first_name)
@@ -109,7 +104,6 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
     end
-
     context "other validation" do
       it "is invalid with password that has different confirmaiton" do
         user = build(:user, :different_password_confirmation)

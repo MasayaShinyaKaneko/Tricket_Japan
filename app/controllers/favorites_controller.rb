@@ -1,5 +1,7 @@
 class FavoritesController < ApplicationController
 
+  before_action :authenticate_user!
+
   def create
       user = User.find(params[:follow_id])
       if Favorite.where(user_id: current_user.id, follow_id: user.id).exists?

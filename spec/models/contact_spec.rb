@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Contact, type: :model do
-
   it "has a valid factory" do
     expect(create(:contact)).to be_valid
   end
 
   describe "validation" do
-
     context "presence validation" do
       it "is invalid without a subject" do
         contact = build(:contact, subject: nil)
@@ -18,7 +16,6 @@ RSpec.describe Contact, type: :model do
         expect(contact).to_not be_valid
       end
     end
-
     context "length validation" do
       it "is invalid with subject that has not less than 51 characters" do
         contact = build(:contact, :too_long_subject)

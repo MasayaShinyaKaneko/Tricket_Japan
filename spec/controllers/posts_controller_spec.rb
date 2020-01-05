@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-
   describe "GET #top" do
     context "as a logged in user" do
       before do
@@ -305,7 +304,7 @@ RSpec.describe PostsController, type: :controller do
       it "deletes a post" do
         expect {
           delete :destroy, params: { id: @post.id }
-        }.to change(Post, :count).by(-1)
+        }.to change(@user.posts, :count).by(-1)
       end
     end
     context "as a guest" do

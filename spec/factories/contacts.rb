@@ -7,6 +7,9 @@ FactoryBot.define do
     status_reply { 0 }
     association :user
 
+    trait :invalid do
+      subject {}
+    end
     trait :too_long_subject do
       subject { Faker::Lorem.characters(number: 51) }
     end

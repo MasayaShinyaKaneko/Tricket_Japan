@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-
   it "has a valid factory" do
     expect(create(:post)).to be_valid
   end
 
   describe "validation" do
-
     context "presence validation" do
       it "is invalid without a title" do
         post = build(:post, title: nil)
@@ -64,7 +62,6 @@ RSpec.describe Post, type: :model do
         expect(post).to be_valid
       end
     end
-
     context "length validation" do
       it "is invalid with title that has not less than 51 characters" do
         post = build(:post, :too_long_title)
