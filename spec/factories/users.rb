@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryBot.define do
   password = Faker::Lorem.characters(number: 6)
   too_short_password = Faker::Lorem.characters(number: 5)

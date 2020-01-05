@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryBot.define do
   factory :post do
     sequence(:title) { |n| "Test Post#{n}" }

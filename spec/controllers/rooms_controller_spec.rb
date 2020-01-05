@@ -91,4 +91,29 @@ RSpec.describe RoomsController, type: :controller do
       end
     end
   end
+  describe "PATCH #status_open"do
+    context "as an authenticated user" do
+      before do
+        @user = create(:user)
+        sign_in @user
+        @room = create(:room, :with_messages)
+      end
+      it "updates messages status" do
+        patch :status_open, params: { room_id: @room.id }
+        expect(@room.messages).to all(satisfy {|message| message.reload.status_open == 1 })
+      end
+    end
+    context "as a guest" do
+      it "returns a 302 response" do
+        room_params = attributes_for(:room)
+        post :create, params: { room: room_params }
+        expect(response).to have_http_status "302"
+      end
+      it "redirects to the sign-in page" do
+        room_params = attributes_for(:room)
+        post :create, params: { room: room_params }
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+  end
 end
