@@ -187,9 +187,13 @@
 		</div>
 		<div class="col-md-4">
 			<h2 style="margin-top: 0;">Map</h2>
-			<div id="target_posted"></div>
-			<p>Address: <br>
-			   中野坂上</p>
+			<% if @post.address? %>
+				<div id="target_posted"></div>
+				<p>Address: <br>
+				   <%= @post.address %></p>
+			<% else %>
+			  <p>No information<br>
+			<% end %>
 		</div>
 	</div>
 	<div class="row" style="background-color:#EFE9D1;">
@@ -244,15 +248,15 @@
 			<div class="row" style="background-color:#EFE9D1;">
 				<div class="col-md-12">
 					<h1 class="title_type1_traveler">Post accomplished message</h1>
-				</div>
-			</div>
-			<div class="row" style="background-color:#EFE9D1;">
-				<div class="col-md-6">
 					<% if flash[:accomplish] %>
 						<div id="flash" class="alert alert-success" role="alert">
 							<%= flash[:accomplish] %>
 						</div>
 					<% end %>
+				</div>
+			</div>
+			<div class="row" style="background-color:#EFE9D1;">
+				<div class="col-md-6">
 					<% if flash[:error] %>
 						<div id="flash" class="alert alert-danger" role="alert">
 							<%= flash[:error] %>
@@ -274,7 +278,7 @@
 				</div>
 				<div class="col-md-6">
 						<%= f.label :map %>
-	        	<%= f.text_field :comment_accomplishment, id:"address", :style=>"width: 80%;", placeholder: "Address or name of the place" %>
+	        	<%= f.text_field :address, id:"address", :style=>"width: 80%;", placeholder: "Address or name of the place" %>
 	        	<div id="target_post"></div>
 				  <% end %>
 				</div>
@@ -340,7 +344,7 @@
 
     map_post = new google.maps.Map(target_post,{
       center: tokyo,
-      zoom: 10,
+      zoom: 16,
       disableDefaultUI: true,
       zoomControl: true
     });
@@ -353,10 +357,10 @@
 	    	geo_post = new google.maps.Geocoder();
 		    geo_post.geocode({address: e.target.value}, geoResultCallback);
 		    function geoResultCallback(result, status) {
-		      if (status != google.maps.GeocoderStatus.OK) {
-		        alert("No places found")
-		        return;
-		      }
+		      // if (status != google.maps.GeocoderStatus.OK) {
+		      //   alert("No places found")
+		      //   return;
+		      // }
 		      var latlng_post = result[0].geometry.location;
 		      map_post.setCenter(latlng_post);
 		      var marker_post = new google.maps.Marker({position:latlng_post, map:map_post});
@@ -368,12 +372,12 @@
     });
 
     geo_posted = new google.maps.Geocoder();
-    geo_posted.geocode({address: "中野坂上駅"}, geoResultCallback);
+    geo_posted.geocode({address: '<%= @post.address %>'}, geoResultCallback);
 		function geoResultCallback(result, status) {
-			if (status != google.maps.GeocoderStatus.OK) {
-        alert("No places found")
-        return;
-      }
+			// if (status != google.maps.GeocoderStatus.OK) {
+   //      alert("No places found")
+   //      return;
+   //    }
       if (result[0]){
       	map_posted = new google.maps.Map(target_posted,{
       		center: result[0].geometry.location,
@@ -385,8 +389,8 @@
 				map_posted.setCenter(latlng_posted);
 			  var marker_posted = new google.maps.Marker({position:latlng_posted, map:map_posted});
       } else {
-      	alert("No places found")
-        return;
+      	// alert("No places found")
+       //  return;
       }
     }
   };
