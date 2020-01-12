@@ -115,7 +115,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="Tricket-post-image">
 				<% if @post.post_image? %>
 					<% if @post.post_image.file.content_type.include?('image/') %>
@@ -131,21 +131,29 @@
 				<% end %>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<h2>When</h2>
-			<% if @post.time_todo.present? %>
-				<%= @post.time_todo %>
-			<% else %>
-				<p> Not particuler</p>
-			<% end %>
-			<h2>Where</h2>
-			<% if @post.place_todo.present? %>
-				<%= @post.place_todo %>
-			<% else %>
-				<p> Not particuler</p>
-			<% end %>
-			<h2>Details</h2>
-			<%= @post.content %>
+		<div class="col-md-8">
+			<div class="Tricket-post-detail-top clearfix">
+				<div class="Tricket-post-when">
+					<h2>When</h2>
+					<% if @post.time_todo.present? %>
+						<%= @post.time_todo %>
+					<% else %>
+						<p> Not particuler</p>
+					<% end %>
+				</div>
+				<div class="Tricket-post-where">
+					<h2>Where</h2>
+					<% if @post.place_todo.present? %>
+						<%= @post.place_todo %>
+					<% else %>
+						<p> Not particuler</p>
+					<% end %>
+				</div>
+			</div>
+			<div class="Tricket-post-details">
+				<h2>Details</h2>
+				<%= @post.content %>
+			</div>
 		</div>
 	</div>
 	<h3 style="text-align: center;"><%= link_to "Back to Trickets", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
@@ -153,8 +161,12 @@
 <!-- Tricket達成時の投稿表示 -->
 	<% if @post.status_accomplishment_before_type_cast == 1 %>
 	<div class="row" style="background-color:#EFE9D1;">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<h1 class="title_type1_traveler">This Tricket had come true!!</h1>
+		</div>
+	</div>
+	<div class="row" style="background-color:#EFE9D1;">
+		<div class="col-md-4">
 			<div class="Tricket-post-image">
 				<% if @post.image_accomplishment? %>
 					<% if @post.image_accomplishment.file.content_type.include?('image/') %>
@@ -168,14 +180,25 @@
 				<% end %>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<h2>Comment from <%= link_to "#{@user.name_user}", user_path(@user) %></h2>
+		<div class="col-md-4">
+			<h2 style="margin-top: 0;">Message from<br>
+				  <%= link_to "#{@user.name_user}", user_path(@user) %></h2>
 			<%= @post.comment_accomplishment %>
+		</div>
+		<div class="col-md-4">
+			<h2 style="margin-top: 0;">Map</h2>
+			<% if @post.address? %>
+				<div id="target_posted"></div>
+				<p>Address: <br>
+				   <%= @post.address %></p>
+			<% else %>
+			  <p>No information<br>
+			<% end %>
 		</div>
 	</div>
 	<div class="row" style="background-color:#EFE9D1;">
 		<div class="col-md-12">
-		<h3 style="text-align: center;"><%= link_to "Back to Trickets", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
+		<h3 style="text-align: center; margin: 10px 0;"><%= link_to "Back to Trickets", posts_top_path, class:"label label-default", :style=>"background-color: #c77eb5;" %></h3>
 		</div>
 	</div>
 	<% end %>
@@ -225,22 +248,24 @@
 			<div class="row" style="background-color:#EFE9D1;">
 				<div class="col-md-12">
 					<h1 class="title_type1_traveler">Post accomplished message</h1>
-
 					<% if flash[:accomplish] %>
 						<div id="flash" class="alert alert-success" role="alert">
 							<%= flash[:accomplish] %>
 						</div>
 					<% end %>
+				</div>
+			</div>
+			<div class="row" style="background-color:#EFE9D1;">
+				<div class="col-md-6">
 					<% if flash[:error] %>
 						<div id="flash" class="alert alert-danger" role="alert">
 							<%= flash[:error] %>
 						</div>
 					<% end %>
-
 					<%= form_for(@post, url:update_accomplish_path, method: :patch) do |f| %>
 			      <div class="field">
 			        <%= f.label :comment %><br>
-			        <%= f.text_area :comment_accomplishment, autofocus: true, placeholder: "After your Tricket had come true, share your accomplishment with everyone who helped you", :style=>"width: 80%;"%>
+			        <%= f.text_area :comment_accomplishment, autofocus: true, placeholder: "After your Tricket had come true, share your accomplishment with everyone who helped you", :style=>"width: 100%; height: 200px;"%>
 			      </div>
 			      <div class="field">
 	        		<%= f.label :image %>
@@ -249,8 +274,13 @@
 				  	<div class="actions">
 				    	<%= f.submit "share your accomplishment", :style=>"background-color: #c77eb5; color: white; width: 200px; border-radius: 5px; margin-top: 10px;" %>
 				  	</div>
-					<% end %>
 					<h4><%= link_to "reset your accomplishment", reset_accomplish_path(@post), method: :patch, class:"label label-default", :style=>"background-color: #c77eb5;" %></h4>
+				</div>
+				<div class="col-md-6">
+						<%= f.label :map %>
+	        	<%= f.text_field :address, id:"address", :style=>"width: 80%;", placeholder: "Address or name of the place" %>
+	        	<div id="target_post"></div>
+				  <% end %>
 				</div>
 			</div>
 		<% end %>
@@ -300,3 +330,68 @@
 	</div>
 <% end %>
 
+<script src="https://maps.googleapis.com/maps/api/js?language=en&key=<%= ENV['KEY'] %>&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    "use strict";
+    var target_post = document.getElementById("target_post");
+    var target_posted = document.getElementById("target_posted");
+    var tokyo = {lat: 35.681167, lng: 139.767052};
+    var map_post;
+    var map_posted;
+    var geo_post;
+    var geo_posted;
+
+    map_post = new google.maps.Map(target_post,{
+      center: tokyo,
+      zoom: 16,
+      disableDefaultUI: true,
+      zoomControl: true
+    });
+
+    var address = document.getElementById("address");
+    var timeId = null;
+    address.addEventListener("input", function(e){
+    	clearTimeout(timeId)
+    	timeId = setTimeout(() => {
+	    	geo_post = new google.maps.Geocoder();
+		    geo_post.geocode({address: e.target.value}, geoResultCallback);
+		    function geoResultCallback(result, status) {
+		      // if (status != google.maps.GeocoderStatus.OK) {
+		      //   alert("No places found")
+		      //   return;
+		      // }
+		      var latlng_post = result[0].geometry.location;
+		      map_post.setCenter(latlng_post);
+		      var marker_post = new google.maps.Marker({position:latlng_post, map:map_post});
+		      marker_post.addListener("click",function(){
+        		this.setMap(null);
+      		});
+		    }
+    	}, 1500);
+    });
+
+    geo_posted = new google.maps.Geocoder();
+    geo_posted.geocode({address: '<%= @post.address %>'}, geoResultCallback);
+		function geoResultCallback(result, status) {
+			// if (status != google.maps.GeocoderStatus.OK) {
+   //      alert("No places found")
+   //      return;
+   //    }
+      if (result[0]){
+      	map_posted = new google.maps.Map(target_posted,{
+      		center: result[0].geometry.location,
+			    zoom: 10,
+			    disableDefaultUI: true,
+			    zoomControl: true
+			  });
+				var latlng_posted = result[0].geometry.location;
+				map_posted.setCenter(latlng_posted);
+			  var marker_posted = new google.maps.Marker({position:latlng_posted, map:map_posted});
+      } else {
+      	// alert("No places found")
+       //  return;
+      }
+    }
+  };
+</script>

@@ -86,7 +86,7 @@ class PostsController < ApplicationController
 	end
 	def reset_accomplish
       @post = Post.find(params[:id])
-      if @post.update(status_accomplishment: 0, image_accomplishment: nil, comment_accomplishment: nil)
+      if @post.update(status_accomplishment: 0, image_accomplishment: nil, comment_accomplishment: nil, address: nil)
         flash[:accomplish] = "You have reset accomplishment successfully."
         redirect_to post_path(@post.id)
       else
@@ -150,6 +150,6 @@ class PostsController < ApplicationController
 
 	private
     def post_params
-      params.require(:post).permit(:title, :content, :area, :season, :interest, :time_todo, :place_todo, :status_display, :post_image, :image_accomplishment, :comment_accomplishment)
+      params.require(:post).permit(:title, :content, :area, :season, :interest, :time_todo, :place_todo, :status_display, :post_image, :image_accomplishment, :comment_accomplishment, :address)
     end
 end

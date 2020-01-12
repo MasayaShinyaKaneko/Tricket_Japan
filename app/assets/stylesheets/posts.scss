@@ -87,8 +87,30 @@
   width: 100%;
   height: 100%;
 }
+.Tricket-post-detail-top{
+	margin-bottom: 20px;
+
+	.Tricket-post-when{
+		width: 50%;
+		float: left;
+	}
+	.Tricket-post-where{
+		width: 50%;
+		float: left;
+	}
+}
 .comments-form{
 	height: 100px;
+}
+#target_post{
+	width: 100%;
+	height: 300px;
+	margin-top: 10px;
+}
+#target_posted{
+	width: 100%;
+	height: 300px;
+	margin-top: 10px;
 }
 
 /*facebook*/
@@ -191,4 +213,3 @@
 	  }
 	}
 }
-
