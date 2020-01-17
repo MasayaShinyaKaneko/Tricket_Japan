@@ -335,46 +335,42 @@
   function initMap() {
     "use strict";
     var target_post = document.getElementById("target_post");
+    var target_posted = document.getElementById("target_posted");
     var tokyo = {lat: 35.681167, lng: 139.767052};
     var map_post;
-    var geo_post;
-
-    map_post = new google.maps.Map(target_post,{
-      center: tokyo,
-      zoom: 16,
-      disableDefaultUI: true,
-      zoomControl: true
-    });
-
-    var address = document.getElementById("address");
-    var timeId = null;
-    address.addEventListener("input", function(e){
-    	clearTimeout(timeId)
-    	timeId = setTimeout(() => {
-	    	geo_post = new google.maps.Geocoder();
-		    geo_post.geocode({address: e.target.value}, geoResultCallback);
-		    function geoResultCallback(result, status) {
-		      // if (status != google.maps.GeocoderStatus.OK) {
-		      //   alert("No places found")
-		      //   return;
-		      // }
-		      var latlng_post = result[0].geometry.location;
-		      map_post.setCenter(latlng_post);
-		      var marker_post = new google.maps.Marker({position:latlng_post, map:map_post});
-		      marker_post.addListener("click",function(){
-        		this.setMap(null);
-      		});
-		    }
-    	}, 1500);
-    });
-  };
-</script>
-<script>
-  function initMap() {
-    "use strict";
-    var target_posted = document.getElementById("target_posted");
     var map_posted;
+    var geo_post;
     var geo_posted;
+
+    if ( '<%= @user.id %>' === '<%= current_user.id  %>' ) {
+	    map_post = new google.maps.Map(target_post,{
+	      center: tokyo,
+	      zoom: 16,
+	      disableDefaultUI: true,
+	      zoomControl: true
+	    });
+	    var address = document.getElementById("address");
+	    var timeId = null;
+	    address.addEventListener("input", function(e){
+	    	clearTimeout(timeId)
+	    	timeId = setTimeout(() => {
+		    	geo_post = new google.maps.Geocoder();
+			    geo_post.geocode({address: e.target.value}, geoResultCallback);
+			    function geoResultCallback(result, status) {
+			      // if (status != google.maps.GeocoderStatus.OK) {
+			      //   alert("No places found")
+			      //   return;
+			      // }
+			      var latlng_post = result[0].geometry.location;
+			      map_post.setCenter(latlng_post);
+			      var marker_post = new google.maps.Marker({position:latlng_post, map:map_post});
+			      marker_post.addListener("click",function(){
+	        		this.setMap(null);
+	      		});
+			    }
+	    	}, 1500);
+	    });
+    }
 
     geo_posted = new google.maps.Geocoder();
     geo_posted.geocode({address: '<%= @post.address %>'}, geoResultCallback);
