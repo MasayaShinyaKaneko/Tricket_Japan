@@ -335,12 +335,9 @@
   function initMap() {
     "use strict";
     var target_post = document.getElementById("target_post");
-    var target_posted = document.getElementById("target_posted");
     var tokyo = {lat: 35.681167, lng: 139.767052};
     var map_post;
-    var map_posted;
     var geo_post;
-    var geo_posted;
 
     map_post = new google.maps.Map(target_post,{
       center: tokyo,
@@ -370,6 +367,14 @@
 		    }
     	}, 1500);
     });
+  };
+</script>
+<script>
+  function initMap() {
+    "use strict";
+    var target_posted = document.getElementById("target_posted");
+    var map_posted;
+    var geo_posted;
 
     geo_posted = new google.maps.Geocoder();
     geo_posted.geocode({address: '<%= @post.address %>'}, geoResultCallback);
