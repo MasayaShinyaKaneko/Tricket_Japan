@@ -330,7 +330,7 @@
 	</div>
 <% end %>
 
-<script src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyBRLrBwwzH18hqPJa6whTJzls3j3jwx_2o&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?language=en&key=<%= ENV['KEY'] %>&callback=initMap" async defer></script>
 <script>
   function initMap() {
     "use strict";
