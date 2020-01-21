@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
 
+  before do
+    @user_traveler = create(:user, type_user: 0)
+    @user_local = create(:user, type_user: 1)
+  end
+
   feature "user sign up" do
     context "with valid attributes" do
       before do
@@ -21,7 +26,7 @@ RSpec.feature "Users", type: :feature do
         fill_in "user_password", with: "password"
         fill_in "user_password_confirmation", with: "password"
       end
-      scenario "sign up" do
+      scenario "sign up successfully" do
         expect {
           click_button "Sign up"
         }.to change(User, :count).by(1)
@@ -53,32 +58,74 @@ RSpec.feature "Users", type: :feature do
       end
     end
   end
-
   feature "user log in" do
+    before do
+      visit root_path
+    end
     context "with valid attributes" do
-      before do
-        @user = create(:user)
-        visit root_path
-      end
-      scenario "log in" do
-        fill_in "email", with: @user.email
-        fill_in "password", with: @user.password
+      scenario "log in successfully" do
+        fill_in "email", with: @user_traveler.email
+        fill_in "password", with: @user_traveler.password
         click_button "Log in"
         expect(page).to have_current_path posts_top_path
         expect(page).to have_link "out", href: destroy_user_session_path
       end
     end
     context "with invalid attributes" do
-      before do
-        @user = create(:user)
-        visit root_path
-      end
       scenario "does not log in" do
         fill_in "email", with: nil
-        fill_in "password", with: @user.password
+        fill_in "password", with: @user_traveler.password
         click_button "Log in"
         expect(page).to have_current_path new_user_session_path
       end
+    end
+  end
+  feature "user log out" do
+    before do
+      visit root_path
+      fill_in "email", with: @user_traveler.email
+      fill_in "password", with: @user_traveler.password
+      click_button "Log in"
+      visit user_path(@user_traveler)
+    end
+    scenario "log out successfully" do
+      click_link "out"
+      expect(page).to have_current_path root_path
+    end
+  end
+  feature "header links" do
+    scenario "when user log in" do
+      visit root_path
+      fill_in "email", with: @user_traveler.email
+      fill_in "password", with: @user_traveler.password
+      click_button "Log in"
+      expect(page).to have_link "#{@user_traveler.name_user}さん", href: user_path(@user_traveler)
+      expect(page).to have_link "Trickets", href: posts_top_path
+      expect(page).to have_link "Photos", href: photos_path
+      expect(page).to have_link "Locals", href: users_locals_path
+      expect(page).to have_link "Notification", href: notifications_path
+      expect(page).to have_link "Messages", href: rooms_path
+      expect(page).to have_link "Contacts", href: new_contact_path
+      expect(page).to have_link "out", href: destroy_user_session_path
+    end
+    scenario "when user log out" do
+      visit root_path
+      expect(page).to have_link "Home", href: root_path
+    end
+  end
+  feature "表示内容とリンクの確認" do
+    scenario "マイページの表示内容とリンク" do
+      visit user_path(@user_local)
+        # expect(page).to have_content @user_local.name_user
+        expect(page).to have_content "Local"
+        expect(page).to have_content "Trickets"
+        expect(page).to have_content "Accomplishments"
+
+        # expect(page).to have_content @user1.introduction
+        # expect(page).to have_link "",href: edit_user_path(@user1)
+        # expect(page).to have_link "",href: user_path(@user2)
+        # expect(page).to have_content @user2.name
+      # まだまだ終わってない。
     end
   end
 end

@@ -34,11 +34,7 @@ class Post < ApplicationRecord
   end
 
   def create_notification_comment!(current_user, comment_id)
-      if Comment.where(post_id: id).where(user_id: current_user.id).exists?
-        other_user_ids = Comment.where(post_id: id).where.not(user_id: current_user.id).distinct.pluck(:user_id)
-      else
-        other_user_ids = Comment.where(post_id: id).distinct.pluck(:user_id)
-      end
+      other_user_ids = Comment.where(post_id: id).where.not(user_id: current_user.id).distinct.pluck(:user_id)
       other_user_ids.each do |other_user_id|
         save_notification_comment!(current_user, comment_id, other_user_id)
       end
