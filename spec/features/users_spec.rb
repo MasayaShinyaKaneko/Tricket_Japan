@@ -10,8 +10,11 @@ RSpec.feature "Users", type: :feature do
   feature "user sign up" do
     context "with valid attributes" do
       before do
+      end
+      scenario "sign up successfully" do
         visit root_path
         click_link "sign_up1"
+        expect(find_field('user[name_first]')).to_not be_truthy
         fill_in "first name", with: "Masaya"
         fill_in "last name", with: "Kaneko"
         fill_in "user name", with: "MSK"
@@ -25,8 +28,6 @@ RSpec.feature "Users", type: :feature do
         fill_in "user_email", with: "example@test.com"
         fill_in "user_password", with: "password"
         fill_in "user_password_confirmation", with: "password"
-      end
-      scenario "sign up successfully" do
         expect {
           click_button "Sign up"
         }.to change(User, :count).by(1)
