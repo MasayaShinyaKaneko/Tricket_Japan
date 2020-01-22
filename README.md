@@ -24,8 +24,8 @@ URL: http://52.199.43.118/
 ・JQuery  
 ・Bootstrap  
 ### サーバサイド  
-・RSpec(テストコード)
-・Actioncable(websocketによる双方向通信/1対1のリアルタイムチャット) 
+・RSpec(テストコード)  
+・Actioncable(websocketによる双方向通信/1対1のリアルタイムチャット)  
 ・Actionmailer(お問い合わせメール)  
 ・carrierwave(動画や写真投稿)  
 ・enum(数字と値の変換)  
