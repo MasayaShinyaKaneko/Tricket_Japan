@@ -19,13 +19,13 @@ URL: http://52.199.43.118/
 ・テストコード ※RspecでModel、Controller、FeatureSpecのテストを行なっています。  
 
 ## 取り入れた技術  
-### フロントエンド  
-・Actioncable(1対1のリアルタイムチャット)  
+### フロントエンド   
 ・Ajax(非同期通信)  
 ・JQuery  
 ・Bootstrap  
 ### サーバサイド  
-・RSpec(テストコード)  
+・RSpec(テストコード)
+・Actioncable(websocketによる双方向通信/1対1のリアルタイムチャット) 
 ・Actionmailer(お問い合わせメール)  
 ・carrierwave(動画や写真投稿)  
 ・enum(数字と値の変換)  
