@@ -23,6 +23,7 @@ URL: http://52.199.43.118/
 ・Ajax(非同期通信)  
 ・JQuery  
 ・Bootstrap  
+・GoogleMapsAPI  
 ### サーバサイド  
 ・RSpec(テストコード)  
 ・Actioncable(websocketによる双方向通信/1対1のリアルタイムチャット)  
@@ -34,3 +35,29 @@ URL: http://52.199.43.118/
 
 ## 開発環境  
 ruby 2.5.5、Rails 5.2.4、Rspec 3.9
+
+# Application Name: “Tricket Japan”  
+“Tricket” is a newly made up word combining “Trip” and “Bucket list”.  
+URL: http://52.199.43.118/  
+
+## Overview  
+This website is for tourists and future tourists from overseas who would like to share their dreams and experiences in Japan. In relation to the posts shared, local Japanese people can give advice through comments or messages. It also creates opportunities for culture exchange.  
+
+## Usage  
+The first step to enjoy this website is you choose your user type from “Traveler (mainly for foreigners)” or “Local (mainly for the Japanese)”.  As a traveler, you can post your dreams, we call them “Tricket”, and troubles you experience in Japan. As a local, you check the Trickets and help Travelers through comments and messages.  
+Basic functions are:  
+registration and unsubscription / post your dream / post with a video / comment to the post.  
+To enhance the user experience, there are more functions below:  
+・Real time chatting  
+・Ability to like posts  
+・Ability to follow users  
+・Favorite posts and users ranking  
+・Notifications for comments, posts and messages  
+・Contacts to the administrator  
+
+## Techniques  
+Front-end: Ajax / JQuery / bootstrap / GoogleMapsAPI    
+Server side: RSpec / Actionmailer / Actionable / carrierwave / enum / rails-i18n / paranoia  
+
+## Development Environment  
+ruby 2.5.5、Rails 5.2.4、Rspec 3.9  
