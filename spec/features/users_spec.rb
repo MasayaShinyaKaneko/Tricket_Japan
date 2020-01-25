@@ -9,12 +9,9 @@ RSpec.feature "Users", type: :feature do
 
   feature "user sign up" do
     context "with valid attributes" do
-      before do
-      end
       scenario "sign up successfully" do
         visit root_path
         click_link "sign_up1"
-        expect(find_field('user[name_first]')).to_not be_truthy
         fill_in "first name", with: "Masaya"
         fill_in "last name", with: "Kaneko"
         fill_in "user name", with: "MSK"
@@ -69,6 +66,7 @@ RSpec.feature "Users", type: :feature do
         fill_in "password", with: @user_traveler.password
         click_button "Log in"
         expect(page).to have_current_path posts_top_path
+        expect(page).to have_content "#{@user_traveler.name_user}さん"
         expect(page).to have_link "out", href: destroy_user_session_path
       end
     end

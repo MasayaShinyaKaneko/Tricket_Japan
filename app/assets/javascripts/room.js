@@ -20,7 +20,6 @@ if(/room/.test(window.location.pathname)) {
     }
   });
   $(document).on('keypress', '[data-behavior~=room_speaker]', function(event) {
-    console.log(event)
     if (event.keyCode === 13) {
       App.room.speak(event.target.value);
       event.target.value = '';
