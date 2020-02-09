@@ -38,7 +38,7 @@ class Post < ApplicationRecord
       other_user_ids.each do |other_user_id|
         save_notification_comment!(current_user, comment_id, other_user_id)
       end
-      if other_user_ids.blank?
+      unless other_user_ids.include?(user_id)
         save_notification_comment!(current_user, comment_id, user_id)
       end
   end
